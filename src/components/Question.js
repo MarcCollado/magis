@@ -5,11 +5,10 @@ import PropTypes from 'prop-types';
 
 class Question extends Component {
   static propTypes = {
-    id: PropTypes.string,
+    id: PropTypes.string.isRequired,
   };
 
   render() {
-
     return (
       <p>{this.props.id}</p>
     );

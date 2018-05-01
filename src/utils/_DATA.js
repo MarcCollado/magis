@@ -63,6 +63,19 @@ let questions = {
       text: 'become a supervillian',
     },
   },
+  '7gd6fk3em9h2dpe490e1': {
+    id: '7gd6fk3em9h2dpe490e1',
+    author: 'johndoe',
+    timestamp: 1476479545194,
+    optionOne: {
+      votes: [],
+      text: 'become Nikola Tesla',
+    },
+    optionTwo: {
+      votes: [],
+      text: 'become Thomas Edison',
+    },
+  },
   am8ehyc8byjqgar0jgpub9: {
     id: 'am8ehyc8byjqgar0jgpub9',
     author: 'sarahedo',
