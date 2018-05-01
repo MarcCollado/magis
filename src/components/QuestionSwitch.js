@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
+import QuestionFeed from './QuestionFeed';
 
 function TabContainer(props) {
   return (
@@ -56,11 +57,15 @@ class QuestionSwitch extends React.Component {
         </Tabs>
         {value === 0 &&
           <TabContainer>
-            TBD... List of Unanswered Questions
+            <QuestionFeed
+              answered={value}
+            />
           </TabContainer>}
         {value === 1 &&
           <TabContainer>
-            TBD... List of Answered Questions
+            <QuestionFeed
+              answered={value}
+            />
           </TabContainer>}
       </div>
     );

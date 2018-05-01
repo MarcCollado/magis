@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import LoadingBar from 'react-redux-loading-bar';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -21,14 +21,28 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="container">
-          <LoadingBar />
-          <Nav />
-          <QuestionSwitch />
-        </div>
+        <Fragment>
+          <div className="container">
+            <LoadingBar />
+            <Nav />
+            {this.props.loading === true
+              ? null
+              : <div>
+                <Route path="/" exact component={QuestionSwitch} />
+                {/* <Route path="/questions/:question_id" exact component={QuestionPage} />
+                <Route path="/add" exact component={NewQuestion} /> */}
+              </div>}
+          </div>
+        </Fragment>
       </Router>
     );
   }
 }
 
-export default connect()(App);
+function mapStateToProps({ authUser }) {
+  return {
+    loading: authUser === null,
+  };
+}
+
+export default connect(mapStateToProps)(App);
