@@ -1,5 +1,7 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
@@ -23,6 +25,10 @@ const styles = {
 };
 
 class Nav extends React.Component {
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
   state = {
     auth: true,
     anchorEl: null,
@@ -32,7 +38,7 @@ class Nav extends React.Component {
     this.setState({ auth: checked });
   };
 
-  handleMenu = event => {
+  handleMenu = (event) => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
@@ -74,11 +80,15 @@ class Nav extends React.Component {
               open={open}
               onClose={this.handleClose}
             >
-              <MenuItem onClick={this.handleClose}>Home</MenuItem>
-              <MenuItem onClick={this.handleClose}>Leaderboard</MenuItem>
+              <NavLink to="/" exact activeClassName="active">
+                <MenuItem onClick={this.handleClose}>Home</MenuItem>
+              </NavLink>
+              <NavLink to="/leaderboard" exact activeClassName="active">
+                <MenuItem onClick={this.handleClose}>Leaderboard</MenuItem>
+              </NavLink>
             </Menu>
             <Typography
-              variant="title"
+              variant="subheading"
               color="inherit"
               className={classes.flex}
             >
@@ -100,9 +110,5 @@ class Nav extends React.Component {
     );
   }
 }
-
-Nav.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(Nav);
