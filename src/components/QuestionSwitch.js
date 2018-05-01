@@ -9,7 +9,8 @@ function TabContainer(props) {
   return (
     <Typography
       component="div"
-      style={{ padding: 8 * 3 }}>
+      style={{ padding: 8 * 3 }}
+    >
       {props.children}
     </Typography>
   );
@@ -46,11 +47,11 @@ class QuestionSwitch extends React.Component {
     return (
       <div className={classes.root}>
         <Tabs
-          centered={true}
+          centered
           value={value}
           onChange={this.handleChange}
         >
-          <Tab label="UNASNSWERED" />
+          <Tab label="UNANSWERED" />
           <Tab label="ANSWERED" />
         </Tabs>
         {value === 0 &&
