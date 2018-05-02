@@ -12,9 +12,11 @@ import './App.css';
 class App extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
   }
 
   componentDidMount() {
+    console.log(this.props);
     this.props.dispatch(handleInitialData());
   }
 
