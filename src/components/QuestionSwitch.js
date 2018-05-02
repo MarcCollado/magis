@@ -6,21 +6,6 @@ import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
 import QuestionFeed from './QuestionFeed';
 
-function TabContainer(props) {
-  return (
-    <Typography
-      component="div"
-      style={{ padding: 8 * 3 }}
-    >
-      {props.children}
-    </Typography>
-  );
-}
-
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -30,6 +15,7 @@ const styles = theme => ({
 
 class QuestionSwitch extends React.Component {
   static propTypes = {
+    // from material-ui
     classes: PropTypes.object.isRequired,
   };
 
@@ -56,17 +42,15 @@ class QuestionSwitch extends React.Component {
           <Tab label="ANSWERED" />
         </Tabs>
         {value === 0 &&
-          <TabContainer>
-            <QuestionFeed
-              answered={value}
-            />
-          </TabContainer>}
+          <QuestionFeed
+            answered={value}
+          />
+        }
         {value === 1 &&
-          <TabContainer>
-            <QuestionFeed
-              answered={value}
-            />
-          </TabContainer>}
+          <QuestionFeed
+            answered={value}
+          />
+        }
       </div>
     );
   }

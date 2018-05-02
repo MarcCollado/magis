@@ -6,8 +6,10 @@ import Question from './Question';
 
 class QuestionFeed extends Component {
   static propTypes = {
+    // from MapStateToProps
     unansweredQuestionsID: PropTypes.arrayOf(PropTypes.string).isRequired,
     answeredQuestionsID: PropTypes.arrayOf(PropTypes.string).isRequired,
+    // from QuestionSwitch
     answered: PropTypes.number,
   }
 
@@ -18,12 +20,12 @@ class QuestionFeed extends Component {
           {this.props.answered === 0
             ? this.props.unansweredQuestionsID
               .map(id => (
-                <li key={id}>
+                <li key={id} style={{ listStyleType: "none" }}>
                   <Question id={id} />
                 </li>))
             : this.props.answeredQuestionsID
             .map(id => (
-              <li key={id}>
+              <li key={id} style={{ listStyleType: "none" }}>
                 <Question id={id} />
               </li>))
           }
