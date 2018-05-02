@@ -6,7 +6,8 @@ import Question from './Question';
 
 class QuestionFeed extends Component {
   static propTypes = {
-    questionsID: PropTypes.arrayOf(PropTypes.string).isRequired,
+    unansweredQuestionsID: PropTypes.arrayOf(PropTypes.string).isRequired,
+    answeredQuestionsID: PropTypes.arrayOf(PropTypes.string).isRequired,
     answered: PropTypes.number,
   }
 
@@ -14,26 +15,46 @@ class QuestionFeed extends Component {
     return (
       <div>
         <ul className="question-feed">
-          {/* if this.props.anwered ==>  answeredQuestionsID
-          else ==> unansweredQuestionsID*/}
-          {this.props.questionsID
+          {this.props.answered === 0
+            ? this.props.unansweredQuestionsID
+              .map(id => (
+                <li key={id}>
+                  <Question id={id} />
+                </li>))
+            : this.props.answeredQuestionsID
             .map(id => (
               <li key={id}>
                 <Question id={id} />
-              </li>
-            ))}
+              </li>))
+          }
         </ul>
       </div>
     );
   }
 }
 
-function mapStateToProps({ questions }) {
+function mapStateToProps({ questions, authUser }) {
+  const userHasAnswered = Object.keys(questions)
+    .filter(i => (
+      questions[i].optionOne.votes.includes(authUser) ||
+      questions[i].optionTwo.votes.includes(authUser)
+    ))
+    .sort((a, b) => (
+      questions[b].timestamp - questions[a].timestamp
+    ));
+
+  const userHasNotAnswered = Object.keys(questions)
+    .filter(i => (
+      !questions[i].optionOne.votes.includes(authUser) &&
+      !questions[i].optionTwo.votes.includes(authUser)
+    ))
+    .sort((a, b) => (
+      questions[b].timestamp - questions[a].timestamp
+    ));
+
   return {
-    //answeredQuestionsID
-    //unansweredQuestionsID
-    questionsID: Object.keys(questions)
-      .sort((a, b) => questions[b].timestamp - questions[a].timestamp),
+    answeredQuestionsID: userHasAnswered,
+    unansweredQuestionsID: userHasNotAnswered,
   };
 }
 
