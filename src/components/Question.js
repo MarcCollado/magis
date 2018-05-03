@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { withStyles } from 'material-ui/styles';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
-import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 
 const styles = {
@@ -36,7 +34,7 @@ const styles = {
   cta: {
     height: 50,
     textAlign: 'center',
-    backgroundColor: '#009688',
+    backgroundColor: 'inherit',
     // flexbox container properties
     display: 'flex',
     justifyContent: 'center',
@@ -61,18 +59,33 @@ class Question extends Component {
     return (
         <Card className={classes.card}>
           <CardContent className={classes.content}>
-            <Typography className={classes.one}>
+            <Typography
+              className={classes.one}
+              variant="body1"
+            >
               {optionOne}
             </Typography>
             <div className={classes.divider}>
-              — or —
+              <Typography
+                variant="button"
+              >
+                — or —
+              </Typography>
             </div>
-            <Typography className={classes.two}>
+            <Typography
+              className={classes.two}
+              variant="body1"
+            >
               {optionTwo}
             </Typography>
           </CardContent>
           <CardActions className={classes.cta}>
-            <Button>Answer It</Button>
+            <Typography
+              variant="button"
+              color="textSecondary"
+            >
+              Answer It
+            </Typography>
 
           </CardActions>
 

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from 'material-ui/styles';
 import Tabs, { Tab } from 'material-ui/Tabs';
-import Typography from 'material-ui/Typography';
 import QuestionFeed from './QuestionFeed';
 
 const styles = theme => ({

@@ -33,7 +33,7 @@ class QuestionFeed extends Component {
 
     return (
       <div className={classes.container}>
-        <ul>
+        <ul style={{ padding: 0 }}>
           {this.props.answered === 0
             ? this.props.unansweredQuestionsID
               .map(id => (
