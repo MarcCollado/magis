@@ -10,24 +10,36 @@ import Typography from 'material-ui/Typography';
 
 const styles = {
   card: {
-    minWidth: 275,
+    width: 320,
+    height: 200,
     marginBottom: 15,
   },
-  divider: {
-
+  content: {
+    height: 120,
+    backgroundColor: '#FAFAFA',
+    // flexbox container properties
+    display: 'flex',
+    alignItems: 'center',
   },
   one: {
-    maxWidth: '40%',
-    float: 'left',
+    width: '40%',
     textAlign: 'left',
   },
+  divider: {
+    textAlign: 'center',
+    width: '20%',
+  },
   two: {
-    maxWidth: '40%',
-    float: 'right',
+    width: '40%',
     textAlign: 'right',
   },
   cta: {
+    height: 50,
     textAlign: 'center',
+    backgroundColor: '#009688',
+    // flexbox container properties
+    display: 'flex',
+    justifyContent: 'center',
   }
 };
 
@@ -47,28 +59,24 @@ class Question extends Component {
     const optionTwo = questions[id].optionTwo.text;
 
     return (
-      <div>
         <Card className={classes.card}>
-          <CardContent>
-            <div>
-              <Typography className={classes.one} component="p">
-                {optionOne}
-              </Typography>
+          <CardContent className={classes.content}>
+            <Typography className={classes.one}>
+              {optionOne}
+            </Typography>
+            <div className={classes.divider}>
+              — or —
             </div>
-            <div>
-              <Typography className={classes.two} component="p">
-                {optionTwo}
-              </Typography>
-            </div>
-            <div style={{ clear:"both" }}></div>
-            <div>
-              <CardActions>
-                <Button className={classes.cta}>Answer It</Button>
-              </CardActions>
-            </div>
+            <Typography className={classes.two}>
+              {optionTwo}
+            </Typography>
           </CardContent>
+          <CardActions className={classes.cta}>
+            <Button>Answer It</Button>
+
+          </CardActions>
+
         </Card>
-      </div>
     );
   }
 }

@@ -2,21 +2,38 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { withStyles } from 'material-ui/styles';
 import Question from './Question';
+
+const styles = {
+  container: {
+    width: '80%',
+    maxWidth: 800,
+    margin: 'auto',
+    // flexbox container properties
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+};
 
 class QuestionFeed extends Component {
   static propTypes = {
     // from MapStateToProps
     unansweredQuestionsID: PropTypes.arrayOf(PropTypes.string).isRequired,
     answeredQuestionsID: PropTypes.arrayOf(PropTypes.string).isRequired,
+    // from material-ui
+    classes: PropTypes.object.isRequired,
     // from QuestionSwitch
     answered: PropTypes.number,
   }
 
   render() {
+    const { classes } = this.props;
+
     return (
-      <div>
-        <ul className="question-feed">
+      <div className={classes.container}>
+        <ul>
           {this.props.answered === 0
             ? this.props.unansweredQuestionsID
               .map(id => (
@@ -60,4 +77,4 @@ function mapStateToProps({ questions, authUser }) {
   };
 }
 
-export default connect(mapStateToProps)(QuestionFeed);
+export default withStyles(styles)(connect(mapStateToProps)(QuestionFeed));
