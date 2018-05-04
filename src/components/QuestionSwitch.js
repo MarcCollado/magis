@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from 'material-ui/styles';
+import Paper from 'material-ui/Paper';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import QuestionFeed from './QuestionFeed';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
   },
@@ -30,26 +31,22 @@ class QuestionSwitch extends React.Component {
     const { value } = this.state;
 
     return (
-      <div className={classes.root}>
+      <Paper className={classes.root}>
         <Tabs
           centered
+          fullWidth={true}
+          indicatorColor="primary"
+          textColor="primary"
           value={value}
           onChange={this.handleChange}
         >
           <Tab label="UNANSWERED" />
           <Tab label="ANSWERED" />
         </Tabs>
-        {value === 0 &&
-          <QuestionFeed
-            answered={value}
-          />
-        }
-        {value === 1 &&
-          <QuestionFeed
-            answered={value}
-          />
-        }
-      </div>
+        <QuestionFeed
+          answered={value}
+        />
+      </Paper>
     );
   }
 }

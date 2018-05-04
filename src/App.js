@@ -14,27 +14,28 @@ import './App.css';
 class App extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
+    // from MapStateToProps
     loading: PropTypes.bool.isRequired,
   }
 
   componentDidMount() {
-    console.log(this.props);
-    this.props.dispatch(handleInitialData());
+    const { dispatch } = this.props;
+    dispatch(handleInitialData());
   }
 
   render() {
+    const { loading } = this.props;
     return (
       <Router>
         <div className="container">
           <LoadingBar />
           <Nav />
-          {this.props.loading === true
+          {loading === true
             ? null
             : <div>
               <Route path="/" exact component={QuestionSwitch} />
-              {/* <Route path="/questions/:question_id" exact component={QuestionPage} />*/}
+              <Route path="/add" exact component={AddQuestion} />
             </div>}
-          <Route path="/add" exact component={AddQuestion} />
           <Link
             to="/add"
             className="add-question"

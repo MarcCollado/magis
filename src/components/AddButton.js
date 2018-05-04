@@ -17,14 +17,15 @@ const styles = theme => ({
 function AddButton(props) {
   const { classes } = props;
   return (
-      <Tooltip title="Add Question">
-        <Button
-          variant="fab"
-          color="secondary"
-          className={classes.absolute}>
-          <AddIcon />
-        </Button>
-      </Tooltip>
+    <Tooltip title="Add Question">
+      <Button
+        variant="fab"
+        color="secondary"
+        className={classes.absolute}
+      >
+        <AddIcon />
+      </Button>
+    </Tooltip>
   );
 }
 

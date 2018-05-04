@@ -7,9 +7,8 @@ import Question from './Question';
 
 const styles = {
   container: {
-    width: '80%',
-    maxWidth: 800,
-    margin: 'auto',
+    width: '85%',
+    margin: '0 auto',
     // flexbox container properties
     display: 'flex',
     flexDirection: 'column',
@@ -29,20 +28,29 @@ class QuestionFeed extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const {
+      answeredQuestionsID,
+      unansweredQuestionsID,
+      classes,
+      answered
+    } = this.props;
 
     return (
       <div className={classes.container}>
-        <ul style={{ padding: 0 }}>
-          {this.props.answered === 0
-            ? this.props.unansweredQuestionsID
+        <ul style={{ padding: 0, width: '100%' }}>
+          {answered === 0
+            ? unansweredQuestionsID
               .map(id => (
-                <li key={id} style={{ listStyleType: "none" }}>
+                <li
+                  key={id}
+                  style={{ listStyleType: 'none' }}>
                   <Question id={id} />
                 </li>))
-            : this.props.answeredQuestionsID
+            : answeredQuestionsID
             .map(id => (
-              <li key={id} style={{ listStyleType: "none" }}>
+              <li
+                key={id}
+                style={{ listStyleType: 'none' }}>
                 <Question id={id} />
               </li>))
           }
