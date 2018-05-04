@@ -7,9 +7,6 @@ import Button from 'material-ui/Button';
 import Tooltip from 'material-ui/Tooltip';
 
 const styles = theme => ({
-  fab: {
-    margin: theme.spacing.unit * 2,
-  },
   absolute: {
     position: 'fixed',
     bottom: theme.spacing.unit * 2,
