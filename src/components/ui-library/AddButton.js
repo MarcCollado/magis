@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // imports from material-ui
 import { withStyles } from 'material-ui/styles';
-import AddIcon from '@material-ui/icons/Add';
 import Button from 'material-ui/Button';
 import Tooltip from 'material-ui/Tooltip';
+import AddIcon from '@material-ui/icons/Add';
 
 const styles = theme => ({
   absolute: {

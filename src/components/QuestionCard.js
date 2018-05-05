@@ -39,7 +39,7 @@ const styles = {
   },
 };
 
-class Question extends Component {
+class QuestionCard extends Component {
   static propTypes = {
     // from MapStateToProps
     questions: PropTypes.object.isRequired,
@@ -96,4 +96,4 @@ function mapStateToProps({ questions }) {
   };
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(Question));
+export default withStyles(styles)(connect(mapStateToProps)(QuestionCard));

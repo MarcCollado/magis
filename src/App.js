@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { handleInitialData } from './actions/shared';
 import Nav from './components/Nav';
 import QuestionSwitch from './components/QuestionSwitch';
+import Leaderboard from './components/Leaderboard';
 import AddQuestion from './components/AddQuestion';
 import AddButton from './components/ui-library/AddButton';
 
@@ -33,6 +34,7 @@ class App extends Component {
             ? null
             : <div>
               <Route path="/" exact component={QuestionSwitch} />
+              <Route path="/leaderboard" exact component={Leaderboard} />
               <Route path="/add" exact component={AddQuestion} />
             </div>}
           <Link

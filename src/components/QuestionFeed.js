@@ -4,16 +4,21 @@ import PropTypes from 'prop-types';
 // imports from material-ui
 import { withStyles } from 'material-ui/styles';
 // relative imports
-import Question from './Question';
+import QuestionCard from './QuestionCard';
 
 const styles = {
   container: {
     width: '85%',
-    margin: '0 auto',
+    margin: 'auto',
     // flexbox container properties
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+  },
+  feed: {
+    padding: 0,
+    width: '100%',
+    maxWidth: 480,
   },
 };
 
@@ -38,7 +43,7 @@ class QuestionFeed extends Component {
 
     return (
       <div className={classes.container}>
-        <ul style={{ padding: 0, width: '100%' }}>
+        <ul className={classes.feed}>
           {answered === 0
             ? unansweredQuestionsID
               .map(id => (
@@ -46,7 +51,7 @@ class QuestionFeed extends Component {
                   key={id}
                   style={{ listStyleType: 'none' }}
                 >
-                  <Question id={id} />
+                  <QuestionCard id={id} />
                 </li>))
             : answeredQuestionsID
             .map(id => (
@@ -54,7 +59,7 @@ class QuestionFeed extends Component {
                 key={id}
                 style={{ listStyleType: 'none' }}
               >
-                <Question id={id} />
+                <QuestionCard id={id} />
               </li>))
           }
         </ul>
