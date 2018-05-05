@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // imports from material-ui
 import { withStyles } from 'material-ui/styles';
@@ -32,7 +33,7 @@ const styles = {
   cta: {
     height: 50,
     textAlign: 'center',
-    backgroundColor: 'inherit',
+    backgroundColor: 'primary',
     // flexbox container properties
     display: 'flex',
     justifyContent: 'center',
@@ -47,10 +48,16 @@ class QuestionCard extends Component {
     classes: PropTypes.object.isRequired,
     // from QuestionFeed
     id: PropTypes.string.isRequired,
+    status: PropTypes.oneOf(['Answered', 'Unanswered']),
+  };
+
+  state = {
+    status: this.props.status,
   };
 
   render() {
     const { questions, classes, id } = this.props;
+    const { status } = this.state;
     const optionOne = questions[id].optionOne.text;
     const optionTwo = questions[id].optionTwo.text;
 
@@ -77,14 +84,28 @@ class QuestionCard extends Component {
             {optionTwo}
           </Typography>
         </CardContent>
-        <CardActions className={classes.cta}>
-          <Typography
-            variant="button"
-            color="textSecondary"
-          >
-            Answer It
-          </Typography>
-        </CardActions>
+        {status === 'Unanswered'
+          ? <CardActions className={classes.cta}>
+            <Link to={`/questions/${id}`}>
+              <Typography
+                variant="button"
+                color="textSecondary"
+              >
+                Answer It
+              </Typography>
+            </Link>
+          </CardActions>
+          : <CardActions className={classes.cta}>
+            <Link to={`/questions/${id}`}>
+              <Typography
+                variant="button"
+                color="textSecondary"
+              >
+                Show Stats
+              </Typography>
+            </Link>
+          </CardActions>
+        }
       </Card>
     );
   }

@@ -45,23 +45,29 @@ class QuestionFeed extends Component {
       <div className={classes.container}>
         <ul className={classes.feed}>
           {answered === 0
-            ? unansweredQuestionsID
+              ? unansweredQuestionsID
+                .map(id => (
+                  <li
+                    key={id}
+                    style={{ listStyleType: 'none' }}
+                  >
+                    <QuestionCard
+                      id={id}
+                      status="Unanswered"
+                    />
+                  </li>))
+              : answeredQuestionsID
               .map(id => (
                 <li
                   key={id}
                   style={{ listStyleType: 'none' }}
                 >
-                  <QuestionCard id={id} />
+                  <QuestionCard
+                    id={id}
+                    status="Answered"
+                  />
                 </li>))
-            : answeredQuestionsID
-            .map(id => (
-              <li
-                key={id}
-                style={{ listStyleType: 'none' }}
-              >
-                <QuestionCard id={id} />
-              </li>))
-          }
+            }
         </ul>
       </div>
     );
