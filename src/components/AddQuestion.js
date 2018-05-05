@@ -2,14 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
-import { handleAddQuestion } from '../actions/questions';
+// imports from material-ui
 import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
+// relative imports
+import { handleAddQuestion } from '../actions/questions';
 
-const styles = (theme) => ({
+const styles = theme => ({
   container: {
     // flexbox container properties
     display: 'flex',
@@ -26,6 +27,7 @@ const styles = (theme) => ({
 
 class AddQuestion extends React.Component {
   static propTypes = {
+    dispatch: PropTypes.func.isRequired,
     // from material-ui
     classes: PropTypes.object.isRequired,
   };
@@ -77,13 +79,13 @@ class AddQuestion extends React.Component {
         <div style={{ textAlign: 'center' }}>
           <Typography
             style={{ marginTop: 30 }}
-            variant='title'
+            variant="title"
           >
             Add a New Question
           </Typography>
           <Typography
             style={{ marginTop: 15 }}
-            variant='subheading'
+            variant="subheading"
           >
             Would You Rather
           </Typography>

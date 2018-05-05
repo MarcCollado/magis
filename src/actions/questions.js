@@ -1,4 +1,5 @@
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
+// relative imports
 import { saveQuestion } from '../utils/api';
 
 export const GET_QUESTIONS = 'GET_QUESTIONS';
@@ -29,7 +30,7 @@ export function handleAddQuestion(optionOneText, optionTwoText) {
       optionOneText,
       optionTwoText,
     })
-    .then(question => dispatch(addQuestion(question)))
-    .then(() => dispatch(hideLoading()));
-  }
-};
+      .then(question => dispatch(addQuestion(question)))
+      .then(() => dispatch(hideLoading()));
+  };
+}

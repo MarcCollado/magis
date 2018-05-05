@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+// imports from material-ui
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
@@ -10,6 +11,8 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Menu, { MenuItem } from 'material-ui/Menu';
+// relative imports
+import SmallAvatar from './ui-library/SmallAvatar';
 
 const styles = {
   root: {
@@ -26,20 +29,21 @@ const styles = {
 
 class Nav extends React.Component {
   static propTypes = {
+    // from MapStateToProps
+    loggedUserURL: PropTypes.string.isRequired,
+    loggedUserID: PropTypes.string.isRequired,
+    loggedUserName: PropTypes.string.isRequired,
+    // from material-ui
     classes: PropTypes.object.isRequired,
   };
 
   state = {
-    auth: true,
+    auth: this.props.loggedUserID !== '',
     anchorEl: null,
   };
 
-  handleChange = (event, checked) => {
-    this.setState({ auth: checked });
-  };
-
-  handleMenu = (event) => {
-    this.setState({ anchorEl: event.currentTarget });
+  handleMenu = (e) => {
+    this.setState({ anchorEl: e.currentTarget });
   };
 
   handleClose = () => {
@@ -47,7 +51,12 @@ class Nav extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const {
+      classes,
+      loggedUserID,
+      loggedUserURL,
+      loggedUserName,
+    } = this.props;
     const { auth, anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
@@ -69,14 +78,6 @@ class Nav extends React.Component {
             <Menu
               id="menu-appbar"
               anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
               open={open}
               onClose={this.handleClose}
             >
@@ -88,14 +89,14 @@ class Nav extends React.Component {
               </NavLink>
             </Menu>
             <Typography
-              variant="subheading"
+              variant="title"
               color="inherit"
               className={classes.flex}
             >
               Would You Rather
             </Typography>
-            {auth && (
-              <div>
+            {loggedUserID === ''
+              ? <div>
                 <IconButton
                   aria-haspopup="true"
                   color="inherit"
@@ -103,7 +104,13 @@ class Nav extends React.Component {
                   <AccountCircle />
                 </IconButton>
               </div>
-            )}
+              : <div>
+                <SmallAvatar
+                  imageURL={loggedUserURL}
+                  userName={loggedUserName}
+                />
+              </div>
+            }
           </Toolbar>
         </AppBar>
       </div>
@@ -111,4 +118,20 @@ class Nav extends React.Component {
   }
 }
 
-export default withStyles(styles)(Nav);
+function mapStateToProps({ authUser, users }) {
+  if (authUser !== null) {
+    const loggedUser = users[authUser];
+    return {
+      loggedUserURL: loggedUser.avatarURL,
+      loggedUserID: loggedUser.id,
+      loggedUserName: loggedUser.name,
+    };
+  }
+  return {
+    loggedUserURL: '',
+    loggedUserID: '',
+    loggedUserName: '',
+  };
+}
+
+export default withStyles(styles)(connect(mapStateToProps)(Nav));

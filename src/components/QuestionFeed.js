@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+// imports from material-ui
 import { withStyles } from 'material-ui/styles';
+// relative imports
 import Question from './Question';
 
 const styles = {
@@ -24,7 +25,7 @@ class QuestionFeed extends Component {
     // from material-ui
     classes: PropTypes.object.isRequired,
     // from QuestionSwitch
-    answered: PropTypes.number,
+    answered: PropTypes.number.isRequired,
   }
 
   render() {
@@ -32,7 +33,7 @@ class QuestionFeed extends Component {
       answeredQuestionsID,
       unansweredQuestionsID,
       classes,
-      answered
+      answered,
     } = this.props;
 
     return (
@@ -43,14 +44,16 @@ class QuestionFeed extends Component {
               .map(id => (
                 <li
                   key={id}
-                  style={{ listStyleType: 'none' }}>
+                  style={{ listStyleType: 'none' }}
+                >
                   <Question id={id} />
                 </li>))
             : answeredQuestionsID
             .map(id => (
               <li
                 key={id}
-                style={{ listStyleType: 'none' }}>
+                style={{ listStyleType: 'none' }}
+              >
                 <Question id={id} />
               </li>))
           }

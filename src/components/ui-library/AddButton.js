@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+// imports from material-ui
 import { withStyles } from 'material-ui/styles';
 import AddIcon from '@material-ui/icons/Add';
 import Button from 'material-ui/Button';
@@ -30,6 +30,7 @@ function AddButton(props) {
 }
 
 AddButton.propTypes = {
+  // from material-ui
   classes: PropTypes.object.isRequired,
 };
 

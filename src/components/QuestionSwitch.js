@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+// imports from material-ui
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Tabs, { Tab } from 'material-ui/Tabs';
+// relative imports
 import QuestionFeed from './QuestionFeed';
 
-const styles = (theme) => ({
+const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
   },
@@ -34,7 +35,7 @@ class QuestionSwitch extends React.Component {
       <Paper className={classes.root}>
         <Tabs
           centered
-          fullWidth={true}
+          fullWidth
           indicatorColor="primary"
           textColor="primary"
           value={value}

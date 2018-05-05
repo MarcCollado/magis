@@ -7,9 +7,8 @@ import PropTypes from 'prop-types';
 import { handleInitialData } from './actions/shared';
 import Nav from './components/Nav';
 import QuestionSwitch from './components/QuestionSwitch';
-import AddButton from './components/AddButton';
 import AddQuestion from './components/AddQuestion';
-import './App.css';
+import AddButton from './components/ui-library/AddButton';
 
 class App extends Component {
   static propTypes = {

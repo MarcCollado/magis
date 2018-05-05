@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+// imports from material-ui
 import { withStyles } from 'material-ui/styles';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
@@ -21,9 +21,9 @@ const styles = {
     width: '38%',
     textAlign: 'left',
   },
-  divider: {
-    textAlign: 'center',
+  or: {
     width: '24%',
+    textAlign: 'center',
   },
   two: {
     width: '38%',
@@ -63,12 +63,12 @@ class Question extends Component {
           >
             {optionOne}
           </Typography>
-          <div className={classes.divider}>
-            <Typography
-              variant="button"
-            >
-              — or —
-            </Typography>
+          <div className={classes.or}>
+            <img
+              alt="or"
+              src="or.webp"
+              style={{ width: 35 }}
+            />
           </div>
           <Typography
             className={classes.two}
