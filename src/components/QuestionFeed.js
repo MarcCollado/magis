@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // imports from material-ui
 import { withStyles } from 'material-ui/styles';
 // relative imports
-import QuestionCard from './QuestionCard';
+import Question from './Question';
 
 const styles = {
   container: {
@@ -51,9 +51,9 @@ class QuestionFeed extends Component {
                   key={id}
                   style={{ listStyleType: 'none' }}
                 >
-                  <QuestionCard
+                  <Question
                     id={id}
-                    status="Unanswered"
+                    status="UNANSWERED"
                   />
                 </li>))
             : answeredQuestionsID
@@ -62,9 +62,9 @@ class QuestionFeed extends Component {
                 key={id}
                 style={{ listStyleType: 'none' }}
               >
-                <QuestionCard
+                <Question
                   id={id}
-                  status="Answered"
+                  status="ANSWERED"
                 />
               </li>))
           }

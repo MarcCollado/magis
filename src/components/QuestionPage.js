@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 // imports from material-ui
 import { withStyles } from 'material-ui/styles';
 // relative imports
-import QuestionCard from './QuestionCard';
+import Question from './Question';
 
 const styles = {
   container: {
@@ -30,13 +30,14 @@ class QuestionPage extends Component {
 
   render() {
     const { classes, match } = this.props;
-    const id = match.params.id
+    const id = match.params.id;
+
     return (
       <div className={classes.container}>
         <div className={classes.feed}>
-          <QuestionCard
+          <Question
             id={id}
-            status="Unanswered"
+            status="AWAITING_ANSWER"
           />
         </div>
       </div>

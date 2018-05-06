@@ -35,7 +35,7 @@ const styles = {
   },
 };
 
-class QuestionCard extends Component {
+class Question extends Component {
   static propTypes = {
     // from MapStateToProps
     questions: PropTypes.object.isRequired,
@@ -43,11 +43,21 @@ class QuestionCard extends Component {
     classes: PropTypes.object.isRequired,
     // from QuestionFeed
     id: PropTypes.string.isRequired,
-    status: PropTypes.oneOf(['Answered', 'Unanswered']),
+    status: PropTypes.oneOf([
+      'ANSWERED',
+      'UNANSWERED',
+      'AWAITING_ANSWER',
+      'SHOW_RESULTS',
+    ]),
   };
 
+  state = {
+    status: this.props.status,
+  }
+
   render() {
-    const { questions, classes, id, status } = this.props;
+    const { questions, classes, id } = this.props;
+    const { status } = this.state;
     const optionOne = questions[id].optionOne.text;
     const optionTwo = questions[id].optionTwo.text;
 
@@ -81,7 +91,7 @@ class QuestionCard extends Component {
           status={status}
         >
         </QuestionActions>
-        </Card>
+      </Card>
     );
   }
 }
@@ -92,4 +102,4 @@ function mapStateToProps({ questions }) {
   };
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(QuestionCard));
+export default withStyles(styles)(connect(mapStateToProps)(Question));
