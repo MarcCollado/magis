@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 // imports from material-ui
 import { withStyles } from 'material-ui/styles';
 // relative imports
-import Question from './Question';
+import Question from './question/Question';
 
 const styles = {
   container: {
@@ -37,7 +37,7 @@ class QuestionPage extends Component {
         <div className={classes.feed}>
           <Question
             id={id}
-            status="AWAITING_ANSWER"
+            status='UserIsVoting'
           />
         </div>
       </div>

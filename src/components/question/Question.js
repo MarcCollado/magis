@@ -6,7 +6,8 @@ import { withStyles } from 'material-ui/styles';
 import Card, { CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 // relative imports
-import QuestionActions from './QuestionActions';
+import FeedLink from './FeedLink';
+import UserIsVoting from './UserIsVoting';
 
 const styles = {
   card: {
@@ -26,13 +27,6 @@ const styles = {
     width: '24%',
     textAlign: 'center',
   },
-  cta: {
-    height: 50,
-    textAlign: 'center',
-    // flexbox container properties
-    display: 'flex',
-    justifyContent: 'center',
-  },
 };
 
 class Question extends Component {
@@ -44,10 +38,10 @@ class Question extends Component {
     // from QuestionFeed
     id: PropTypes.string.isRequired,
     status: PropTypes.oneOf([
-      'ANSWERED',
-      'UNANSWERED',
-      'AWAITING_ANSWER',
-      'SHOW_RESULTS',
+      'UserWillVote',
+      'UserDidVote',
+      'UserIsVoting',
+      'PollStats',
     ]),
   };
 
@@ -55,9 +49,36 @@ class Question extends Component {
     status: this.props.status,
   }
 
+  renderActions() {
+    const { status } = this.state;
+    const { id } = this.props;
+
+    switch (status) {
+      case 'UserDidVote':
+        return (
+          <FeedLink
+            id={id}
+            status={status}
+          />
+        );
+      case 'UserIsVoting':
+        return (
+          <UserIsVoting
+            id={id}
+            status={status}
+          />
+        );
+      default:
+        return (
+          <FeedLink
+            id={id}
+            status={status}
+          />
+        );
+    }
+  }
   render() {
     const { questions, classes, id } = this.props;
-    const { status } = this.state;
     const optionOne = questions[id].optionOne.text;
     const optionTwo = questions[id].optionTwo.text;
 
@@ -74,7 +95,7 @@ class Question extends Component {
           <div className={classes.or}>
             <img
               alt="or"
-              src="or.webp"
+              src="/or.webp"
               style={{ width: 35 }}
             />
           </div>
@@ -86,11 +107,9 @@ class Question extends Component {
             {optionTwo}
           </Typography>
         </CardContent>
-        <QuestionActions
-          id={id}
-          status={status}
-        >
-        </QuestionActions>
+
+        {this.renderActions()}
+
       </Card>
     );
   }

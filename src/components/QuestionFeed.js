@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // imports from material-ui
 import { withStyles } from 'material-ui/styles';
 // relative imports
-import Question from './Question';
+import Question from './question/Question';
 
 const styles = {
   container: {
@@ -53,7 +53,7 @@ class QuestionFeed extends Component {
                 >
                   <Question
                     id={id}
-                    status="UNANSWERED"
+                    status='UserWillVote'
                   />
                 </li>))
             : answeredQuestionsID
@@ -64,7 +64,7 @@ class QuestionFeed extends Component {
               >
                 <Question
                   id={id}
-                  status="ANSWERED"
+                  status='UserDidVote'
                 />
               </li>))
           }

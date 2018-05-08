@@ -37,10 +37,10 @@ class App extends Component {
             ? null
             : <div>
               <Switch>
-                <Route path="/" exact component={QuestionSwitch} />
                 <Route path="/leaderboard" exact component={Leaderboard} />
                 <Route path="/add" exact component={AddQuestion} />
                 <Route path="/questions/:id" exact component={QuestionPage} />
+                <Route path="/" exact component={QuestionSwitch} />
               </Switch>
             </div>}
         </div>
