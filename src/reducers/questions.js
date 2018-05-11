@@ -1,7 +1,7 @@
 import {
   GET_QUESTIONS,
   ADD_QUESTION,
-  ANSWER_QUESTION
+  REGISTER_VOTE,
 } from '../actions/questions';
 
 export default function questions(state = {}, action) {
@@ -16,11 +16,43 @@ export default function questions(state = {}, action) {
         ...state,
         [action.question.id]: action.question,
       };
-    case ANSWER_QUESTION:
+    case REGISTER_VOTE:
       return {
-
+        ...state,
+        [action.qid]: {
+          ...state[action.qid],
+          [action.answer]: {
+            ...state[action.qid][action.answer],
+            votes: state[action.qid][action.answer].votes.concat([action.authedUser]),
+          },
+        },
       };
     default:
       return state;
   }
 }
+
+/*
+case TOGGLE_TWEET:
+  return {
+    ...state,
+    [action.id]: {
+      ...state[action.id],
+      likes: action.hasLiked === true
+        ? state[action.id].likes.filter(uid => uid !== action.authUser)
+        : state[action.id].likes.concat([action.authUser]),
+    },
+  };
+case ADD_TWEET:
+  const { tweet } = action;
+
+  let replyingTo = {};
+  if (tweet.replyingTo !== null) {
+    replyingTo = {
+      [tweet.replyingTo]: {
+        ...state[tweet.replyingTo],
+        replies: state[tweet.replyingTo].replies.concat([tweet.id]),
+      },
+    };
+  }
+*/

@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 // imports from material-ui
 import { CardActions } from 'material-ui/Card';
 import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
 // relative imports
-import { handleAnswerQuestion } from '../../actions/questions';
+import { handleRegisterVote } from '../../actions/questions';
 
 class UserIsVoting extends Component {
   static propTypes = {
@@ -20,20 +21,23 @@ class UserIsVoting extends Component {
   handleOptionOne = (e) => {
     e.preventDefault();
     const { dispatch, id } = this.props;
-    const option = 'optionOne'
-    dispatch(handleAnswerQuestion(id, option));
+    const option = 'optionOne';
+    const payLoad = { id, option }
+    dispatch(handleRegisterVote(payLoad));
   }
 
   handleOptionTwo = (e) => {
     e.preventDefault();
     const { dispatch, id } = this.props;
-    const option = 'optionTwo'
-    dispatch(handleAnswerQuestion(id, option));
+    const option = 'optionTwo';
+    const payLoad = { id, option };
+    dispatch(handleRegisterVote(payLoad));
   }
 
   render() {
     const cardStyles = {
       height: 50,
+      width: '50%',
       textAlign: 'center',
       // flexbox container properties
       display: 'flex',
@@ -43,22 +47,25 @@ class UserIsVoting extends Component {
     return (
       <CardActions
         className="card-actions"
-        style={cardStyles}
       >
-        <Button
-          variant="raised"
-          color="primary"
-          onClick={this.handleOptionOne}
-        >
-          Vote Option One
-        </Button>
-        <Button
-          variant="raised"
-          color="secondary"
-          onClick={this.handleOptionTwo}
-        >
-          Vote Option Two
-        </Button>
+        <div style={cardStyles}>
+          <Button
+            variant="raised"
+            color="primary"
+            onClick={this.handleOptionOne}
+          >
+            Vote Option One
+          </Button>
+        </div>
+        <div style={cardStyles}>
+          <Button
+            variant="raised"
+            color="primary"
+            onClick={this.handleOptionTwo}
+          >
+            Vote Option Two
+          </Button>
+        </div>
       </CardActions>
     );
   }

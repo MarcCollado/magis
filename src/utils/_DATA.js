@@ -201,8 +201,8 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
           },
         },
       };
-      
-      res(questions[qid]);
+
+      res({ ...questions });
     }, 500);
   });
 }

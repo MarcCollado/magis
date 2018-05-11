@@ -4,7 +4,7 @@ import { saveQuestion, saveQuestionAnswer} from '../utils/api';
 
 export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const ADD_QUESTION = 'ADD_QUESTION';
-export const ANSWER_QUESTION = 'ANSWER_QUESTION';
+export const REGISTER_VOTE = 'REGISTER_VOTE';
 
 export function getQuestions(questions) {
   return {
@@ -36,26 +36,43 @@ export function handleAddQuestion(optionOneText, optionTwoText) {
   };
 }
 
-function answerQuestion(question, authUser) {
+function registerVote({ authedUser, qid, answer }) {
   return {
-    type: ANSWER_QUESTION,
-    question,
-    authUser
+    type: REGISTER_VOTE,
+    authedUser,
+    qid,
+    answer,
   };
 }
 
-export function handleAnswerQuestion(qid, answer) {
+export function handleRegisterVote(info) {
   return (dispatch, getState) => {
     const { authUser } = getState();
-
-    dispatch(showLoading());
-
-    return saveQuestionAnswer({
+    const questionPayload = {
       authedUser: authUser,
-      qid,
-      answer,
-    })
-      .then(question => dispatch(answerQuestion(question, authUser)))
+      qid: info.id,
+      answer: info.option,
+    };
+    dispatch(showLoading());
+    dispatch(registerVote(questionPayload));
+    return saveQuestionAnswer(questionPayload)
+      // .then(question => dispatch(registerVote(question, authUser)))
       .then(() => dispatch(hideLoading()));
   };
 }
+
+/*
+Option w/ fallback
+export function handleRegisterVote(info) {
+  return (dispatch) => {
+    dispatch(registerVote(info));
+
+    return saveQuestionAnswer(info)
+      .catch((e) => {
+        console.warn('Error in handleRegisterVote: ', e);
+        dispatch(registerVote(info));
+        alert('There was an error saving your vote. Try again.');
+      });
+  };
+}
+*/
