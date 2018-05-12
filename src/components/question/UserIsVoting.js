@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // imports from material-ui
 import { CardActions } from 'material-ui/Card';
@@ -18,12 +18,19 @@ class UserIsVoting extends Component {
     ]),
   };
 
+  state = {
+    toHome: false,
+  };
+
   handleOptionOne = (e) => {
     e.preventDefault();
     const { dispatch, id } = this.props;
     const option = 'optionOne';
     const payLoad = { id, option }
     dispatch(handleRegisterVote(payLoad));
+    setTimeout(() => this.setState(() => ({
+      toHome: true,
+    })), 1000);
   }
 
   handleOptionTwo = (e) => {
@@ -32,6 +39,9 @@ class UserIsVoting extends Component {
     const option = 'optionTwo';
     const payLoad = { id, option };
     dispatch(handleRegisterVote(payLoad));
+    setTimeout(() => this.setState(() => ({
+      toHome: true,
+    })), 1000);
   }
 
   render() {
@@ -43,6 +53,11 @@ class UserIsVoting extends Component {
       display: 'flex',
       justifyContent: 'center',
     };
+    const { toHome } = this.state;
+
+    if (toHome === true) {
+      return <Redirect to="/" />;
+    }
 
     return (
       <CardActions

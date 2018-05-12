@@ -55,24 +55,14 @@ export function handleRegisterVote(info) {
     };
     dispatch(showLoading());
     dispatch(registerVote(questionPayload));
+
     return saveQuestionAnswer(questionPayload)
-      // .then(question => dispatch(registerVote(question, authUser)))
+      .then(apiPayload => console.log('API PAYLOAD = ', apiPayload))
+      // .catch((e) => {
+      //   console.warn('Error in handleRegisterVote: ', e);
+      //   dispatch(removeVote(info));
+      //   alert('There was an error saving your vote. Try again.');
+      // });
       .then(() => dispatch(hideLoading()));
   };
 }
-
-/*
-Option w/ fallback
-export function handleRegisterVote(info) {
-  return (dispatch) => {
-    dispatch(registerVote(info));
-
-    return saveQuestionAnswer(info)
-      .catch((e) => {
-        console.warn('Error in handleRegisterVote: ', e);
-        dispatch(registerVote(info));
-        alert('There was an error saving your vote. Try again.');
-      });
-  };
-}
-*/
