@@ -9,12 +9,12 @@ import Typography from 'material-ui/Typography';
 // relative imports
 import { handleRegisterVote } from '../../actions/questions';
 
-class UserIsVoting extends Component {
+class PollIsVoting extends Component {
   static propTypes = {
     // from Question
     id: PropTypes.string.isRequired,
     status: PropTypes.oneOf([
-      'UserIsVoting',
+      'PollIsVoting',
     ]),
   };
 
@@ -41,7 +41,7 @@ class UserIsVoting extends Component {
     dispatch(handleRegisterVote(payLoad));
     setTimeout(() => this.setState(() => ({
       toHome: true,
-    })), 1000);
+    })), 2000);
   }
 
   render() {
@@ -53,10 +53,11 @@ class UserIsVoting extends Component {
       display: 'flex',
       justifyContent: 'center',
     };
+    const { id } = this.props;
     const { toHome } = this.state;
 
     if (toHome === true) {
-      return <Redirect to="/" />;
+      return <Redirect to={`/questions/${id}/details`} />;
     }
 
     return (
@@ -86,4 +87,4 @@ class UserIsVoting extends Component {
   }
 }
 
-export default connect()(UserIsVoting);
+export default connect()(PollIsVoting);

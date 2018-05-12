@@ -7,7 +7,8 @@ import Card, { CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 // relative imports
 import FeedLink from './FeedLink';
-import UserIsVoting from './UserIsVoting';
+import PollIsVoting from './PollIsVoting';
+import PollDetails from './PollDetails';
 
 const styles = {
   card: {
@@ -40,8 +41,8 @@ class Question extends Component {
     status: PropTypes.oneOf([
       'UserWillVote',
       'UserDidVote',
-      'UserIsVoting',
-      'PollStats',
+      'PollIsVoting',
+      'PollDetails',
     ]),
   };
 
@@ -61,11 +62,16 @@ class Question extends Component {
             status={status}
           />
         );
-      case 'UserIsVoting':
+      case 'PollIsVoting':
         return (
-          <UserIsVoting
+          <PollIsVoting
             id={id}
-            status={status}
+          />
+        );
+      case 'PollDetails':
+        return (
+          <PollDetails
+            id={id}
           />
         );
       default:
@@ -79,6 +85,7 @@ class Question extends Component {
   }
   render() {
     const { questions, classes, id } = this.props;
+    const { status } = this.state;
     const optionOne = questions[id].optionOne.text;
     const optionTwo = questions[id].optionTwo.text;
 

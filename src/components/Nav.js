@@ -89,9 +89,9 @@ class Nav extends React.Component {
               </NavLink>
             </Menu>
             <Typography
-              variant="title"
-              color="inherit"
               className={classes.flex}
+              color="inherit"
+              variant="title"
             >
               Would You Rather
             </Typography>

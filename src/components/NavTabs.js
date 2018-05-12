@@ -5,7 +5,7 @@ import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Tabs, { Tab } from 'material-ui/Tabs';
 // relative imports
-import QuestionFeed from './QuestionFeed';
+import Feed from './Feed';
 
 const styles = theme => ({
   root: {
@@ -13,7 +13,7 @@ const styles = theme => ({
   },
 });
 
-class QuestionSwitch extends React.Component {
+class NavTabs extends React.Component {
   static propTypes = {
     // from material-ui
     classes: PropTypes.object.isRequired,
@@ -44,7 +44,7 @@ class QuestionSwitch extends React.Component {
           <Tab label="UNANSWERED" />
           <Tab label="ANSWERED" />
         </Tabs>
-        <QuestionFeed
+        <Feed
           answered={value}
         />
       </Paper>
@@ -52,4 +52,4 @@ class QuestionSwitch extends React.Component {
   }
 }
 
-export default withStyles(styles)(QuestionSwitch);
+export default withStyles(styles)(NavTabs);

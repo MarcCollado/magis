@@ -22,7 +22,7 @@ const styles = {
   },
 };
 
-class QuestionFeed extends Component {
+class Feed extends Component {
   static propTypes = {
     // from MapStateToProps
     unansweredQuestionsID: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -99,4 +99,4 @@ function mapStateToProps({ questions, authUser }) {
   };
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(QuestionFeed));
+export default withStyles(styles)(connect(mapStateToProps)(Feed));

@@ -32,13 +32,13 @@ export default function FeedLink(props) {
           </Typography>
         </Link>
         : <Link
-          to={`/questions/${id}/results`}
+          to={`/questions/${id}/details`}
           style={{ textDecoration: 'none' }}
           >
           <Typography
             variant="button"
             color="textSecondary"
-          >View Results
+          >Poll Details
           </Typography>
         </Link>
       }

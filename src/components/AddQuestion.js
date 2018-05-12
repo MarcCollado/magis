@@ -79,13 +79,13 @@ class AddQuestion extends React.Component {
         <div style={{ textAlign: 'center' }}>
           <Typography
             style={{ marginTop: 30 }}
-            variant="title"
+            variant="display1"
           >
             Add a New Question
           </Typography>
           <Typography
-            style={{ marginTop: 15 }}
-            variant="subheading"
+            style={{ marginTop: 20 }}
+            variant="headline"
           >
             Would You Rather
           </Typography>
@@ -99,7 +99,7 @@ class AddQuestion extends React.Component {
           <div style={{ textAlign: 'center' }}>
             <TextField
               id="option-one"
-              label="First Option"
+              label="Option One"
               placeholder=""
               multiline
               fullWidth
@@ -111,7 +111,7 @@ class AddQuestion extends React.Component {
             />
             <TextField
               id="option-two"
-              label="Second Option"
+              label="Option Two"
               placeholder=""
               multiline
               fullWidth
