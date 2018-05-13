@@ -44,8 +44,8 @@ class PollDetails extends Component {
     const { classes } = this.props;
     const optionOneCount = this.countVotes(1);
     const optionTwoCount = this.countVotes(2);
-    const optionOnePercent = parseInt(100 * (optionOneCount /
-      (optionOneCount + optionOneCount)), 10);
+    const totalVotes = optionOneCount + optionTwoCount;
+    const optionOnePercent = parseInt(100 * (optionOneCount / totalVotes), 10);
     const optionTwoPercent = parseInt(100 - optionOnePercent, 10);
 
     return (

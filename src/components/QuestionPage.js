@@ -48,7 +48,7 @@ class QuestionPage extends Component {
     return (
       <div className={classes.container}>
         <Typography
-          style={{ marginTop: 30 }}
+          style={{ marginTop: 20 }}
           variant="display1"
         >
           {path.includes('details') ?

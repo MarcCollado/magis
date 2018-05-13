@@ -46,6 +46,17 @@ class Question extends Component {
     ]).isRequired,
   };
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    // console.log('nextProps => ', nextProps);
+    // console.log('prevState => ', prevState);
+    if (nextProps.status === prevState.status) {
+      return null;
+    }
+    return {
+      status: "PollDetails",
+    }
+  };
+
   state = {
     status: this.props.status,
   }

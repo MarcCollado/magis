@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 // imports from material-ui
 import { CardActions } from 'material-ui/Card';
 import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
 // relative imports
 import { handleRegisterVote } from '../../actions/questions';
 
@@ -25,22 +24,22 @@ class PollIsVoting extends Component {
     e.preventDefault();
     const { dispatch, id } = this.props;
     const option = 'optionOne';
-    const payLoad = { id, option };
-    dispatch(handleRegisterVote(payLoad));
+    const userVote = { id, option };
+    dispatch(handleRegisterVote(userVote));
     setTimeout(() => this.setState(() => ({
       toDetails: true,
-    })), 1000);
+    })), 500);
   }
 
   handleOptionTwo = (e) => {
     e.preventDefault();
     const { dispatch, id } = this.props;
     const option = 'optionTwo';
-    const payLoad = { id, option };
-    dispatch(handleRegisterVote(payLoad));
+    const userVote = { id, option };
+    dispatch(handleRegisterVote(userVote));
     setTimeout(() => this.setState(() => ({
       toDetails: true,
-    })), 1000);
+    })), 500);
   }
 
   render() {
@@ -65,7 +64,6 @@ class PollIsVoting extends Component {
       >
         <div style={cardStyles}>
           <Button
-            variant="raised"
             color="primary"
             onClick={this.handleOptionOne}
           >
@@ -74,7 +72,6 @@ class PollIsVoting extends Component {
         </div>
         <div style={cardStyles}>
           <Button
-            variant="raised"
             color="primary"
             onClick={this.handleOptionTwo}
           >

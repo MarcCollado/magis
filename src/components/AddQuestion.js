@@ -79,7 +79,7 @@ class AddQuestion extends React.Component {
       <div>
         <div style={{ textAlign: 'center' }}>
           <Typography
-            style={{ marginTop: 30 }}
+            style={{ marginTop: 20 }}
             variant="display1"
           >
             Add a New Question
