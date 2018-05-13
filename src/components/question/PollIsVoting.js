@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // imports from material-ui
 import { CardActions } from 'material-ui/Card';
@@ -11,25 +11,24 @@ import { handleRegisterVote } from '../../actions/questions';
 
 class PollIsVoting extends Component {
   static propTypes = {
+    // from connect
+    dispatch: PropTypes.func.isRequired,
     // from Question
     id: PropTypes.string.isRequired,
-    status: PropTypes.oneOf([
-      'PollIsVoting',
-    ]),
   };
 
   state = {
-    toHome: false,
+    toDetails: false,
   };
 
   handleOptionOne = (e) => {
     e.preventDefault();
     const { dispatch, id } = this.props;
     const option = 'optionOne';
-    const payLoad = { id, option }
+    const payLoad = { id, option };
     dispatch(handleRegisterVote(payLoad));
     setTimeout(() => this.setState(() => ({
-      toHome: true,
+      toDetails: true,
     })), 1000);
   }
 
@@ -40,8 +39,8 @@ class PollIsVoting extends Component {
     const payLoad = { id, option };
     dispatch(handleRegisterVote(payLoad));
     setTimeout(() => this.setState(() => ({
-      toHome: true,
-    })), 2000);
+      toDetails: true,
+    })), 1000);
   }
 
   render() {
@@ -54,9 +53,9 @@ class PollIsVoting extends Component {
       justifyContent: 'center',
     };
     const { id } = this.props;
-    const { toHome } = this.state;
+    const { toDetails } = this.state;
 
-    if (toHome === true) {
+    if (toDetails === true) {
       return <Redirect to={`/questions/${id}/details`} />;
     }
 

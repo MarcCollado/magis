@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import LoadingBar from 'react-redux-loading-bar';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+// relative imports
 import { handleInitialData } from './actions/shared';
 import Nav from './components/Nav';
 import NavTabs from './components/NavTabs';
@@ -14,6 +14,7 @@ import AddButton from './components/ui-library/AddButton';
 
 class App extends Component {
   static propTypes = {
+    // from connect
     dispatch: PropTypes.func.isRequired,
     // from MapStateToProps
     loading: PropTypes.bool.isRequired,
@@ -32,18 +33,17 @@ class App extends Component {
           <LoadingBar />
           <Nav />
           <Link to="/add"><AddButton /></Link>
-
-          {loading === true
-            ? null
-            : <div>
-              <Switch>
-                <Route path="/leaderboard" exact component={Leaderboard} />
-                <Route path="/add" exact component={AddQuestion} />
-                <Route path="/questions/:id/details" exact component={QuestionPage} />
-                <Route path="/questions/:id" exact component={QuestionPage} />
-                <Route path="/" exact component={NavTabs} />
-              </Switch>
-            </div>}
+          {loading === true ?
+          null :
+          <div>
+            <Switch>
+              <Route path="/leaderboard" exact component={Leaderboard} />
+              <Route path="/add" exact component={AddQuestion} />
+              <Route path="/questions/:id/details" exact component={QuestionPage} />
+              <Route path="/questions/:id" exact component={QuestionPage} />
+              <Route path="/" exact component={NavTabs} />
+            </Switch>
+          </div>}
         </div>
       </Router>
     );

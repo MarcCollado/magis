@@ -51,8 +51,7 @@ class Leaderboard extends Component {
                   questionsAnswered={user.questionsAnswered}
                   questionsPosted={user.questionsPosted}
                 />
-              </li>))
-          }
+              </li>))}
         </ul>
       </div>
     );

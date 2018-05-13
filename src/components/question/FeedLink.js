@@ -20,28 +20,27 @@ export default function FeedLink(props) {
       className="card-actions"
       style={cardStyles}
     >
-      {status === 'UserWillVote'
-        ? <Link
+      {status === 'UserWillVote' ?
+        <Link
           to={`/questions/${id}`}
           style={{ textDecoration: 'none' }}
-          >
+        >
           <Typography
             variant="button"
             color="textSecondary"
           >Vote It
           </Typography>
-        </Link>
-        : <Link
+        </Link> :
+        <Link
           to={`/questions/${id}/details`}
           style={{ textDecoration: 'none' }}
-          >
+        >
           <Typography
             variant="button"
             color="textSecondary"
           >Poll Details
           </Typography>
-        </Link>
-      }
+        </Link>}
     </CardActions>
   );
 }
@@ -52,5 +51,5 @@ FeedLink.propTypes = {
   status: PropTypes.oneOf([
     'UserWillVote',
     'UserDidVote',
-  ]),
+  ]).isRequired,
 };

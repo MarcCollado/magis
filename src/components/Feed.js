@@ -29,7 +29,7 @@ class Feed extends Component {
     answeredQuestionsID: PropTypes.arrayOf(PropTypes.string).isRequired,
     // from material-ui
     classes: PropTypes.object.isRequired,
-    // from QuestionSwitch
+    // from NavTabs
     answered: PropTypes.number.isRequired,
   }
 
@@ -44,19 +44,8 @@ class Feed extends Component {
     return (
       <div className={classes.container}>
         <ul className={classes.feed}>
-          {answered === 0
-            ? unansweredQuestionsID
-              .map(id => (
-                <li
-                  key={id}
-                  style={{ listStyleType: 'none' }}
-                >
-                  <Question
-                    id={id}
-                    status='UserWillVote'
-                  />
-                </li>))
-            : answeredQuestionsID
+          {answered === 0 ?
+            unansweredQuestionsID
             .map(id => (
               <li
                 key={id}
@@ -64,10 +53,20 @@ class Feed extends Component {
               >
                 <Question
                   id={id}
-                  status='UserDidVote'
+                  status="UserWillVote"
                 />
-              </li>))
-          }
+              </li>)) :
+            answeredQuestionsID
+            .map(id => (
+              <li
+                key={id}
+                style={{ listStyleType: 'none' }}
+              >
+                <Question
+                  id={id}
+                  status="UserDidVote"
+                />
+              </li>))}
         </ul>
       </div>
     );

@@ -36,14 +36,14 @@ class Question extends Component {
     questions: PropTypes.object.isRequired,
     // from material-ui
     classes: PropTypes.object.isRequired,
-    // from QuestionFeed
+    // from Feed
     id: PropTypes.string.isRequired,
     status: PropTypes.oneOf([
       'UserWillVote',
       'UserDidVote',
       'PollIsVoting',
       'PollDetails',
-    ]),
+    ]).isRequired,
   };
 
   state = {
@@ -85,7 +85,6 @@ class Question extends Component {
   }
   render() {
     const { questions, classes, id } = this.props;
-    const { status } = this.state;
     const optionOne = questions[id].optionOne.text;
     const optionTwo = questions[id].optionTwo.text;
 

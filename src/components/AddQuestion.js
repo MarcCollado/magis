@@ -27,6 +27,7 @@ const styles = theme => ({
 
 class AddQuestion extends React.Component {
   static propTypes = {
+    // from connect
     dispatch: PropTypes.func.isRequired,
     // from material-ui
     classes: PropTypes.object.isRequired,

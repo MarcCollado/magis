@@ -30,15 +30,15 @@ const styles = {
 class Nav extends React.Component {
   static propTypes = {
     // from MapStateToProps
-    loggedUserURL: PropTypes.string.isRequired,
-    loggedUserID: PropTypes.string.isRequired,
-    loggedUserName: PropTypes.string.isRequired,
+    authUserURL: PropTypes.string.isRequired,
+    authUserID: PropTypes.string.isRequired,
+    authUserName: PropTypes.string.isRequired,
     // from material-ui
     classes: PropTypes.object.isRequired,
   };
 
   state = {
-    auth: this.props.loggedUserID !== '',
+    // auth: this.props.authUserID !== '',
     anchorEl: null,
   };
 
@@ -53,11 +53,11 @@ class Nav extends React.Component {
   render() {
     const {
       classes,
-      loggedUserID,
-      loggedUserURL,
-      loggedUserName,
+      authUserID,
+      authUserURL,
+      authUserName,
     } = this.props;
-    const { auth, anchorEl } = this.state;
+    const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
     return (
@@ -95,22 +95,21 @@ class Nav extends React.Component {
             >
               Would You Rather
             </Typography>
-            {loggedUserID === ''
-              ? <div>
+            {authUserID === '' ?
+              <div>
                 <IconButton
                   aria-haspopup="true"
                   color="inherit"
                 >
                   <AccountCircle />
                 </IconButton>
-              </div>
-              : <div>
+              </div> :
+              <div>
                 <SmallAvatar
-                  imageURL={loggedUserURL}
-                  userName={loggedUserName}
+                  imageURL={authUserURL}
+                  userName={authUserName}
                 />
-              </div>
-            }
+              </div>}
           </Toolbar>
         </AppBar>
       </div>
@@ -122,15 +121,15 @@ function mapStateToProps({ authUser, users }) {
   if (authUser !== null) {
     const loggedUser = users[authUser];
     return {
-      loggedUserURL: loggedUser.avatarURL,
-      loggedUserID: loggedUser.id,
-      loggedUserName: loggedUser.name,
+      authUserURL: loggedUser.avatarURL,
+      authUserID: loggedUser.id,
+      authUserName: loggedUser.name,
     };
   }
   return {
-    loggedUserURL: '',
-    loggedUserID: '',
-    loggedUserName: '',
+    authUserURL: '',
+    authUserID: '',
+    authUserName: '',
   };
 }
 
