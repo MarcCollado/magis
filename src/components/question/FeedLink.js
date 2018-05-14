@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // imports from material-ui
 import { CardActions } from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
 
 export default function FeedLink(props) {
   const { id, status } = props;
@@ -13,6 +13,7 @@ export default function FeedLink(props) {
     // flexbox container properties
     display: 'flex',
     justifyContent: 'center',
+    backgroundColor: '#E8EAF6',
   };
 
   return (
@@ -23,23 +24,25 @@ export default function FeedLink(props) {
       {status === 'UserWillVote' ?
         <Link
           to={`/questions/${id}`}
-          style={{ textDecoration: 'none' }}
+          style={{ textDecoration: 'none', width: '100%' }}
         >
-          <Typography
-            variant="button"
-            color="textSecondary"
-          >Vote It
-          </Typography>
+          <Button
+            style={{ width: '100%' }}
+            color="primary"
+          >
+            Vote
+          </Button>
         </Link> :
         <Link
           to={`/questions/${id}/details`}
-          style={{ textDecoration: 'none' }}
+          style={{ textDecoration: 'none', width: '100%' }}
         >
-          <Typography
-            variant="button"
-            color="textSecondary"
-          >Poll Details
-          </Typography>
+          <Button
+            style={{ width: '100%' }}
+            color="primary"
+          >
+            Poll Details
+          </Button>
         </Link>}
     </CardActions>
   );

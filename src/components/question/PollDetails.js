@@ -6,6 +6,12 @@ import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 
 const styles = {
+  voted: {
+    width: '100%',
+    height: 30,
+    backgroundColor: '#E8EAF6',
+    textAlign: 'center',
+  },
   container: {
     // flexbox container properties
     display: 'flex',
@@ -19,7 +25,6 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-
   },
 };
 
@@ -27,6 +32,7 @@ class PollDetails extends Component {
   static propTypes = {
     // from MapStateToProps
     questions: PropTypes.object.isRequired,
+    answer: PropTypes.string.isRequired,
     // from material-ui
     classes: PropTypes.object.isRequired,
     // from Question
@@ -41,7 +47,7 @@ class PollDetails extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, answer } = this.props;
     const optionOneCount = this.countVotes(1);
     const optionTwoCount = this.countVotes(2);
     const totalVotes = optionOneCount + optionTwoCount;
@@ -49,46 +55,67 @@ class PollDetails extends Component {
     const optionTwoPercent = parseInt(100 - optionOnePercent, 10);
 
     return (
-      <div className={classes.container}>
-        <div className={classes.options}>
+      <div>
+        <div className={classes.voted}>
           <Typography
-            style={{ marginBottom: 5 }}
-            variant="display2"
-          >
-            {`${optionOnePercent}%`}
-          </Typography>
-          <Typography
-            style={{ marginBottom: 12 }}
+            style={{ paddingTop: 6 }}
             variant="caption"
+            color="default"
           >
-            {optionOneCount === 1
-              ? `voted by ${optionOneCount} user`
-              : `voted by ${optionOneCount} users`}
+            {answer !== '' ? `${answer}` : ''}
           </Typography>
         </div>
-        <div className={classes.options}>
-          <Typography
-            style={{ marginBottom: 5 }}
-            variant="display2"
-          >
-            {`${optionTwoPercent}%`}
-          </Typography>
-          <Typography
-            style={{ marginBottom: 12 }}
-            variant="caption"
-          >
-            {optionTwoCount === 1
-              ? `voted by ${optionTwoCount} user`
-              : `voted by ${optionTwoCount} users`}
-          </Typography>
+        <div className={classes.container}>
+          <div className={classes.options}>
+            <Typography
+              style={{ marginBottom: 5 }}
+              variant="display2"
+            >
+              {`${optionOnePercent}%`}
+            </Typography>
+            <Typography
+              style={{ marginBottom: 12 }}
+              variant="caption"
+            >
+              {optionOneCount === 1
+                ? `voted by ${optionOneCount} user`
+                : `voted by ${optionOneCount} users`}
+            </Typography>
+          </div>
+          <div className={classes.options}>
+            <Typography
+              style={{ marginBottom: 5 }}
+              variant="display2"
+            >
+              {`${optionTwoPercent}%`}
+            </Typography>
+            <Typography
+              style={{ marginBottom: 12 }}
+              variant="caption"
+            >
+              {optionTwoCount === 1
+                ? `voted by ${optionTwoCount} user`
+                : `voted by ${optionTwoCount} users`}
+            </Typography>
+          </div>
         </div>
       </div>
     );
   }
 }
 
-function mapStateToProps({ questions }) {
+function mapStateToProps({ questions, authUser }, { id }) {
+  let answer = '';
+
+  if (questions[id].optionOne.votes.includes(authUser)) {
+    answer = '🙋‍ You voted for option one';
+  } else if (questions[id].optionTwo.votes.includes(authUser)) {
+    answer = 'You voted for option two 🙋‍';
+  } else {
+    answer = '';
+  }
   return {
+    answer,
     questions,
   };
 }

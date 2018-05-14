@@ -53,9 +53,9 @@ class Question extends Component {
       return null;
     }
     return {
-      status: "PollDetails",
-    }
-  };
+      status: 'PollDetails',
+    };
+  }
 
   state = {
     status: this.props.status,

@@ -64,6 +64,7 @@ class PollIsVoting extends Component {
       >
         <div style={cardStyles}>
           <Button
+            style={{ width: '100%' }}
             color="primary"
             onClick={this.handleOptionOne}
           >
@@ -72,6 +73,7 @@ class PollIsVoting extends Component {
         </div>
         <div style={cardStyles}>
           <Button
+            style={{ width: '100%' }}
             color="primary"
             onClick={this.handleOptionTwo}
           >
