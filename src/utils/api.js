@@ -15,6 +15,10 @@ export function getInitialData() {
   }));
 }
 
+export function getAuthUsers() {
+  return _getUsers();
+}
+
 export function saveQuestion(question) {
   return _saveQuestion(question);
 }

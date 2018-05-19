@@ -5,7 +5,7 @@ import { getQuestions } from './questions';
 import { getUsers } from './users';
 import { setAuthUser } from './auth';
 
-const FAKE_ID = 'tylermcginnis';
+const NO_AUTH_ID = "tylermcginnis";
 
 export function handleInitialData() {
   return (dispatch) => {
@@ -14,7 +14,7 @@ export function handleInitialData() {
       .then(({ users, questions }) => {
         dispatch(getQuestions(questions));
         dispatch(getUsers(users));
-        dispatch(setAuthUser(FAKE_ID));
+        dispatch(setAuthUser(NO_AUTH_ID));
         dispatch(hideLoading());
       });
   };

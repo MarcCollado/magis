@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 // imports from material-ui
 import { withStyles } from 'material-ui/styles';
-// relative imports
 import SmallAvatar from './ui-library/SmallAvatar';
+import Typography from 'material-ui/Typography';
+// relative imports
+import { handleSetAuthUser } from '../actions/auth';
 
 const styles = {
   container: {
@@ -24,10 +26,17 @@ const styles = {
 
 class Login extends Component {
   static propTypes = {
+    // from connect
+    dispatch: PropTypes.func.isRequired,
     // from MapStateToProps
     userDetails: PropTypes.array.isRequired,
     // from material-ui
     classes: PropTypes.object.isRequired,
+  }
+
+  handleAuth(id) {
+    const { dispatch } = this.props;
+    dispatch(handleSetAuthUser(id));
   }
 
   render() {
@@ -49,6 +58,13 @@ class Login extends Component {
                   imageURL={user.imageURL}
                   userName={user.userName}
                 />
+                <Typography
+                  style={{ marginBottom: 10, textAlign: 'center' }}
+                  variant="caption"
+                  color="default"
+                >
+                  {user.userName}
+                </Typography>
               </li>))}
         </ul>
       </div>
@@ -62,6 +78,7 @@ function mapStateToProps({ users }) {
       const tempUserDetails = {
         imageURL: users[user].avatarURL,
         userName: users[user].name,
+        userID: users[user].id,
       };
       return (tempUserDetails);
     })
