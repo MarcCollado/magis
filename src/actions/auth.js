@@ -17,10 +17,11 @@ export function handleSetAuthUser(id) {
 
     return getAuthUsers()
       .then(users => {
-        Object.keys(users)
-          .filter((user) => users[user].id === id) ?
-          dispatch(setAuthUser(id)) :
-          dispatch(setAuthUser(null))
+        const auth = Object.keys(users)
+          .filter((user) => user === id)
+        auth.length === 0 ?
+          dispatch(setAuthUser(null)) :
+          dispatch(setAuthUser(id))
       })
       .then(() => dispatch(hideLoading()));
   };

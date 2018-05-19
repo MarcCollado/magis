@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // imports from material-ui
 import { withStyles } from 'material-ui/styles';
 import SmallAvatar from './ui-library/SmallAvatar';
 import Typography from 'material-ui/Typography';
 // relative imports
+// import { handleInitialData } from '../actions/shared';
 import { handleSetAuthUser } from '../actions/auth';
 
 const styles = {
@@ -34,16 +36,33 @@ class Login extends Component {
     classes: PropTypes.object.isRequired,
   }
 
-  handleAuth(id) {
+  state = {
+    redirect: false,
+  }
+
+  login = (e, id) => {
     const { dispatch } = this.props;
     dispatch(handleSetAuthUser(id));
+    this.setState(() => ({
+        redirect: true,
+      }))
   }
 
   render() {
     const {
       classes,
       userDetails,
+      authUser,
+      location,
     } = this.props;
+    const { redirect } = this.state;
+    const { from } = location.state || { from: { pathname: '/' } }
+
+    if (redirect === true) {
+      console.log("AUTH >>> ", authUser);
+      console.log("FROM >>> ", from);
+      <Redirect to={from} />
+    }
 
     return (
       <div className={classes.container}>
@@ -53,6 +72,7 @@ class Login extends Component {
               <li
                 key={user.userName}
                 style={{ listStyleType: 'none' }}
+                onClick={e => this.login(e, user.userID)}
               >
                 <SmallAvatar
                   imageURL={user.imageURL}

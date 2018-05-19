@@ -12,13 +12,12 @@ import Leaderboard from './components/Leaderboard';
 import AddQuestion from './components/AddQuestion';
 import QuestionPage from './components/QuestionPage';
 import AddButton from './components/ui-library/AddButton';
+import PrivateRoute from './components/PrivateRoute';
 
 class App extends Component {
   static propTypes = {
     // from connect
     dispatch: PropTypes.func.isRequired,
-    // from MapStateToProps
-    loading: PropTypes.bool.isRequired,
   }
 
   componentDidMount() {
@@ -27,35 +26,48 @@ class App extends Component {
   }
 
   render() {
-    const { loading } = this.props;
     return (
       <Router>
         <div className="container">
           <LoadingBar />
           <Nav />
           <Link to="/add"><AddButton /></Link>
-          {loading === true ?
-          null :
-          <div>
-            <Switch>
-              <Route path="/login" exact component={Login} />
-              <Route path="/leaderboard" exact component={Leaderboard} />
-              <Route path="/add" exact component={AddQuestion} />
-              <Route path="/questions/:id/details" exact component={QuestionPage} />
-              <Route path="/questions/:id" exact component={QuestionPage} />
-              <Route path="/" exact component={NavTabs} />
-            </Switch>
-          </div>}
+          <Switch>
+            <Route
+              path="/"
+              exact
+              component={NavTabs}
+            />
+            <Route
+              path="/login"
+              exact
+              component={Login}
+            />
+            <PrivateRoute
+              path="/leaderboard"
+              exact
+              component={Leaderboard}
+            />
+            <PrivateRoute
+              path="/add"
+              exact
+              component={AddQuestion}
+            />
+            <PrivateRoute
+              path="/questions/:id/details"
+              exact
+              component={QuestionPage}
+            />
+            <PrivateRoute
+              path="/questions/:id"
+              exact
+              component={QuestionPage}
+            />
+          </Switch>
         </div>
       </Router>
     );
   }
 }
 
-function mapStateToProps({ authUser }) {
-  return {
-    loading: authUser === null,
-  };
-}
-
-export default connect(mapStateToProps)(App);
+export default connect()(App);
