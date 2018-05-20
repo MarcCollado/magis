@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // imports from material-ui
-import { CardActions } from 'material-ui/Card';
-import Button from 'material-ui/Button';
+import CardActions from '@material-ui/core/CardActions';
+import Button from '@material-ui/core/Button';
 
 export default function FeedLink(props) {
   const { id, status } = props;

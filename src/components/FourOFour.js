@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // imports from material-ui
-import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 const styles = {
   container: {

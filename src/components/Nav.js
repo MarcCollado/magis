@@ -3,14 +3,15 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // imports from material-ui
-import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import Menu, { MenuItem } from 'material-ui/Menu';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 // relative imports
 import { logOut } from '../actions/auth';
 import SmallAvatar from './ui-library/SmallAvatar';
@@ -97,10 +98,10 @@ class Nav extends React.Component {
               </Link>
               {authUserID ?
                 <Link to="/login" style={{ textDecoration: 'none' }}>
-                  <MenuItem onClick={this.handleLogOut}>Log Out</MenuItem>
+                  <MenuItem onClick={this.handleLogOut}>Logout</MenuItem>
                 </Link> :
                 <Link to="/login" style={{ textDecoration: 'none' }}>
-                  <MenuItem onClick={this.handleClose}>Log In</MenuItem>
+                  <MenuItem onClick={this.handleClose}>Login</MenuItem>
                 </Link>}
             </Menu>
             <Typography

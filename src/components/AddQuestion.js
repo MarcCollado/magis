@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // imports from material-ui
-import { withStyles } from 'material-ui/styles';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 // relative imports
 import { handleAddQuestion } from '../actions/questions';
 
@@ -88,7 +88,7 @@ class AddQuestion extends React.Component {
             style={{ marginTop: 20 }}
             variant="body1"
           >
-            {`Would You Rather 🤔`}
+            {'Would You Rather 🤔'}
           </Typography>
         </div>
         <form
@@ -125,7 +125,7 @@ class AddQuestion extends React.Component {
           </div>
           <Button
             style={{ marginTop: 30 }}
-            variant="raised"
+            variant="outlined"
             size="medium"
             color="primary"
             className={classes.button}

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 // imports from material-ui
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 // relative imports
 import UserCard from './ui-library/UserCard';
 
@@ -38,6 +39,24 @@ class Leaderboard extends Component {
 
     return (
       <div className={classes.container}>
+        <Typography
+          style={{ marginTop: 20 }}
+          variant="display1"
+        >
+          Leaderboard
+        </Typography>
+        <Typography
+          style={{ marginTop: 15, textAlign: 'center' }}
+          variant="body1"
+        >
+          Meet the app's top performers.
+        </Typography>
+        <Typography
+          style={{ marginTop: 10, textAlign: 'center' }}
+          variant="caption"
+        >
+          {`The more questions they post and vote, the higher they rank 🏅`}
+        </Typography>
         <ul className={classes.feed}>
           {userDetails
             .map(user => (

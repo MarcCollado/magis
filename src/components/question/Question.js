@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 // imports from material-ui
-import { withStyles } from 'material-ui/styles';
-import Card, { CardContent } from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 // relative imports
 import FeedLink from './FeedLink';
 import PollIsVoting from './PollIsVoting';

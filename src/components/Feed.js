@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 // imports from material-ui
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 // relative imports
 import Question from './question/Question';
 

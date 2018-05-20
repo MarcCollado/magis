@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // imports from material-ui
-import { withStyles } from 'material-ui/styles';
-import SmallAvatar from './ui-library/SmallAvatar';
-import Typography from 'material-ui/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 // relative imports
+import SmallAvatar from './ui-library/SmallAvatar';
 import { handleSetAuthUser } from '../actions/auth';
 
 const styles = {
@@ -31,8 +31,11 @@ class Login extends Component {
     dispatch: PropTypes.func.isRequired,
     // from MapStateToProps
     userDetails: PropTypes.array.isRequired,
+    authUser: PropTypes.string,
     // from material-ui
     classes: PropTypes.object.isRequired,
+    // from Router
+    location: PropTypes.object,
   }
 
   login = (e, id) => {
@@ -64,7 +67,7 @@ class Login extends Component {
           Login
         </Typography>
         <Typography
-          style={{ textAlign: 'center', marginTop: 15 }}
+          style={{ marginTop: 15, textAlign: 'center' }}
           variant="body1"
         >
           Please, select a user to login.
@@ -73,7 +76,7 @@ class Login extends Component {
           style={{ marginTop: 10, textAlign: 'center' }}
           variant="caption"
         >
-          {'Only logged users can vote, submit new questions or view leaderboards. Don\'t miss out on all the fun 🎉'}
+          {`Only logged users can vote, submit new questions or view leaderboards. Don't miss out on all the fun 🎉`}
         </Typography>
         <ul className={classes.feed}>
           {userDetails
@@ -83,10 +86,12 @@ class Login extends Component {
                 style={{ listStyleType: 'none' }}
                 onClick={e => this.login(e, user.userID)}
               >
-                <SmallAvatar
-                  imageURL={user.imageURL}
-                  userName={user.userName}
-                />
+                <Link to="#">
+                  <SmallAvatar
+                    imageURL={user.imageURL}
+                    userName={user.userName}
+                  />
+                </Link>
                 <Typography
                   style={{ marginBottom: 10, textAlign: 'center' }}
                   variant="caption"

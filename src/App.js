@@ -11,9 +11,9 @@ import Login from './components/Login';
 import Leaderboard from './components/Leaderboard';
 import AddQuestion from './components/AddQuestion';
 import QuestionPage from './components/QuestionPage';
-import AddButton from './components/ui-library/AddButton';
 import PrivateRoute from './components/PrivateRoute';
 import FourOFour from './components/FourOFour';
+import AddButton from './components/ui-library/AddButton';
 
 class App extends Component {
   static propTypes = {
