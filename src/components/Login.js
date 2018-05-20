@@ -7,7 +7,6 @@ import { withStyles } from 'material-ui/styles';
 import SmallAvatar from './ui-library/SmallAvatar';
 import Typography from 'material-ui/Typography';
 // relative imports
-// import { handleInitialData } from '../actions/shared';
 import { handleSetAuthUser } from '../actions/auth';
 
 const styles = {
@@ -36,16 +35,9 @@ class Login extends Component {
     classes: PropTypes.object.isRequired,
   }
 
-  state = {
-    redirect: false,
-  }
-
   login = (e, id) => {
     const { dispatch } = this.props;
     dispatch(handleSetAuthUser(id));
-    this.setState(() => ({
-        redirect: true,
-      }))
   }
 
   render() {
@@ -55,17 +47,34 @@ class Login extends Component {
       authUser,
       location,
     } = this.props;
-    const { redirect } = this.state;
     const { from } = location.state || { from: { pathname: '/' } }
 
-    if (redirect === true) {
-      console.log("AUTH >>> ", authUser);
-      console.log("FROM >>> ", from);
-      <Redirect to={from} />
+    if (authUser !== null) {
+      return (
+        <Redirect to={from} />
+      )
     }
 
     return (
       <div className={classes.container}>
+        <Typography
+          style={{ marginTop: 20 }}
+          variant="display1"
+        >
+          Login
+        </Typography>
+        <Typography
+          style={{ marginTop: 15 }}
+          variant="body1"
+        >
+          Please, select a user to login.
+        </Typography>
+        <Typography
+          style={{ marginTop: 10, textAlign: 'center' }}
+          variant="caption"
+        >
+          {`Only logged users can vote, submit new questions or view leaderboards. Don't miss out on all the fun 🎉`}
+        </Typography>
         <ul className={classes.feed}>
           {userDetails
             .map(user => (
@@ -92,7 +101,7 @@ class Login extends Component {
   }
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ users, authUser }) {
   const userDetails = Object.keys(users)
     .map((user) => {
       const tempUserDetails = {
@@ -104,6 +113,7 @@ function mapStateToProps({ users }) {
     })
   return {
     userDetails,
+    authUser,
   };
 }
 
