@@ -17,12 +17,12 @@ export function handleSetAuthUser(id) {
     dispatch(showLoading());
 
     return getAuthUsers()
-      .then(users => {
+      .then((users) => {
         const auth = Object.keys(users)
-          .filter((user) => user === id)
+          .filter(user => user === id);
         auth.length === 0 ?
           dispatch(logIn(null)) :
-          dispatch(logIn(id))
+          dispatch(logIn(id));
       })
       .then(() => dispatch(hideLoading()));
   };

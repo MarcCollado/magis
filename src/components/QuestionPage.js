@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // imports from material-ui
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
+import Button from 'material-ui/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 // relative imports
 import SmallAvatar from './ui-library/SmallAvatar';
@@ -55,15 +57,6 @@ class QuestionPage extends Component {
           'Poll Details' :
           'Would You Rather'}
         </Typography>
-        {/* <Typography
-          style={{ marginTop: 20 }}
-          variant="headline"
-          >
-          {path.includes('details')
-            ? 'What people say'
-            : 'It is time to vote'
-          }
-        </Typography> */}
         <div className={classes.feed}>
           {path.includes('details') ?
             <Question
@@ -98,6 +91,15 @@ class QuestionPage extends Component {
               />
             </div>}
         </div>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <Button
+            style={{ marginTop: 10 }}
+            variant="outlined"
+            className={classes.button}
+          >
+            {'Go 🔙 Home'}
+          </Button>
+        </Link>
       </div>
     );
   }

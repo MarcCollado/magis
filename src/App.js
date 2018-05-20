@@ -13,6 +13,7 @@ import AddQuestion from './components/AddQuestion';
 import QuestionPage from './components/QuestionPage';
 import AddButton from './components/ui-library/AddButton';
 import PrivateRoute from './components/PrivateRoute';
+import FourOFour from './components/FourOFour';
 
 class App extends Component {
   static propTypes = {
@@ -62,6 +63,9 @@ class App extends Component {
               path="/questions/:id"
               exact
               component={QuestionPage}
+            />
+            <Route
+              component={FourOFour}
             />
           </Switch>
         </div>

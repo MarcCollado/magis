@@ -47,12 +47,12 @@ class Login extends Component {
       authUser,
       location,
     } = this.props;
-    const { from } = location.state || { from: { pathname: '/' } }
+    const { from } = location.state || { from: { pathname: '/' } };
 
     if (authUser !== null) {
       return (
         <Redirect to={from} />
-      )
+      );
     }
 
     return (
@@ -64,7 +64,7 @@ class Login extends Component {
           Login
         </Typography>
         <Typography
-          style={{ marginTop: 15 }}
+          style={{ textAlign: 'center', marginTop: 15 }}
           variant="body1"
         >
           Please, select a user to login.
@@ -73,7 +73,7 @@ class Login extends Component {
           style={{ marginTop: 10, textAlign: 'center' }}
           variant="caption"
         >
-          {`Only logged users can vote, submit new questions or view leaderboards. Don't miss out on all the fun 🎉`}
+          {'Only logged users can vote, submit new questions or view leaderboards. Don\'t miss out on all the fun 🎉'}
         </Typography>
         <ul className={classes.feed}>
           {userDetails
@@ -110,7 +110,7 @@ function mapStateToProps({ users, authUser }) {
         userID: users[user].id,
       };
       return (tempUserDetails);
-    })
+    });
   return {
     userDetails,
     authUser,

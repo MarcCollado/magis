@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // imports from material-ui
 import { withStyles } from 'material-ui/styles';
@@ -8,7 +8,6 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
-import Button from 'material-ui/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Menu, { MenuItem } from 'material-ui/Menu';
@@ -90,19 +89,19 @@ class Nav extends React.Component {
               open={open}
               onClose={this.handleClose}
             >
-              <NavLink to="/" exact activeClassName="active">
+              <Link to="/" style={{ textDecoration: 'none' }}>
                 <MenuItem onClick={this.handleClose}>Home</MenuItem>
-              </NavLink>
-              <NavLink to="/leaderboard" exact activeClassName="active">
+              </Link>
+              <Link to="/leaderboard" style={{ textDecoration: 'none' }}>
                 <MenuItem onClick={this.handleClose}>Leaderboard</MenuItem>
-              </NavLink>
+              </Link>
               {authUserID ?
-                <NavLink to="/login" exact activeClassName="active">
+                <Link to="/login" style={{ textDecoration: 'none' }}>
                   <MenuItem onClick={this.handleLogOut}>Log Out</MenuItem>
-                </NavLink> :
-                <NavLink to="/login" exact activeClassName="active">
+                </Link> :
+                <Link to="/login" style={{ textDecoration: 'none' }}>
                   <MenuItem onClick={this.handleClose}>Log In</MenuItem>
-                </NavLink>}
+                </Link>}
             </Menu>
             <Typography
               className={classes.flex}

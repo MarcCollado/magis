@@ -86,9 +86,9 @@ class AddQuestion extends React.Component {
           </Typography>
           <Typography
             style={{ marginTop: 20 }}
-            variant="headline"
+            variant="body1"
           >
-            Would You Rather
+            {`Would You Rather 🤔`}
           </Typography>
         </div>
         <form
