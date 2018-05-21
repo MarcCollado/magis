@@ -11,6 +11,7 @@ This is the second project of the [React Developer Nanodegree](https://eu.udacit
 ## TL;DR
 This project consists in a small quiz game, of course built in React & Redux, that quizzes the user with questions in a *"Would You Rather..."* format. It allows the user to login, post questions and also vote on questions posted by other users.
 
+![img](/public/readme/artwork.jpg)
 
 ## Tech Stack
 * [React](https://reactjs.org/)
@@ -39,6 +40,8 @@ Because by default the user is unauthenticated at launch, all the questions are 
 
 There's not much a user can do without authenticating besides switching between the *ANSWERED* or *UNANSWERED* tabs. Attempting to vote, post or view the stats of a question, or view the leaderboard, will redirect to the *Login* page, since the aforementioned routes are private and can't be accessed without being authenticated.
 
+![img](/public/readme/login.png)
+
 It is also possible to navigate directly to the *Login* page without being redirected from private routes from the (always present) main menu, found in the left side of the navigation bar.
 
 From the *Login* page `/login`, the user is presented with a list of all registered users pulled from `_DATA.js`, tapping on one of them will authenticate and log in.
@@ -51,6 +54,8 @@ Finally, the app allows the user to logout and log back in. To *Logout* simply o
 
 ### Home — aka. Feed
 As mentioned before, all the answered and unanswered polls are both available at the root `/`, the *Feed*. The *ANSWERED* or *UNANSWERED* tabs above allow the user to switch between viewing answered and unanswered polls. The unanswered questions are shown by default and without an authenticated user logged in, all the polls are shown under the *UNANSWERED* tab.
+
+![img](/public/readme/feed.png)
 
 The polls in both tabs are arranged from the most recently created (top) to the least recently created (bottom).
 
@@ -67,16 +72,24 @@ The whole UI of the project resolves around the *Question Card*. This is a modul
 
 *Question Card* in the *Feed* under the *UNANSWERED* tab will display a CTA to vote the question, since the user hasn't voted, yet.
 
+![img](/public/readme/question-unanswered.png)
+
 Upon tapping `VOTE` the user will be directed to the *Question Page* under `questions/:question_id` and display the *Question Card* with a CTA to vote on one of each option.
 
-*Question Card* in the *Feed* under the *ANSWERED* tab will display a CTA to view the poll details the question, since the user has already voted it.
+![img](/public/readme/question-vote.png)
 
-Either upon tapping `POLL DETAILS` or after the user has voted, the user will be directed to the *Question Details* under `questions/:question_id/details` and display the *Question Card* with the poll information and results, which include:
+*Question Card* back to the *Feed* under the *ANSWERED* tab will display a CTA to view the poll details the question, since the user has already voted it.
+
+![img](/public/readme/question-answered.png)
+
+Either upon tapping `POLL DETAILS` or after the user has voted, the user will be directed to the *Question Details* page under `questions/:question_id/details` and display the *Question Card* with the poll information and results, which include:
 
 * Number of people who voted for each option
 * Percentage of people who voted for each option
 * Option selected by the logged user
 * User who posted the question
+
+![img](/public/readme/question-details.png)
 
 As mentioned before, voting is possible and poll details are shown only when the user is logged in. If the user is logged out, she is asked to login before being able to perform any action on the poll.
 
@@ -89,10 +102,14 @@ No matter where the user finds herself within the application, a `+` button to p
 
 Tapping the button, a form available at `/add` will be shown with two text input fields corresponding to each option. Upon submitting the form, a new poll is created and the user is taken back to the *Feed*.
 
+![img](/public/readme/add-question.png)
+
 The new polling question the user just submitted will most certainly appear in the uppermost position under the *UNANSWERED* tab, since chances are she hasn't answered yet and it has been the last question to be created.
 
 ### Leaderboard
 The Leaderboard is available at `/leaderboard` and can be accessed from the the menu item in navigation bar. Basically it lists all the users ordered in descending order based on the sum of the number of questions they’ve answered and the number of questions they’ve asked.
+
+![img](/public/readme/user-card.png)
 
 Each user entry maintains certain consistency with the card UI used for the *Question Card* component and contains the following information:
 	* User’s name

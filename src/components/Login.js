@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // imports from material-ui
 import { withStyles } from '@material-ui/core/styles';
@@ -86,12 +86,10 @@ class Login extends Component {
                 style={{ listStyleType: 'none' }}
                 onClick={e => this.login(e, user.userID)}
               >
-                {/* <Link to="#"> */}
                 <SmallAvatar
                   imageURL={user.imageURL}
                   userName={user.userName}
                 />
-                {/* </Link> */}
                 <Typography
                   style={{ marginBottom: 10, textAlign: 'center' }}
                   variant="caption"
