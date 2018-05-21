@@ -86,12 +86,12 @@ class Login extends Component {
                 style={{ listStyleType: 'none' }}
                 onClick={e => this.login(e, user.userID)}
               >
-                <Link to="#">
-                  <SmallAvatar
-                    imageURL={user.imageURL}
-                    userName={user.userName}
-                  />
-                </Link>
+                {/* <Link to="#"> */}
+                <SmallAvatar
+                  imageURL={user.imageURL}
+                  userName={user.userName}
+                />
+                {/* </Link> */}
                 <Typography
                   style={{ marginBottom: 10, textAlign: 'center' }}
                   variant="caption"

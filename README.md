@@ -9,7 +9,7 @@ This is the second project of the [React Developer Nanodegree](https://eu.udacit
 
 
 ## TL;DR
-This project consists in a small game, of course built in React & Redux, that quizzes the user with questions in a *"Would You Rather..."* format. It allows the user to login, post questions and also vote on questions posted by other users.
+This project consists in a small quiz game, of course built in React & Redux, that quizzes the user with questions in a *"Would You Rather..."* format. It allows the user to login, post questions and also vote on questions posted by other users.
 
 
 ## Tech Stack
@@ -21,7 +21,8 @@ This project consists in a small game, of course built in React & Redux, that qu
 
 ## Setting Things Up
 To get started right away:
-* Install all project dependencies with `npm install`
+* Clone the repo
+* Install project dependencies with `npm install`
 * Start the development server with `npm start`
 * Open the browser at `localhost:3000`
 
@@ -32,7 +33,7 @@ To get started right away:
 ### Login & Logout
 Once the server has started with `npm start` the user will be routed, not authenticated by default, to the *Feed* `/`.
 
-The *Feed* is a time based stream of the questions posted by all users, categorized by *ANSWERED* or *UNANSWERED* — through the tabs found right below the navigation bar, depending on whether the logged user has voted on them or not.
+The *Feed* is a time based stream of the questions posted by all users, categorized by *ANSWERED* or *UNANSWERED* — through the tabs found right below the (always visible) navigation bar, depending on whether the logged user has voted on them or not.
 
 Because by default the user is unauthenticated at launch, all the questions are shown in the *UNANSWERED* side of the feed.
 
@@ -48,16 +49,68 @@ From the *Login* page `/login`, the user is presented with a list of all registe
 
 Finally, the app allows the user to logout and log back in. To *Logout* simply open the main menu and a *Logout* menu item will appear instead of the *Login* found before. Tap *Logout* and the app will clear out the authenticated user and redirect back to `/login`.
 
+### Home — aka. Feed
+As mentioned before, all the answered and unanswered polls are both available at the root `/`, the *Feed*. The *ANSWERED* or *UNANSWERED* tabs above allow the user to switch between viewing answered and unanswered polls. The unanswered questions are shown by default and without an authenticated user logged in, all the polls are shown under the *UNANSWERED* tab.
 
+The polls in both tabs are arranged from the most recently created (top) to the least recently created (bottom).
 
-## Data
+From the Feed, a user can perform several actions (each feature will be further explained in the upcoming sections):
 
-There are two types of objects stored in our database:
+* Vote on a poll: a user can vote on a question under the *UNANSWERED* tab. The details or stats of a question are not disclosed until the user has voted.
+* View details or stats of a poll: a user can view the details or stats of a question under the *ANSWERED* tab.
+* Navigate to the *Leaderboard* through a menu link in the navigation bar.
+* Add or create a new poll through the `+` button permanently shown on the lower right corner.
+* *Login* and *Logout*: as seen earlier, a user can login and logout from a menu link in the navigation bar.
+
+### Questions
+The whole UI of the project resolves around the *Question Card*. This is a modular component, reused across entire application both for the *Feed* as well for the *Question Page*. The card format is preserved, but its CTA is dynamically rendered depending on the status of the question. In other words, depending if the user has answered the question, wants to answer it or just check out the details, the *Question Card* will render the available actions accordingly.
+
+*Question Card* in the *Feed* under the *UNANSWERED* tab will display a CTA to vote the question, since the user hasn't voted, yet.
+
+Upon tapping `VOTE` the user will be directed to the *Question Page* under `questions/:question_id` and display the *Question Card* with a CTA to vote on one of each option.
+
+*Question Card* in the *Feed* under the *ANSWERED* tab will display a CTA to view the poll details the question, since the user has already voted it.
+
+Either upon tapping `POLL DETAILS` or after the user has voted, the user will be directed to the *Question Details* under `questions/:question_id/details` and display the *Question Card* with the poll information and results, which include:
+
+* Number of people who voted for each option
+* Percentage of people who voted for each option
+* Option selected by the logged user
+* User who posted the question
+
+As mentioned before, voting is possible and poll details are shown only when the user is logged in. If the user is logged out, she is asked to login before being able to perform any action on the poll.
+
+Finally, when the user comes back to the *Feed*, the polling question now appears in the *ANSWERED* tab.
+
+**✨ Bonus Feature:** the *Question Details* component shows an emoji 🙋‍ in the corresponding side of the *Question Card* depending on the user answer to that question.
+
+### Post Questions
+No matter where the user finds herself within the application, a `+` button to post a new question is always shown at the lower right corner, visible on all of the pages.
+
+Tapping the button, a form available at `/add` will be shown with two text input fields corresponding to each option. Upon submitting the form, a new poll is created and the user is taken back to the *Feed*.
+
+The new polling question the user just submitted will most certainly appear in the uppermost position under the *UNANSWERED* tab, since chances are she hasn't answered yet and it has been the last question to be created.
+
+### Leaderboard
+The Leaderboard is available at `/leaderboard` and can be accessed from the the menu item in navigation bar. Basically it lists all the users ordered in descending order based on the sum of the number of questions they’ve answered and the number of questions they’ve asked.
+
+Each user entry maintains certain consistency with the card UI used for the *Question Card* component and contains the following information:
+	* User’s name
+	* User’s picture
+	* Number of questions the user asked
+	* Number of questions the user answered
+
+### Data
+Udacity provided a data file `_DATA.js` that served as a "mock database" for the application.
+
+The `_DATA.js` has been slightly tweaked to accommodate some special data requirements, but most important, the project has also built a thin interface layer that acts as an API for `_DATA.js` that can be found under `utils/api.js`.
+
+This small API exposes some of the methods found in `_DATA.js` and it acts as the direct interface with the app itself.
+
+To summarize there are two types of objects stored in the database:
 
 * Users
 * Questions
-
-### Users
 
 Users include:
 
@@ -69,8 +122,6 @@ Users include:
 | questions | Array | A list of ids of the polling questions this user created|
 | answers      | Object         |  The object's keys are the ids of each question this user answered. The value of each key is the answer the user selected. It can be either `'optionOne'` or `'optionTwo'` since each question has two options.
 
-### Questions
-
 Questions include:
 
 | Attribute | Type | Description |
@@ -81,8 +132,6 @@ Questions include:
 | optionOne | Object | The first voting option|
 | optionTwo | Object | The second voting option|
 
-### Voting Options
-
 Voting options are attached to questions. They include:
 
 | Attribute | Type | Description |
@@ -90,7 +139,7 @@ Voting options are attached to questions. They include:
 | votes             | Array | A list that contains the id of each user who voted for that option|
 | text                | String | The text of the option |
 
-Your code will talk to the database via 4 methods:
+`api.js` talks to the database through 4 methods:
 
 * `_getUsers()`
 * `_getQuestions()`
