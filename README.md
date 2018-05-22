@@ -7,6 +7,24 @@ This is the second project of the [React Developer Nanodegree](https://eu.udacit
 * [Would You Rather](https://github.com/MarcCollado/would-you-rather) — React & Redux Project
 * TBD — React Native Project
 
+---
+## IMPORTANT => CRITICAL ISSUE
+Before project submission, the Material UI library was updated to the latest version (1.0). Unfortunately there is an issue with one of the the Material UI library modules that was not properly updated and throws an error when trying to compile the project because it looks for the wrong library.
+
+While I'm working on a fix, the workaround to this issue it to:
+
+Go to this file:
+
+`/node_modules/@material-ui/icons/utils/createSvgIcon.js`
+
+And change the line 15 from:
+
+`var _SvgIcon = require('material-ui/SvgIcon');`
+
+to be:
+
+`var _SvgIcon = require('@material-ui/core/SvgIcon');`
+---
 
 ## TL;DR
 This project consists in a small quiz game, of course built in React & Redux, that quizzes the user with questions in a *"Would You Rather..."* format. It allows the user to login, post questions and also vote on questions posted by other users.
