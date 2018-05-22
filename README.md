@@ -8,8 +8,9 @@ This is the second project of the [React Developer Nanodegree](https://eu.udacit
 * TBD — React Native Project
 
 ---
+
 ## IMPORTANT => CRITICAL ISSUE
-Before project submission, the Material UI library was updated to the latest version (1.0). Unfortunately there is an issue with one of the the Material UI library modules that was not properly updated and throws an error when trying to compile the project because it looks for the wrong library.
+Before project submission, the Material UI library was updated to the latest version (1.0). Unfortunately there is a known issue with one of the Material UI library modules that was not properly updated and throws an error when trying to compile the project because it looks for the wrong library.
 
 While I'm working on a fix, the workaround to this issue it to:
 
@@ -24,6 +25,9 @@ And change the line 15 from:
 to be:
 
 `var _SvgIcon = require('@material-ui/core/SvgIcon');`
+
+Update: I updated the `package.json` to include the old version of the library as well, it is a workaround on the workaround, but should be fine.
+
 ---
 
 ## TL;DR
