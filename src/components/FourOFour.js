@@ -53,7 +53,7 @@ class FourOFour extends Component {
           style={{ textAlign: 'center', marginTop: 15 }}
         >
           <img
-            src="minions.jpg"
+            src="/minions.jpg"
             alt="minions"
             style={{ width: '80%' }}
           />

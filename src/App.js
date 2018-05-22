@@ -19,6 +19,8 @@ class App extends Component {
   static propTypes = {
     // from connect
     dispatch: PropTypes.func.isRequired,
+    // from MapStateToProps
+    questionsIDs: PropTypes.array.isRequired,
   }
 
   componentDidMount() {
@@ -27,51 +29,78 @@ class App extends Component {
   }
 
   render() {
+      // const { questionsIDs } = this.props;
+      // const url = window.location.href.toString();
+      // if (url.includes('/questions/')) {
+      //   const invalidUrl = questionsIDs.filter(id => url.includes('id'));
+      //   if (invalidUrl) {
+      //     return (
+      //       <Router>
+      //         <div className="container">
+      //           <LoadingBar />
+      //           <Nav />
+      //           <Link to="/add"><AddButton /></Link>
+      //           <Route
+      //             component={FourOFour}
+      //           />
+      //         </div>
+      //       </Router>
+      //     )
+      //   }
+      //   return;
+      // }
     return (
-      <Router>
-        <div className="container">
-          <LoadingBar />
-          <Nav />
-          <Link to="/add"><AddButton /></Link>
-          <Switch>
-            <Route
-              path="/"
-              exact
-              component={NavTabs}
-            />
-            <Route
-              path="/login"
-              exact
-              component={Login}
-            />
-            <PrivateRoute
-              path="/leaderboard"
-              exact
-              component={Leaderboard}
-            />
-            <PrivateRoute
-              path="/add"
-              exact
-              component={AddQuestion}
-            />
-            <PrivateRoute
-              path="/questions/:id/details"
-              exact
-              component={QuestionPage}
-            />
-            <PrivateRoute
-              path="/questions/:id"
-              exact
-              component={QuestionPage}
-            />
-            <Route
-              component={FourOFour}
-            />
-          </Switch>
-        </div>
-      </Router>
+    <Router>
+      <div className="container">
+        <LoadingBar />
+        <Nav />
+        <Link to="/add"><AddButton /></Link>
+        <Switch>
+          <Route
+            path="/"
+            exact
+            component={NavTabs}
+          />
+          <Route
+            path="/login"
+            exact
+            component={Login}
+          />
+          <PrivateRoute
+            path="/leaderboard"
+            exact
+            component={Leaderboard}
+          />
+          <PrivateRoute
+            path="/add"
+            exact
+            component={AddQuestion}
+          />
+          <PrivateRoute
+            path="/questions/:id/details"
+            exact
+            component={QuestionPage}
+          />
+          <PrivateRoute
+            path="/questions/:id"
+            exact
+            component={QuestionPage}
+          />
+          <Route
+            component={FourOFour}
+          />
+        </Switch>
+      </div>
+    </Router>
     );
   }
 }
 
-export default connect()(App);
+function mapStateToProps({ questions }, { match }) {
+  const questionsIDs = Object.keys(questions);
+  return {
+    questionsIDs,
+  };
+}
+
+export default connect(mapStateToProps)(App);

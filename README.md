@@ -9,10 +9,12 @@ This is the second project of the [React Developer Nanodegree](https://eu.udacit
 
 ---
 
-## IMPORTANT => CRITICAL ISSUE
-Before project submission, the Material UI library was updated to the latest version (1.0). Unfortunately there is a known issue with one of the Material UI library modules that was not properly updated and throws an error when trying to compile the project because it looks for the wrong library.
+## ⚠️ Important Note
+During the entire development, the project was using the beta version of the `material-ui` library. Right before submission, the `material-ui` library was updated to its latest version (1.0). Unfortunately there is a known issue with one of the library modules in 1.0 that makes the application crash at launch because one of its dependencies (`createSvgIcon.js`) points at an old directory.
 
-While I'm working on a fix, the workaround to this issue it to:
+While waiting on the update, I've temporarily worked around the issue and included back the old version of the `material-ui` library in the `package.json`. So now, the whole app works with the new version of `material-ui`, while this broken reference mentioned still resolves fine and works with the old version.
+
+Long story short: the project now works properly "out of the box" with both libraries installed. Still, if you want to "manually" fix the issue and ensure the project works with `material-ui` updated library altogether, simply follow the next steps.
 
 Go to this file:
 
@@ -25,8 +27,6 @@ And change the line 15 from:
 to be:
 
 `var _SvgIcon = require('@material-ui/core/SvgIcon');`
-
-Update: I updated the `package.json` to include the old version of the library as well, it is a workaround on the workaround, but should be fine.
 
 ---
 
