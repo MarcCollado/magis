@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 // imports from material-ui
@@ -9,59 +9,50 @@ import UserCard from './ui-library/UserCard';
 // styles
 import { Leaderboard as styles } from '../styles/styles';
 
-class Leaderboard extends Component {
-  static propTypes = {
-    // from MapStateToProps
-    userDetails: PropTypes.array.isRequired,
-    // from material-ui
-    classes: PropTypes.object.isRequired,
-  }
+const Leaderboard = ({ classes, userDetails }) => (
+  <div className={classes.container}>
+    <Typography
+      style={{ marginTop: 20 }}
+      variant="display1"
+    >
+      Leaderboard
+    </Typography>
+    <Typography
+      style={{ marginTop: 15, textAlign: 'center' }}
+      variant="body1"
+    >
+      {'Meet the app\'s top performers.'}
+    </Typography>
+    <Typography
+      style={{ marginTop: 10, textAlign: 'center' }}
+      variant="caption"
+    >
+      {'The more questions they post and vote, the higher they rank 🏅'}
+    </Typography>
+    <ul className={classes.feed}>
+      {userDetails
+        .map(user => (
+          <li
+            key={user.userName}
+            style={{ listStyleType: 'none' }}
+          >
+            <UserCard
+              imageURL={user.imageURL}
+              userName={user.userName}
+              questionsAnswered={user.questionsAnswered}
+              questionsPosted={user.questionsPosted}
+            />
+          </li>))}
+    </ul>
+  </div>
+);
 
-  render() {
-    const {
-      classes,
-      userDetails,
-    } = this.props;
-
-    return (
-      <div className={classes.container}>
-        <Typography
-          style={{ marginTop: 20 }}
-          variant="display1"
-        >
-          Leaderboard
-        </Typography>
-        <Typography
-          style={{ marginTop: 15, textAlign: 'center' }}
-          variant="body1"
-        >
-          Meet the app's top performers.
-        </Typography>
-        <Typography
-          style={{ marginTop: 10, textAlign: 'center' }}
-          variant="caption"
-        >
-          {'The more questions they post and vote, the higher they rank 🏅'}
-        </Typography>
-        <ul className={classes.feed}>
-          {userDetails
-            .map(user => (
-              <li
-                key={user.userName}
-                style={{ listStyleType: 'none' }}
-              >
-                <UserCard
-                  imageURL={user.imageURL}
-                  userName={user.userName}
-                  questionsAnswered={user.questionsAnswered}
-                  questionsPosted={user.questionsPosted}
-                />
-              </li>))}
-        </ul>
-      </div>
-    );
-  }
-}
+Leaderboard.propTypes = {
+  // from MapStateToProps
+  userDetails: PropTypes.array.isRequired,
+  // from material-ui
+  classes: PropTypes.object.isRequired,
+};
 
 function mapStateToProps({ users }) {
   const userDetails = Object.keys(users)
