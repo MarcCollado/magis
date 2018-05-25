@@ -19,8 +19,6 @@ class App extends Component {
   static propTypes = {
     // from connect
     dispatch: PropTypes.func.isRequired,
-    // from MapStateToProps
-    questionsIDs: PropTypes.array.isRequired,
   }
 
   componentDidMount() {
@@ -29,26 +27,6 @@ class App extends Component {
   }
 
   render() {
-      // const { questionsIDs } = this.props;
-      // const url = window.location.href.toString();
-      // if (url.includes('/questions/')) {
-      //   const invalidUrl = questionsIDs.filter(id => url.includes('id'));
-      //   if (invalidUrl) {
-      //     return (
-      //       <Router>
-      //         <div className="container">
-      //           <LoadingBar />
-      //           <Nav />
-      //           <Link to="/add"><AddButton /></Link>
-      //           <Route
-      //             component={FourOFour}
-      //           />
-      //         </div>
-      //       </Router>
-      //     )
-      //   }
-      //   return;
-      // }
     return (
     <Router>
       <div className="container">
@@ -96,11 +74,4 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ questions }, { match }) {
-  const questionsIDs = Object.keys(questions);
-  return {
-    questionsIDs,
-  };
-}
-
-export default connect(mapStateToProps)(App);
+export default connect()(App);

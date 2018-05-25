@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 // relative imports
+import FourOFour from './FourOFour';
 import SmallAvatar from './ui-library/SmallAvatar';
 import Question from './question/Question';
 
@@ -32,8 +33,9 @@ const styles = {
 class QuestionPage extends Component {
   static propTypes = {
     // from MapStateToProps
-    realName: PropTypes.string.isRequired,
-    imageURL: PropTypes.string.isRequired,
+    realName: PropTypes.string,
+    imageURL: PropTypes.string,
+    errorPage: PropTypes.bool.isRequired,
     // from material-ui
     classes: PropTypes.object.isRequired,
     // from Router
@@ -42,10 +44,16 @@ class QuestionPage extends Component {
 
   render() {
     const {
-      classes, match, realName, imageURL,
+      classes, match, realName, imageURL, errorPage,
     } = this.props;
     const { id } = match.params;
     const { path } = match;
+
+    if (errorPage) {
+      return (
+        <FourOFour />
+      );
+    }
 
     return (
       <div className={classes.container}>
@@ -106,12 +114,20 @@ class QuestionPage extends Component {
 }
 
 function mapStateToProps({ questions, users, authUser }, { match }) {
+  if (questions[match.params.id] === undefined) {
+    const errorPage = true;
+    return {
+      errorPage,
+    };
+  }
   const userName = questions[match.params.id].author;
   const realName = authUser === userName ? 'you' : users[userName].name;
   const imageURL = users[userName].avatarURL;
+  const errorPage = false;
   return {
     realName,
     imageURL,
+    errorPage,
   };
 }
 

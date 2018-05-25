@@ -76,7 +76,7 @@ class Login extends Component {
           style={{ marginTop: 10, textAlign: 'center' }}
           variant="caption"
         >
-          {`Only logged users can vote, submit new questions or view leaderboards. Don't miss out on all the fun 🎉`}
+          {'Only logged users can vote, submit new questions or view leaderboards. Don\'t miss out on all the fun 🎉'}
         </Typography>
         <ul className={classes.feed}>
           {userDetails

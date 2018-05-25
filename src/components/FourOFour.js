@@ -67,7 +67,7 @@ class FourOFour extends Component {
 
         <Link to="/" style={{ textDecoration: 'none' }}>
           <Button
-            style={{ marginTop: 10 }}
+            style={{ marginTop: 20 }}
             variant="outlined"
             className={classes.button}
           >

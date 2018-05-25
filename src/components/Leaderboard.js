@@ -55,7 +55,7 @@ class Leaderboard extends Component {
           style={{ marginTop: 10, textAlign: 'center' }}
           variant="caption"
         >
-          {`The more questions they post and vote, the higher they rank 🏅`}
+          {'The more questions they post and vote, the higher they rank 🏅'}
         </Typography>
         <ul className={classes.feed}>
           {userDetails
