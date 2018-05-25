@@ -6,22 +6,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 // relative imports
 import UserCard from './ui-library/UserCard';
-
-const styles = {
-  container: {
-    width: '75%',
-    margin: 'auto',
-    // flexbox container properties
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  feed: {
-    padding: 0,
-    width: '100%',
-    maxWidth: 480,
-  },
-};
+// styles
+import { Leaderboard as styles } from '../styles/styles';
 
 class Leaderboard extends Component {
   static propTypes = {

@@ -19,8 +19,8 @@ const persistedReducer = persistReducer(persistConfig, reducer);
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-let store = createStore(persistedReducer, composeEnhancers(middleware));
-let persistor = persistStore(store);
+const store = createStore(persistedReducer, composeEnhancers(middleware));
+const persistor = persistStore(store);
 
 ReactDOM.render(
   <Provider store={store}>

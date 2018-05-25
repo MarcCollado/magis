@@ -4,29 +4,8 @@ import PropTypes from 'prop-types';
 // imports from material-ui
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-
-const styles = {
-  voted: {
-    width: '100%',
-    height: 30,
-    backgroundColor: '#E8EAF6',
-    textAlign: 'center',
-  },
-  container: {
-    // flexbox container properties
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  options: {
-    marginTop: 20,
-    marginBottom: 10,
-    width: '100%',
-    // flexbox container properties
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-};
+// styles
+import { PollDetails as styles } from '../../styles/styles';
 
 class PollDetails extends Component {
   static propTypes = {

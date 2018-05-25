@@ -5,22 +5,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 // relative imports
 import Question from './question/Question';
-
-const styles = {
-  container: {
-    width: '85%',
-    margin: 'auto',
-    // flexbox container properties
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  feed: {
-    padding: 0,
-    width: '100%',
-    maxWidth: 480,
-  },
-};
+// styles
+import { Feed as styles } from '../styles/styles';
 
 class Feed extends Component {
   static propTypes = {

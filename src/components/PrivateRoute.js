@@ -14,7 +14,7 @@ function PrivateRoute({ component: Component, ...rest }) {
             pathname: '/login',
             state: { from: props.location },
           }}
-            />
+          />
       )}
     />
   );

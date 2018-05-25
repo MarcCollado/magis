@@ -12,23 +12,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import FourOFour from './FourOFour';
 import SmallAvatar from './ui-library/SmallAvatar';
 import Question from './question/Question';
-
-const styles = {
-  container: {
-    width: '85%',
-    margin: 'auto',
-    // flexbox container properties
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  feed: {
-    marginTop: 15,
-    padding: 0,
-    width: '100%',
-    maxWidth: 480,
-  },
-};
+// styles
+import { QuestionPage as styles } from '../styles/styles';
 
 class QuestionPage extends Component {
   static propTypes = {

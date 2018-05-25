@@ -12,7 +12,6 @@ import { handleAddQuestion } from '../actions/questions';
 
 const styles = theme => ({
   container: {
-    // flexbox container properties
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

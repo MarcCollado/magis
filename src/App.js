@@ -28,48 +28,48 @@ class App extends Component {
 
   render() {
     return (
-    <Router>
-      <div className="container">
-        <LoadingBar />
-        <Nav />
-        <Link to="/add"><AddButton /></Link>
-        <Switch>
-          <Route
-            path="/"
-            exact
-            component={NavTabs}
-          />
-          <Route
-            path="/login"
-            exact
-            component={Login}
-          />
-          <PrivateRoute
-            path="/leaderboard"
-            exact
-            component={Leaderboard}
-          />
-          <PrivateRoute
-            path="/add"
-            exact
-            component={AddQuestion}
-          />
-          <PrivateRoute
-            path="/questions/:id/details"
-            exact
-            component={QuestionPage}
-          />
-          <PrivateRoute
-            path="/questions/:id"
-            exact
-            component={QuestionPage}
-          />
-          <Route
-            component={FourOFour}
-          />
-        </Switch>
-      </div>
-    </Router>
+      <Router>
+        <div className="container">
+          <LoadingBar />
+          <Nav />
+          <Link to="/add"><AddButton /></Link>
+          <Switch>
+            <Route
+              path="/"
+              exact
+              component={NavTabs}
+            />
+            <Route
+              path="/login"
+              exact
+              component={Login}
+            />
+            <PrivateRoute
+              path="/leaderboard"
+              exact
+              component={Leaderboard}
+            />
+            <PrivateRoute
+              path="/add"
+              exact
+              component={AddQuestion}
+            />
+            <PrivateRoute
+              path="/questions/:id/details"
+              exact
+              component={QuestionPage}
+            />
+            <PrivateRoute
+              path="/questions/:id"
+              exact
+              component={QuestionPage}
+            />
+            <Route
+              component={FourOFour}
+            />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }

@@ -15,19 +15,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 // relative imports
 import { logOut } from '../actions/auth';
 import SmallAvatar from './ui-library/SmallAvatar';
-
-const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  flex: {
-    flex: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-};
+// styles
+import { Nav as styles } from '../styles/styles';
 
 class Nav extends React.Component {
   static propTypes = {

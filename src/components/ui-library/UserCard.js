@@ -8,16 +8,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import ModeComment from '@material-ui/icons/ModeComment';
 import ReplyAll from '@material-ui/icons/ReplyAll';
-
-const styles = {
-  card: {
-    marginTop: 15,
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%',
-  },
-};
+// styles
+import { UserCard as styles } from '../../styles/styles';
 
 class UserCard extends Component {
   static propTypes = {

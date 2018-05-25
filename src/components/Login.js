@@ -8,22 +8,8 @@ import Typography from '@material-ui/core/Typography';
 // relative imports
 import SmallAvatar from './ui-library/SmallAvatar';
 import { handleSetAuthUser } from '../actions/auth';
-
-const styles = {
-  container: {
-    width: '75%',
-    margin: 'auto',
-    // flexbox container properties
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  feed: {
-    padding: 0,
-    width: '100%',
-    maxWidth: 480,
-  },
-};
+// styles
+import { Login as styles } from '../styles/styles';
 
 class Login extends Component {
   static propTypes = {

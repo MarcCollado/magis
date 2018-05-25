@@ -6,22 +6,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-
-const styles = {
-  container: {
-    width: '75%',
-    margin: 'auto',
-    // flexbox container properties
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  feed: {
-    padding: 0,
-    width: '100%',
-    maxWidth: 480,
-  },
-};
+// styles
+import { FourOFour as styles } from '../styles/styles';
 
 class FourOFour extends Component {
   static propTypes = {

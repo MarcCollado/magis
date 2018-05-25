@@ -10,26 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import FeedLink from './FeedLink';
 import PollIsVoting from './PollIsVoting';
 import PollDetails from './PollDetails';
-
-const styles = {
-  card: {
-    marginBottom: 15,
-  },
-  content: {
-    height: 120,
-    backgroundColor: '#FAFAFA',
-    // flexbox container properties
-    display: 'flex',
-    alignItems: 'center',
-  },
-  question: {
-    width: '38%',
-  },
-  or: {
-    width: '24%',
-    textAlign: 'center',
-  },
-};
+// styles
+import { Question as styles } from '../../styles/styles';
 
 class Question extends Component {
   static propTypes = {
