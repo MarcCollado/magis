@@ -26,9 +26,9 @@ class PollIsVoting extends Component {
     const option = 'optionOne';
     const userVote = { id, option };
     dispatch(handleRegisterVote(userVote));
-    setTimeout(() => this.setState(() => ({
+    setTimeout(() => this.setState({
       toDetails: true,
-    })), 500);
+    }), 500);
   }
 
   handleOptionTwo = (e) => {
