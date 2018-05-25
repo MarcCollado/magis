@@ -18,8 +18,7 @@ export function handleSetAuthUser(id) {
 
     return getAuthUsers()
       .then((users) => {
-        const auth = Object.keys(users)
-          .filter(user => user === id);
+        const auth = Object.keys(users).filter(user => user === id);
         auth.length === 0 ?
           dispatch(logIn(null)) :
           dispatch(logIn(id));

@@ -57,12 +57,6 @@ export function handleRegisterVote(info) {
     dispatch(registerVote(questionPayload));
 
     return saveQuestionAnswer(questionPayload)
-      .then(apiPayload => console.log('API PAYLOAD = ', apiPayload))
-      // .catch((e) => {
-      //   console.warn('Error in handleRegisterVote: ', e);
-      //   dispatch(removeVote(info));
-      //   alert('There was an error saving your vote. Try again.');
-      // });
       .then(() => dispatch(hideLoading()));
   };
 }

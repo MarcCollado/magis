@@ -16,9 +16,8 @@ const persistConfig = {
   storage,
 };
 const persistedReducer = persistReducer(persistConfig, reducer);
-
+// redux-tools
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
 const store = createStore(persistedReducer, composeEnhancers(middleware));
 const persistor = persistStore(store);
 

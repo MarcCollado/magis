@@ -24,6 +24,11 @@ class Login extends Component {
     location: PropTypes.object,
   }
 
+  static defaultProps = {
+    authUser: null,
+    location: null,
+  }
+
   login = (e, id) => {
     const { dispatch } = this.props;
     dispatch(handleSetAuthUser(id));

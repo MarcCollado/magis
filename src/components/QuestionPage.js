@@ -27,6 +27,11 @@ class QuestionPage extends Component {
     match: PropTypes.object.isRequired,
   }
 
+  static defaultProps = {
+    realName: '',
+    imageURL: '',
+  }
+
   render() {
     const {
       classes, match, realName, imageURL, errorPage,
