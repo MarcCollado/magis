@@ -1,4 +1,4 @@
-export const GET_USERS = 'GET_USERS';
+import { GET_USERS } from './actionTypes';
 
 export function getUsers(users) {
   return {

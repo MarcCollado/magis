@@ -1,10 +1,7 @@
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 // relative imports
 import { saveQuestion, saveQuestionAnswer } from '../utils/api';
-
-export const GET_QUESTIONS = 'GET_QUESTIONS';
-export const ADD_QUESTION = 'ADD_QUESTION';
-export const REGISTER_VOTE = 'REGISTER_VOTE';
+import { GET_QUESTIONS, ADD_QUESTION, REGISTER_VOTE } from './actionTypes';
 
 export function getQuestions(questions) {
   return {

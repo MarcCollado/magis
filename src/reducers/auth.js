@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT } from '../actions/auth';
+import { LOG_IN, LOG_OUT } from '../actions/actionTypes';
 
 export default function authUser(state = null, action) {
   switch (action.type) {
