@@ -7,28 +7,6 @@ This is the second project of the [React Developer Nanodegree](https://eu.udacit
 * [Would You Rather](https://github.com/MarcCollado/would-you-rather) — React & Redux Project
 * [Flashcards](https://github.com/MarcCollado/flashcards) — React Native Project
 
----
-
-## ⚠️ Important Note
-During the entire development, the project was using the beta version of the `material-ui` library. Right before submission, the `material-ui` library was updated to its latest version (1.0). Unfortunately there is a known issue with one of the library modules in 1.0 that makes the application crash at launch because one of its dependencies (`createSvgIcon.js`) points at an old directory.
-
-While waiting on the update, I've temporarily worked around the issue and included back the old version of the `material-ui` library in the `package.json`. So now, the whole app works with the new version of `material-ui`, while this broken reference mentioned still resolves fine and works with the old version.
-
-Long story short: the project now works properly "out of the box" with both libraries installed. Still, if you want to "manually" fix the issue and ensure the project works with `material-ui` updated library altogether, simply follow the next steps.
-
-Go to this file:
-
-`/node_modules/@material-ui/icons/utils/createSvgIcon.js`
-
-And change the line 15 from:
-
-`var _SvgIcon = require('material-ui/SvgIcon');`
-
-to be:
-
-`var _SvgIcon = require('@material-ui/core/SvgIcon');`
-
----
 
 ## TL;DR
 This project consists in a small quiz game, of course built in React & Redux, that quizzes the user with questions in a *"Would You Rather..."* format. It allows the user to login, post questions and also vote on questions posted by other users.
@@ -187,17 +165,17 @@ Voting options are attached to questions. They include:
 
 1) `_getUsers()` Method
 
-*Description*: Get all of the existing users from the database.  
+*Description*: Get all of the existing users from the database.
 *Return Value*: Object where the key is the user’s id and the value is the user object.
 
 2) `_getQuestions()` Method
 
-*Description*: Get all of the existing questions from the database.  
+*Description*: Get all of the existing questions from the database.
 *Return Value*: Object where the key is the question’s id and the value is the question object.
 
 3) `_saveQuestion(question)` Method
 
-*Description*: Save the polling question in the database.  
+*Description*: Save the polling question in the database.
 *Parameters*:  Object that includes the following properties: `author`, `optionOneText`, and `optionTwoText`. More details about these properties:
 
 | Attribute | Type | Description |
