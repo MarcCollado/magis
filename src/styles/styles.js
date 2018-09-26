@@ -19,25 +19,6 @@ const PollDetails = {
   },
 };
 
-const Question = {
-  card: {
-    marginBottom: 15,
-  },
-  content: {
-    height: 120,
-    backgroundColor: '#FAFAFA',
-    display: 'flex',
-    alignItems: 'center',
-  },
-  question: {
-    width: '38%',
-  },
-  or: {
-    width: '24%',
-    textAlign: 'center',
-  },
-};
-
 const UserCard = {
   card: {
     marginTop: 15,
@@ -139,7 +120,6 @@ const QuestionPage = {
 
 export {
   PollDetails,
-  Question,
   UserCard,
   Feed,
   FourOFour,
