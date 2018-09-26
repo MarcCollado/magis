@@ -1,24 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// imports from material-ui
-import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import styled from 'styled-components';
 // relative imports
 import FeedLink from './FeedLink';
 import PollIsVoting from './PollIsVoting';
 import PollDetails from './PollDetails';
-// styles
-import { Question as styles } from '../../styles/styles';
+import Card from '../Card';
 
 class Question extends Component {
   static propTypes = {
     // from MapStateToProps
     questions: PropTypes.object.isRequired,
-    // from material-ui
-    classes: PropTypes.object.isRequired,
     // from Feed
     id: PropTypes.string.isRequired,
     status: PropTypes.oneOf([
@@ -49,13 +42,6 @@ class Question extends Component {
     const { id } = this.props;
 
     switch (status) {
-      case 'UserDidVote':
-        return (
-          <FeedLink
-            id={id}
-            status={status}
-          />
-        );
       case 'PollIsVoting':
         return (
           <PollIsVoting
@@ -68,6 +54,13 @@ class Question extends Component {
             id={id}
           />
         );
+      case 'UserDidVote':
+        return (
+          <FeedLink
+            id={id}
+            status={status}
+          />
+        );
       default:
         return (
           <FeedLink
@@ -77,36 +70,29 @@ class Question extends Component {
         );
     }
   }
+
   render() {
-    const { questions, classes, id } = this.props;
+    const { questions, id } = this.props;
     const optionOne = questions[id].optionOne.text;
     const optionTwo = questions[id].optionTwo.text;
 
     return (
-      <Card className={classes.card}>
-        <CardContent className={classes.content}>
-          <Typography
-            className={classes.question}
-            style={{ textAlign: 'left' }}
-            variant="body1"
-          >
+      <Card>
+        <Options>
+          <OptionOne>
             {optionOne}
-          </Typography>
-          <div className={classes.or}>
+          </OptionOne>
+          <OR>
             <img
               alt="or"
               src="/or.webp"
-              style={{ width: 35 }}
+              style={{ width: '2em' }}
             />
-          </div>
-          <Typography
-            className={classes.question}
-            style={{ textAlign: 'right' }}
-            variant="body1"
-          >
+          </OR>
+          <OptionTwo>
             {optionTwo}
-          </Typography>
-        </CardContent>
+          </OptionTwo>
+        </Options>
 
         {this.renderActions()}
 
@@ -115,10 +101,31 @@ class Question extends Component {
   }
 }
 
+const Options = styled.div`
+  height: 8em;
+  display: flex;
+  align-items: center;
+`;
+
+const OptionOne = styled.p`
+  text-align: left;
+  width: 40%;
+`;
+
+const OR = styled.div`
+  text-align: center;
+  width: 20%;
+`;
+
+const OptionTwo = styled.p`
+  text-align: right;
+  width: 40%;
+`;
+
 function mapStateToProps({ questions }) {
   return {
     questions,
   };
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(Question));
+export default connect(mapStateToProps)(Question);
