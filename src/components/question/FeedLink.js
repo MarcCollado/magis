@@ -1,50 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-// imports from material-ui
-import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
+
+import CardButton from '../CardButton'
 
 export default function FeedLink(props) {
   const { id, status } = props;
-  const cardStyles = {
-    height: 50,
-    textAlign: 'center',
-    // flexbox container properties
-    display: 'flex',
-    justifyContent: 'center',
-    backgroundColor: '#E8EAF6',
-  };
 
   return (
-    <CardActions
-      className="card-actions"
-      style={cardStyles}
-    >
+    <CardButton>
       {status === 'UserWillVote' ?
         <Link
           to={`/questions/${id}`}
           style={{ textDecoration: 'none', width: '100%' }}
         >
-          <Button
-            style={{ width: '100%' }}
-            color="primary"
-          >
-            Vote
-          </Button>
+          Vote
         </Link> :
         <Link
           to={`/questions/${id}/details`}
           style={{ textDecoration: 'none', width: '100%' }}
         >
-          <Button
-            style={{ width: '100%' }}
-            color="primary"
-          >
-            Poll Details
-          </Button>
-        </Link>}
-    </CardActions>
+          Poll Details
+        </Link>
+      }
+    </CardButton>
   );
 }
 
