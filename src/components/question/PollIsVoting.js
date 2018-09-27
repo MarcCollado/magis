@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-// imports from material-ui
-import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
-// relative imports
+import styled from 'styled-components';
+
+
+import CardButton from '../CardButton';
 import { handleRegisterVote } from '../../actions/questions';
+import { BodyLink } from '../../styles/typography';
 
 class PollIsVoting extends Component {
   static propTypes = {
@@ -20,10 +21,9 @@ class PollIsVoting extends Component {
     toDetails: false,
   };
 
-  handleOptionOne = (e) => {
+  handleOption = (e, option) => {
     e.preventDefault();
     const { dispatch, id } = this.props;
-    const option = 'optionOne';
     const userVote = { id, option };
     dispatch(handleRegisterVote(userVote));
     setTimeout(() => this.setState({
@@ -31,26 +31,7 @@ class PollIsVoting extends Component {
     }), 500);
   }
 
-  handleOptionTwo = (e) => {
-    e.preventDefault();
-    const { dispatch, id } = this.props;
-    const option = 'optionTwo';
-    const userVote = { id, option };
-    dispatch(handleRegisterVote(userVote));
-    setTimeout(() => this.setState(() => ({
-      toDetails: true,
-    })), 500);
-  }
-
   render() {
-    const cardStyles = {
-      height: 50,
-      width: '50%',
-      textAlign: 'center',
-      // flexbox container properties
-      display: 'flex',
-      justifyContent: 'center',
-    };
     const { id } = this.props;
     const { toDetails } = this.state;
 
@@ -59,30 +40,29 @@ class PollIsVoting extends Component {
     }
 
     return (
-      <CardActions
-        className="card-actions"
-      >
-        <div style={cardStyles}>
-          <Button
-            style={{ width: '100%' }}
-            color="primary"
-            onClick={this.handleOptionOne}
-          >
+      <Container>
+        <CardButton
+          onClick={(e) => this.handleOption(e, 'optionOne')}
+        >
+          <BodyLink href='#'>
             Vote Option One
-          </Button>
-        </div>
-        <div style={cardStyles}>
-          <Button
-            style={{ width: '100%' }}
-            color="primary"
-            onClick={this.handleOptionTwo}
-          >
+          </BodyLink>
+        </CardButton>
+        <CardButton
+          onClick={(e) => this.handleOption(e, 'optionTwo')}
+        >
+          <BodyLink href='#'>
             Vote Option Two
-          </Button>
-        </div>
-      </CardActions>
+          </BodyLink>
+        </CardButton>
+      </Container>
     );
   }
 }
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 export default connect()(PollIsVoting);
