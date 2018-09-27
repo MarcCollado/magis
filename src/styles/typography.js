@@ -14,15 +14,21 @@ const Title1 = styled.h1`
 
 const Title2 = styled.h2`
   color: ${pitchDark};
+  font-size: 24px;
   font-weight: 700;
   letter-spacing: -1px;
+  margin: 0.125em;
+  padding: 0.125em;
   text-transform: uppercase;
 `;
 
 const Title3 = styled.h3`
   color: ${pitchDark};
+  font-size: 20px;
   font-weight: 700;
   letter-spacing: -1px;
+  margin: 0.125em;
+  padding: 0.125em;
   text-transform: uppercase;
 `;
 
@@ -54,6 +60,8 @@ const BodyLink = styled.a`
 const MetaText = styled.p`
   color: ${fakeAsbestos}88;
   font-size: 0.75em;
+  margin: 0.25em;
+  padding: 0.25em;
 `;
 
 export {
