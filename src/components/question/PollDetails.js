@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// imports from material-ui
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-// styles
-import { PollDetails as styles } from '../../styles/styles';
+import styled from 'styled-components';
+
+import {bianchiGreen} from '../../styles/colors';
+import { Title2, MetaText } from '../../styles/typography';
 
 class PollDetails extends Component {
   static propTypes = {
     // from MapStateToProps
     questions: PropTypes.object.isRequired,
     answer: PropTypes.string.isRequired,
-    // from material-ui
-    classes: PropTypes.object.isRequired,
     // from Question
     id: PropTypes.string.isRequired,
   };
-
 
   countVotes(oneOrTwo) {
     const { questions, id } = this.props;
@@ -26,7 +22,7 @@ class PollDetails extends Component {
   }
 
   render() {
-    const { classes, answer } = this.props;
+    const { answer } = this.props;
     const optionOneCount = this.countVotes(1);
     const optionTwoCount = this.countVotes(2);
     const totalVotes = optionOneCount + optionTwoCount;
@@ -34,54 +30,64 @@ class PollDetails extends Component {
     const optionTwoPercent = parseInt(100 - optionOnePercent, 10);
 
     return (
-      <div>
-        <div className={classes.voted}>
-          <Typography
-            style={{ paddingTop: 6 }}
-            variant="caption"
-            color="default"
-          >
-            {answer !== '' ? `${answer}` : ''}
-          </Typography>
-        </div>
-        <div className={classes.container}>
-          <div className={classes.options}>
-            <Typography
-              style={{ marginBottom: 5 }}
-              variant="display2"
-            >
+      <Container>
+        <YourVote>
+          <MetaText>
+          {answer !== '' ? `${answer}` : ''}
+          </MetaText>
+        </YourVote>
+        <PollResults>
+          <OptionResults>
+            <Title2>
               {`${optionOnePercent}%`}
-            </Typography>
-            <Typography
-              style={{ marginBottom: 12 }}
-              variant="caption"
-            >
+            </Title2>
+            <MetaText>
               {optionOneCount === 1
                 ? `voted by ${optionOneCount} user`
                 : `voted by ${optionOneCount} users`}
-            </Typography>
-          </div>
-          <div className={classes.options}>
-            <Typography
-              style={{ marginBottom: 5 }}
-              variant="display2"
-            >
+            </MetaText>
+          </OptionResults>
+          <OptionResults>
+            <Title2>
               {`${optionTwoPercent}%`}
-            </Typography>
-            <Typography
-              style={{ marginBottom: 12 }}
-              variant="caption"
-            >
+            </Title2>
+            <MetaText>
               {optionTwoCount === 1
                 ? `voted by ${optionTwoCount} user`
                 : `voted by ${optionTwoCount} users`}
-            </Typography>
-          </div>
-        </div>
-      </div>
+            </MetaText>
+          </OptionResults>
+        </PollResults>
+      </Container>
     );
   }
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const YourVote = styled.div`
+  background: ${bianchiGreen}88;
+  border-radius: 0.25em;
+  margin: 1em 0em;
+  padding: 0.5em;
+  text-align: center;
+`;
+
+const PollResults = styled.div`
+  display: flex;
+`;
+
+const OptionResults = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: 0.5em 0em;
+  padding: 0.25em 0.75em;
+`;
 
 function mapStateToProps({ questions, authUser }, { id }) {
   let answer = '';
@@ -93,10 +99,11 @@ function mapStateToProps({ questions, authUser }, { id }) {
   } else {
     answer = '';
   }
+
   return {
     answer,
     questions,
   };
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(PollDetails));
+export default connect(mapStateToProps)(PollDetails);
