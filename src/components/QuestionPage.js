@@ -2,16 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
 // imports from material-ui
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 // relative imports
+import CardButton from './CardButton';
 import FourOFour from './FourOFour';
 import SmallAvatar from './ui-library/SmallAvatar';
 import Question from './question/Question';
+import { Title1, MetaText } from '../styles/typography';
 // styles
 import { QuestionPage as styles } from '../styles/styles';
 
@@ -32,61 +34,59 @@ const QuestionPage = ({
   }
 
   return (
-    <div className={classes.container}>
-      <Typography
-        style={{ marginTop: 20 }}
-        variant="display1"
-      >
+    <Container>
+      <Title1>
         {path.includes('details') ?
         'Poll Details' :
         'Would You Rather'}
-      </Typography>
-      <div className={classes.feed}>
-        {path.includes('details') ?
-          <Question
-            id={id}
-            status="PollDetails"
-          /> :
-          <Question
-            id={id}
-            status="PollIsVoting"
-          />}
-      </div>
-      <div style={{ marginTop: 10 }}>
-        <Typography
-          color="inherit"
-          variant="caption"
-        >
-          {`Posted by ${realName}`}
-        </Typography>
-        {imageURL === '' ?
-          <div>
-            <IconButton
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </div> :
-          <div>
-            <SmallAvatar
-              imageURL={imageURL}
-              userName={realName}
-            />
-          </div>}
-      </div>
+      </Title1>
+      {path.includes('details') ?
+        <Question
+          id={id}
+          status="PollDetails"
+        /> :
+        <Question
+          id={id}
+          status="PollIsVoting"
+        />
+      }
+
+      <MetaText>
+        {`Posted by ${realName}`}
+      </MetaText>
+
+      {imageURL === '' ?
+        <div>
+          <IconButton
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+        </div> :
+        <div>
+          <SmallAvatar
+            imageURL={imageURL}
+            userName={realName}
+          />
+        </div>
+      }
+
       <Link to="/" style={{ textDecoration: 'none' }}>
-        <Button
-          style={{ marginTop: 10 }}
-          variant="outlined"
-          className={classes.button}
-        >
+        <CardButton>
           {'Go 🔙 Home'}
-        </Button>
+        </CardButton>
       </Link>
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
 
 QuestionPage.propTypes = {
   // from MapStateToProps
