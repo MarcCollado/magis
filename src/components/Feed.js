@@ -16,7 +16,6 @@ const Feed = ({
     .map(id => (
       <ListItem
         key={id}
-        style={{ listStyleType: 'none' }}
       >
         <Question
           id={id}
@@ -27,7 +26,6 @@ const Feed = ({
     .map(id => (
       <ListItem
         key={id}
-        style={{ listStyleType: 'none' }}
       >
         <Question
           id={id}
@@ -42,7 +40,7 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
-  text-decoration: none;
+  list-style-type: none;
 `;
 
 Feed.propTypes = {
