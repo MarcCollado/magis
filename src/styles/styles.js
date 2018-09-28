@@ -29,21 +29,6 @@ const UserCard = {
   },
 };
 
-const Feed = {
-  container: {
-    width: '85%',
-    margin: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  feed: {
-    padding: 0,
-    width: '100%',
-    maxWidth: 480,
-  },
-};
-
 const FourOFour = {
   container: {
     width: '75%',
@@ -121,7 +106,6 @@ const QuestionPage = {
 export {
   PollDetails,
   UserCard,
-  Feed,
   FourOFour,
   Leaderboard,
   Login,

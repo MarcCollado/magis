@@ -1,54 +1,50 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// imports from material-ui
-import { withStyles } from '@material-ui/core/styles';
-// relative imports
+import styled from 'styled-components';
+
 import Question from './question/Question';
-// styles
-import { Feed as styles } from '../styles/styles';
 
 const Feed = ({
   answeredQuestionsID,
   unansweredQuestionsID,
-  classes,
   answered,
 }) => (
-  <div className={classes.container}>
-    <ul className={classes.feed}>
-      {answered === 0 ?
-          unansweredQuestionsID
-        .map(id => (
-          <li
-            key={id}
-            style={{ listStyleType: 'none' }}
-          >
-            <Question
-              id={id}
-              status="UserWillVote"
-            />
-          </li>)) :
-          answeredQuestionsID
-        .map(id => (
-          <li
-            key={id}
-            style={{ listStyleType: 'none' }}
-          >
-            <Question
-              id={id}
-              status="UserDidVote"
-            />
-          </li>))}
-    </ul>
-  </div>
+  <List>
+  {answered === 0 ?
+      unansweredQuestionsID
+    .map(id => (
+      <li
+        key={id}
+        style={{ listStyleType: 'none' }}
+      >
+        <Question
+          id={id}
+          status="UserWillVote"
+        />
+      </li>)) :
+      answeredQuestionsID
+    .map(id => (
+      <li
+        key={id}
+        style={{ listStyleType: 'none' }}
+      >
+        <Question
+          id={id}
+          status="UserDidVote"
+        />
+      </li>))}
+  </List>
 );
+
+const List = styled.ul`
+  padding: 0em;
+`;
 
 Feed.propTypes = {
   // from MapStateToProps
   unansweredQuestionsID: PropTypes.arrayOf(PropTypes.string).isRequired,
   answeredQuestionsID: PropTypes.arrayOf(PropTypes.string).isRequired,
-  // from material-ui
-  classes: PropTypes.object.isRequired,
   // from NavTabs
   answered: PropTypes.number.isRequired,
 };
@@ -78,4 +74,4 @@ function mapStateToProps({ questions, authUser }) {
   };
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(Feed));
+export default connect(mapStateToProps)(Feed);
