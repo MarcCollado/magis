@@ -21,7 +21,7 @@ const Container = styled.div`
   border-radius: 0.25em;
   display: flex;
   justify-content: center;
-  margin: 0em 0.5em;
+  margin: 0.25em 0.5em;
   padding: 0.25em 1em;
   text-align: center;
 
@@ -31,7 +31,7 @@ const Container = styled.div`
 `;
 
 const StyledLink = styled(BodyText)`
-  color: ${fakeAsbestos}88;
+  color: ${fakeAsbestos};
   line-height: 0em;
   text-decoration: none;
 
