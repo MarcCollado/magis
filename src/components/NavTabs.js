@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 // imports from material-ui
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -8,14 +7,10 @@ import Feed from './Feed';
 import Layout from './Layout';
 
 class NavTabs extends React.Component {
-  static propTypes = {
-    // from material-ui
-    classes: PropTypes.object.isRequired,
-  };
-
-  state = {
-    value: 0,
-  };
+  constructor(props) {
+    super(props);
+    this.state = { value: 0 };
+  }
 
   handleChange = (e, value) => {
     this.setState({ value });

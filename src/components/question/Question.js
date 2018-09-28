@@ -1,17 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import FeedLink from './FeedLink';
-import PollIsVoting from './PollIsVoting';
-import PollDetails from './PollDetails';
 import Card from '../Card';
+import FeedLink from './FeedLink';
+import PollDetails from './PollDetails';
+import PollIsVoting from './PollIsVoting';
 import { BodyText } from '../../styles/typography';
 
-class Question extends Component {
+class Question extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { status: this.props.status };
+  }
+
   static propTypes = {
-    // from MapStateToProps
+    // from connect
     questions: PropTypes.object.isRequired,
     // from Feed
     id: PropTypes.string.isRequired,
@@ -32,10 +37,6 @@ class Question extends Component {
     return {
       status: 'PollDetails',
     };
-  }
-
-  state = {
-    status: this.props.status,
   }
 
   renderActions() {
