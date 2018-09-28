@@ -7,8 +7,11 @@ import {
 const Title1 = styled.h1`
   box-shadow: inset 0em -0.5em 0em ${bianchiGreen};
   color: ${pitchDark};
+  font-size: 28px;
   font-weight: 700;
   letter-spacing: -1px;
+  margin: 0.5em 0em;
+  padding: 0.125em;
   text-transform: uppercase;
 `;
 
