@@ -10,40 +10,33 @@ export default function FeedLink(props) {
   const { id, status } = props;
 
   return (
-    <Container>
-      <CardButton>
-        {status === 'UserWillVote'
-          ? (
-            <StyledLink
-              to={`/questions/${id}`}
-            >
-            {`Vote`}
-            </StyledLink>
-          )
-          : (
-            <StyledLink
-              to={`/questions/${id}/details`}
-            >
-            {`Poll Details`}
-            </StyledLink>
-          )
-        }
-      </CardButton>
-    </Container>
+    <CardButton>
+      {status === 'UserWillVote'
+        ? (
+          <StyledLink
+            to={`/questions/${id}`}
+          >
+          {`Vote`}
+          </StyledLink>
+        )
+        : (
+          <StyledLink
+            to={`/questions/${id}/details`}
+          >
+          {`Poll Details`}
+          </StyledLink>
+        )
+      }
+    </CardButton>
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-`;
 
 const StyledLink = styled(Link)`
   color: ${fakeAsbestos};
   text-decoration: none;
 
   &:visited, :hover, :active {
-    color: inherit;
+    color: ${fakeAsbestos};
   }
 `;
 
