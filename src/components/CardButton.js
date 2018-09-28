@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { fakeAsbestos } from '../styles/colors';
+import { BodyText } from '../styles/typography';
 
 const CardButton = ({ children, onClick }) => (
   <Container
     onClick={onClick}
   >
-    {children}
+    <StyledLink>
+      {children}
+    </StyledLink>
   </Container>
 );
 
@@ -19,11 +22,21 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   margin: 0em 0.5em;
-  padding: 0.5em 1em;
+  padding: 0.25em 1em;
   text-align: center;
 
   &:hover {
-    border: 1px solid ${fakeAsbestos};
+    background: ${fakeAsbestos}22;
+  }
+`;
+
+const StyledLink = styled(BodyText)`
+  color: ${fakeAsbestos}88;
+  line-height: 0em;
+  text-decoration: none;
+
+  &:visited, :hover, :active {
+    color: inherit;
   }
 `;
 
