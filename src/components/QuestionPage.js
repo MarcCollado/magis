@@ -5,20 +5,18 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 // imports from material-ui
-import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 // relative imports
 import CardButton from './CardButton';
 import FourOFour from './FourOFour';
-import SmallAvatar from './ui-library/SmallAvatar';
+import Layout from './Layout';
 import Question from './question/Question';
+import SmallAvatar from './ui-library/SmallAvatar';
+import { fakeAsbestos } from '../styles/colors';
 import { Title1, MetaText } from '../styles/typography';
-// styles
-import { QuestionPage as styles } from '../styles/styles';
 
 const QuestionPage = ({
-  classes,
   match,
   realName,
   imageURL,
@@ -34,7 +32,7 @@ const QuestionPage = ({
   }
 
   return (
-    <Container>
+    <Layout>
       <Title1>
         {path.includes('details') ?
         'Poll Details' :
@@ -72,29 +70,29 @@ const QuestionPage = ({
         </div>
       }
 
-      <Link to="/" style={{ textDecoration: 'none' }}>
+      <StyledLink to="/">
         <CardButton>
           {'Go 🔙 Home'}
         </CardButton>
-      </Link>
-    </Container>
+      </StyledLink>
+    </Layout>
   );
 };
 
-const Container = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+const StyledLink = styled(Link)`
+  color: ${fakeAsbestos};
+  text-decoration: none;
+
+  &:visited, :hover, :active {
+    color: ${fakeAsbestos};
+  }
 `;
 
 QuestionPage.propTypes = {
-  // from MapStateToProps
+  // from connect
   realName: PropTypes.string,
   imageURL: PropTypes.string,
   errorPage: PropTypes.bool.isRequired,
-  // from material-ui
-  classes: PropTypes.object.isRequired,
   // from Router
   match: PropTypes.object.isRequired,
 };
@@ -122,4 +120,4 @@ function mapStateToProps({ questions, users, authUser }, { match }) {
   };
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(QuestionPage));
+export default connect(mapStateToProps)(QuestionPage);
