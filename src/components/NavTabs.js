@@ -1,18 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // imports from material-ui
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 // relative imports
 import Feed from './Feed';
-
-const styles = theme => ({
-  root: {
-    backgroundColor: theme.palette.background.paper,
-  },
-});
+import Layout from './Layout';
 
 class NavTabs extends React.Component {
   static propTypes = {
@@ -24,16 +17,15 @@ class NavTabs extends React.Component {
     value: 0,
   };
 
-  handleChange = (event, value) => {
+  handleChange = (e, value) => {
     this.setState({ value });
   };
 
   render() {
-    const { classes } = this.props;
     const { value } = this.state;
 
     return (
-      <Paper className={classes.root}>
+      <Layout>
         <Tabs
           centered
           fullWidth
@@ -48,9 +40,9 @@ class NavTabs extends React.Component {
         <Feed
           answered={value}
         />
-      </Paper>
+      </Layout>
     );
   }
 }
 
-export default withStyles(styles)(NavTabs);
+export default NavTabs;
