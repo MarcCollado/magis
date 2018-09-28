@@ -1,19 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {bianchiGreen} from '../../styles/colors';
+import { bianchiGreen } from '../../styles/colors';
 import { Title2, MetaText } from '../../styles/typography';
 
-class PollDetails extends Component {
-  static propTypes = {
-    // from MapStateToProps
-    questions: PropTypes.object.isRequired,
-    answer: PropTypes.string.isRequired,
-    // from Question
-    id: PropTypes.string.isRequired,
-  };
+class PollDetails extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
   countVotes(oneOrTwo) {
     const { questions, id } = this.props;
@@ -30,7 +26,7 @@ class PollDetails extends Component {
     const optionTwoPercent = parseInt(100 - optionOnePercent, 10);
 
     return (
-      <Container>
+      <div>
         <YourVote>
           <MetaText>
           {answer !== '' ? `${answer}` : ''}
@@ -58,15 +54,10 @@ class PollDetails extends Component {
             </MetaText>
           </OptionResults>
         </PollResults>
-      </Container>
+      </div>
     );
   }
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 const YourVote = styled.div`
   background: ${bianchiGreen}88;
@@ -105,5 +96,13 @@ function mapStateToProps({ questions, authUser }, { id }) {
     questions,
   };
 }
+
+PollDetails.propTypes = {
+  // from connect
+  questions: PropTypes.object.isRequired,
+  answer: PropTypes.string.isRequired,
+  // from Question
+  id: PropTypes.string.isRequired,
+};
 
 export default connect(mapStateToProps)(PollDetails);
