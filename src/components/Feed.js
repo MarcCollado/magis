@@ -6,15 +6,15 @@ import styled from 'styled-components';
 import Question from './question/Question';
 
 const Feed = ({
-  answeredQuestionsID,
-  unansweredQuestionsID,
+  answeredIDs,
+  unansweredIDs,
   answered,
 }) => (
   <List>
   {answered === 0 ?
-      unansweredQuestionsID
+      unansweredIDs
     .map(id => (
-      <li
+      <ListItem
         key={id}
         style={{ listStyleType: 'none' }}
       >
@@ -22,10 +22,10 @@ const Feed = ({
           id={id}
           status="UserWillVote"
         />
-      </li>)) :
-      answeredQuestionsID
+      </ListItem>)) :
+      answeredIDs
     .map(id => (
-      <li
+      <ListItem
         key={id}
         style={{ listStyleType: 'none' }}
       >
@@ -33,7 +33,7 @@ const Feed = ({
           id={id}
           status="UserDidVote"
         />
-      </li>))}
+      </ListItem>))}
   </List>
 );
 
@@ -41,16 +41,20 @@ const List = styled.ul`
   padding: 0em;
 `;
 
+const ListItem = styled.li`
+  text-decoration: none;
+`;
+
 Feed.propTypes = {
-  // from MapStateToProps
-  unansweredQuestionsID: PropTypes.arrayOf(PropTypes.string).isRequired,
-  answeredQuestionsID: PropTypes.arrayOf(PropTypes.string).isRequired,
+  // from connect
+  answeredIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
+  unansweredIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
   // from NavTabs
   answered: PropTypes.number.isRequired,
 };
 
 function mapStateToProps({ questions, authUser }) {
-  const userHasAnswered = Object.keys(questions)
+  const answeredIDs = Object.keys(questions)
     .filter(i => (
       questions[i].optionOne.votes.includes(authUser) ||
       questions[i].optionTwo.votes.includes(authUser)
@@ -59,7 +63,7 @@ function mapStateToProps({ questions, authUser }) {
       questions[b].timestamp - questions[a].timestamp
     ));
 
-  const userHasNotAnswered = Object.keys(questions)
+  const unansweredIDs = Object.keys(questions)
     .filter(i => (
       !questions[i].optionOne.votes.includes(authUser) &&
       !questions[i].optionTwo.votes.includes(authUser)
@@ -69,8 +73,8 @@ function mapStateToProps({ questions, authUser }) {
     ));
 
   return {
-    answeredQuestionsID: userHasAnswered,
-    unansweredQuestionsID: userHasNotAnswered,
+    answeredIDs,
+    unansweredIDs,
   };
 }
 
