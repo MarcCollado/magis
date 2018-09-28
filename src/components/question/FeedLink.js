@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import CardButton from '../CardButton';
+import { fakeAsbestos } from '../../styles/colors';
 
 export default function FeedLink(props) {
   const { id, status } = props;
@@ -13,20 +14,18 @@ export default function FeedLink(props) {
       <CardButton>
         {status === 'UserWillVote'
           ? (
-            <Link
+            <StyledLink
               to={`/questions/${id}`}
-              style={{ textDecoration: 'none', width: '100%' }}
             >
-            Vote
-            </Link>
+            {`Vote`}
+            </StyledLink>
           )
           : (
-            <Link
+            <StyledLink
               to={`/questions/${id}/details`}
-              style={{ textDecoration: 'none', width: '100%' }}
             >
-            Poll Details
-            </Link>
+            {`Poll Details`}
+            </StyledLink>
           )
         }
       </CardButton>
@@ -37,6 +36,15 @@ export default function FeedLink(props) {
 const Container = styled.div`
   display: flex;
   justify-content: center;
+`;
+
+const StyledLink = styled(Link)`
+  color: ${fakeAsbestos};
+  text-decoration: none;
+
+  &:visited, :hover, :active {
+    color: inherit;
+  }
 `;
 
 FeedLink.propTypes = {
