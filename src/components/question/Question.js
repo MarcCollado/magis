@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-// relative imports
+
 import FeedLink from './FeedLink';
 import PollIsVoting from './PollIsVoting';
 import PollDetails from './PollDetails';
 import Card from '../Card';
+import { BodyText } from '../../styles/typography';
 
 class Question extends Component {
   static propTypes = {
@@ -107,7 +108,7 @@ const Options = styled.div`
   align-items: center;
 `;
 
-const OptionOne = styled.p`
+const OptionOne = styled(BodyText)`
   text-align: left;
   width: 40%;
 `;
@@ -117,7 +118,7 @@ const OR = styled.div`
   width: 20%;
 `;
 
-const OptionTwo = styled.p`
+const OptionTwo = styled(BodyText)`
   text-align: right;
   width: 40%;
 `;
