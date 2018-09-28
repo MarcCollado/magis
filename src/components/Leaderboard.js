@@ -1,40 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// imports from material-ui
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import styled from 'styled-components';
+
+import Layout from './Layout';
+import { Title1, BodyText, MetaText } from '../styles/typography';
+
 // relative imports
 import UserCard from './ui-library/UserCard';
-// styles
-import { Leaderboard as styles } from '../styles/styles';
 
-const Leaderboard = ({ classes, userDetails }) => (
-  <div className={classes.container}>
-    <Typography
-      style={{ marginTop: 20 }}
-      variant="display1"
-    >
-      Leaderboard
-    </Typography>
-    <Typography
-      style={{ marginTop: 15, textAlign: 'center' }}
-      variant="body1"
-    >
+
+const Leaderboard = ({ userDetails }) => (
+  <Layout>
+    <Title1>
+      {`Leaderboard`}
+    </Title1>
+    <BodyText>
       {'Meet the app\'s top performers.'}
-    </Typography>
-    <Typography
-      style={{ marginTop: 10, textAlign: 'center' }}
-      variant="caption"
-    >
+    </BodyText>
+    <MetaText>
       {'The more questions they post and vote, the higher they rank 🏅'}
-    </Typography>
-    <ul className={classes.feed}>
+    </MetaText>
+    <List>
       {userDetails
         .map(user => (
-          <li
+          <ListItem
             key={user.userName}
-            style={{ listStyleType: 'none' }}
           >
             <UserCard
               imageURL={user.imageURL}
@@ -42,16 +33,24 @@ const Leaderboard = ({ classes, userDetails }) => (
               questionsAnswered={user.questionsAnswered}
               questionsPosted={user.questionsPosted}
             />
-          </li>))}
-    </ul>
-  </div>
+          </ListItem>
+        ))
+      }
+    </List>
+  </Layout>
 );
 
+const List = styled.ul`
+  padding: 0em;
+`;
+
+const ListItem = styled.li`
+  list-style-type: none;
+`;
+
 Leaderboard.propTypes = {
-  // from MapStateToProps
-  userDetails: PropTypes.array.isRequired,
-  // from material-ui
-  classes: PropTypes.object.isRequired,
+  // from connect
+  userDetails: PropTypes.array.isRequired
 };
 
 function mapStateToProps({ users }) {
@@ -75,4 +74,4 @@ function mapStateToProps({ users }) {
   };
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(Leaderboard));
+export default connect(mapStateToProps)(Leaderboard);
