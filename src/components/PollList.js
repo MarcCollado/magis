@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import Question from './question/Question';
 
-const Feed = ({
+const PollList = ({
   answeredIDs,
   unansweredIDs,
   answered,
@@ -43,11 +43,11 @@ const ListItem = styled.li`
   list-style-type: none;
 `;
 
-Feed.propTypes = {
+PollList.propTypes = {
   // from connect
   answeredIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
   unansweredIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
-  // from NavTabs
+  // from HomePage
   answered: PropTypes.number.isRequired,
 };
 
@@ -76,4 +76,4 @@ function mapStateToProps({ questions, authUser }) {
   };
 }
 
-export default connect(mapStateToProps)(Feed);
+export default connect(mapStateToProps)(PollList);

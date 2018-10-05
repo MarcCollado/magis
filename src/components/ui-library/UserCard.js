@@ -58,7 +58,7 @@ const UserCard = ({
 UserCard.propTypes = {
   // from material-ui
   classes: PropTypes.object.isRequired,
-  // from Leaderboard
+  // from LeaderPage
   imageURL: PropTypes.string.isRequired,
   userName: PropTypes.string.isRequired,
   questionsAnswered: PropTypes.number.isRequired,

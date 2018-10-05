@@ -3,10 +3,10 @@ import React from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 // relative imports
-import Feed from './Feed';
+import PollList from './PollList';
 import Layout from './Layout';
 
-class NavTabs extends React.Component {
+class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: 0 };
@@ -32,7 +32,7 @@ class NavTabs extends React.Component {
           <Tab label="UNANSWERED" />
           <Tab label="ANSWERED" />
         </Tabs>
-        <Feed
+        <PollList
           answered={value}
         />
       </Layout>
@@ -40,4 +40,4 @@ class NavTabs extends React.Component {
   }
 }
 
-export default NavTabs;
+export default HomePage;

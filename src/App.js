@@ -7,9 +7,9 @@ import styled from 'styled-components';
 // relative imports
 import { handleInitialData } from './actions/shared';
 import Nav from './components/Nav';
-import NavTabs from './components/NavTabs';
+import HomePage from './components/HomePage';
 import Login from './components/Login';
-import Leaderboard from './components/Leaderboard';
+import LeaderPage from './components/LeaderPage';
 import AddQuestion from './components/AddQuestion';
 import QuestionPage from './components/QuestionPage';
 import PrivateRoute from './components/PrivateRoute';
@@ -38,7 +38,7 @@ class App extends Component {
               <Route
                 path="/"
                 exact
-                component={NavTabs}
+                component={HomePage}
               />
               <Route
                 path="/login"
@@ -48,7 +48,7 @@ class App extends Component {
               <PrivateRoute
                 path="/leaderboard"
                 exact
-                component={Leaderboard}
+                component={LeaderPage}
               />
               <PrivateRoute
                 path="/add"
