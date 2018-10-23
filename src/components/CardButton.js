@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { fakeAsbestos } from '../styles/colors';
+import { fakeAsbestos, bianchiGreen } from '../styles/colors';
 import { BodyText } from '../styles/typography';
 
 const CardButton = ({ children, onClick }) => (
@@ -17,16 +17,19 @@ const CardButton = ({ children, onClick }) => (
 
 const Container = styled.div`
   align-items: center;
-  border: 1px solid ${fakeAsbestos}22;
-  border-radius: 0.25em;
+  background: ${bianchiGreen}88;
+  border-radius: 1.25em;
+  box-shadow: ${fakeAsbestos}22 0em 0.125em 0.25em 0em;
   display: flex;
   justify-content: center;
-  margin: 0.25em 0.5em;
+  margin: 0.25em 0.5em 0.75em;
+  min-width: 7em;
   padding: 0.25em 1em;
   text-align: center;
+  transition: box-shadow 0.3s ease;
 
-  &:hover {
-    background: ${fakeAsbestos}22;
+  &:hover, &:active {
+    box-shadow: ${fakeAsbestos}22 0em 0.5em 1em 0em;
   }
 `;
 
