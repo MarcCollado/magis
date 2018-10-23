@@ -14,7 +14,7 @@ import styled from 'styled-components';
 
 const Layout = ({ children }) => (
   <Container>
-      {children}
+    {children}
   </Container>
 );
 
@@ -28,6 +28,8 @@ const Container = styled.div`
   max-width: 480px;
 `;
 
-Layout.propTypes = {};
+Layout.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default Layout;
