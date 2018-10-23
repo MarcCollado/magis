@@ -6,14 +6,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // relative imports
 import { handleInitialData } from './actions/shared';
-import Nav from './components/Nav';
-import NavTabs from './components/NavTabs';
-import Login from './components/Login';
-import Leaderboard from './components/Leaderboard';
 import AddQuestion from './components/AddQuestion';
-import QuestionPage from './components/QuestionPage';
-import PrivateRoute from './components/PrivateRoute';
+import Feed from './components/Feed';
 import FourOFour from './components/FourOFour';
+import Leaderboard from './components/Leaderboard';
+import Login from './components/Login';
+import Nav from './components/Nav';
+import PrivateRoute from './components/PrivateRoute';
+import QuestionPage from './components/QuestionPage';
 import AddButton from './components/ui-library/AddButton';
 
 class App extends Component {
@@ -38,7 +38,7 @@ class App extends Component {
               <Route
                 path="/"
                 exact
-                component={NavTabs}
+                component={Feed}
               />
               <Route
                 path="/login"
