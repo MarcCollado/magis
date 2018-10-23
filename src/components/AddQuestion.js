@@ -38,6 +38,18 @@ class AddQuestion extends React.Component {
     toHome: false,
   };
 
+  handleInput = (e, option) => {
+    const input = e.target.value;
+
+    option === "optionOne" ?
+      this.setState(() => ({
+        optionOneText: input,
+      })) :
+      this.setState(() => ({
+        optionTwoText: input,
+      }));
+  }
+
   handleChangeOneText = (e) => {
     const optionOneText = e.target.value;
     this.setState(() => ({
@@ -105,7 +117,7 @@ class AddQuestion extends React.Component {
               fullWidth
               rowsMax="4"
               value={optionOneText}
-              onChange={this.handleChangeOneText}
+              onChange={(e) => this.handleInput(e, "optionOne")}
               className={classes.textField}
               margin="normal"
             />
@@ -117,7 +129,7 @@ class AddQuestion extends React.Component {
               fullWidth
               rowsMax="4"
               value={optionTwoText}
-              onChange={this.handleChangeTwoText}
+              onChange={(e) => this.handleInput(e, "optionTwo")}
               className={classes.textField}
               margin="normal"
             />

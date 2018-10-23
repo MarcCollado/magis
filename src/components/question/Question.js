@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Card from '../Card';
-import FeedLink from './FeedLink';
+import HomeLink from './HomeLink';
 import PollDetails from './PollDetails';
 import PollIsVoting from './PollIsVoting';
 import { BodyText } from '../../styles/typography';
@@ -18,7 +18,7 @@ class Question extends React.Component {
   static propTypes = {
     // from connect
     questions: PropTypes.object.isRequired,
-    // from Feed
+    // from PollList
     id: PropTypes.string.isRequired,
     status: PropTypes.oneOf([
       'UserWillVote',
@@ -58,14 +58,14 @@ class Question extends React.Component {
         );
       case 'UserDidVote':
         return (
-          <FeedLink
+          <HomeLink
             id={id}
             status={status}
           />
         );
       default:
         return (
-          <FeedLink
+          <HomeLink
             id={id}
             status={status}
           />

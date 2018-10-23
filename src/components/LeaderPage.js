@@ -10,7 +10,7 @@ import { Title1, BodyText, MetaText } from '../styles/typography';
 import UserCard from './ui-library/UserCard';
 
 
-const Leaderboard = ({ userDetails }) => (
+const LeaderPage = ({ userDetails }) => (
   <Layout>
     <Title1>
       {`Leaderboard`}
@@ -48,7 +48,7 @@ const ListItem = styled.li`
   list-style-type: none;
 `;
 
-Leaderboard.propTypes = {
+LeaderPage.propTypes = {
   // from connect
   userDetails: PropTypes.array.isRequired
 };
@@ -74,4 +74,4 @@ function mapStateToProps({ users }) {
   };
 }
 
-export default connect(mapStateToProps)(Leaderboard);
+export default connect(mapStateToProps)(LeaderPage);

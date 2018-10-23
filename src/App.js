@@ -9,7 +9,7 @@ import { handleInitialData } from './actions/shared';
 import AddQuestion from './components/AddQuestion';
 import Feed from './components/Feed';
 import FourOFour from './components/FourOFour';
-import Leaderboard from './components/Leaderboard';
+import LeaderPage from './components/LeaderPage';
 import Login from './components/Login';
 import Nav from './components/Nav';
 import PrivateRoute from './components/PrivateRoute';
@@ -48,7 +48,7 @@ class App extends Component {
               <PrivateRoute
                 path="/leaderboard"
                 exact
-                component={Leaderboard}
+                component={LeaderPage}
               />
               <PrivateRoute
                 path="/add"

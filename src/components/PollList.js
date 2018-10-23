@@ -66,10 +66,15 @@ const ListItem = styled.li`
   list-style-type: none;
 `;
 
-Feed.propTypes = {
+PollList.propTypes = {
   // from connect
   answeredIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
   unansweredIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
+<<<<<<< HEAD:src/components/Feed.js
+=======
+  // from HomePage
+  answered: PropTypes.number.isRequired,
+>>>>>>> 7b0ae99f91fbacf419b809f82f4835f26c27a4b7:src/components/PollList.js
 };
 
 function mapStateToProps({ questions, authUser }) {
@@ -97,4 +102,4 @@ function mapStateToProps({ questions, authUser }) {
   };
 }
 
-export default connect(mapStateToProps)(Feed);
+export default connect(mapStateToProps)(PollList);

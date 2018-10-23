@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import CardButton from '../CardButton';
 import { fakeAsbestos } from '../../styles/colors';
 
-export default function FeedLink(props) {
+export default function HomeLink(props) {
   const { id, status } = props;
 
   return (
@@ -40,7 +40,7 @@ const StyledLink = styled(Link)`
   }
 `;
 
-FeedLink.propTypes = {
+HomeLink.propTypes = {
   // from Question
   id: PropTypes.string.isRequired,
   status: PropTypes.oneOf([
