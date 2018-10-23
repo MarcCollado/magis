@@ -3,37 +3,60 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import Layout from './Layout';
 import Question from './question/Question';
+import Tabs from './Tabs';
 
-const Feed = ({
-  answeredIDs,
-  unansweredIDs,
-  answered,
-}) => (
-  <List>
-  {answered === 0 ?
-      unansweredIDs
-    .map(id => (
-      <ListItem
-        key={id}
-      >
-        <Question
-          id={id}
-          status="UserWillVote"
-        />
-      </ListItem>)) :
-      answeredIDs
-    .map(id => (
-      <ListItem
-        key={id}
-      >
-        <Question
-          id={id}
-          status="UserDidVote"
-        />
-      </ListItem>))}
-  </List>
-);
+class Feed extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { selectedFeed: "unanswered" };
+  }
+
+  handleTabChange = (value) => {
+    this.setState({ selectedFeed: value });
+  };
+
+  render() {
+    const {
+      answeredIDs,
+      unansweredIDs,
+    } = this.props;
+
+    const { selectedFeed } = this.state;
+
+    return (
+      <Layout>
+        <Tabs
+          tabState={selectedFeed}
+          handleTabChange={this.handleTabChange}
+        >
+        </Tabs>
+        <List>
+          {selectedFeed === "unanswered" ?
+            unansweredIDs.map(id => (
+              <ListItem
+                key={id}
+              >
+                <Question
+                  id={id}
+                  status="UserWillVote"
+                />
+              </ListItem>)) :
+            answeredIDs.map(id => (
+              <ListItem
+                key={id}
+              >
+                <Question
+                  id={id}
+                  status="UserDidVote"
+                />
+              </ListItem>))}
+        </List>
+      </Layout>
+    );
+  }
+}
 
 const List = styled.ul`
   padding: 0em;
@@ -47,8 +70,6 @@ Feed.propTypes = {
   // from connect
   answeredIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
   unansweredIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
-  // from NavTabs
-  answered: PropTypes.number.isRequired,
 };
 
 function mapStateToProps({ questions, authUser }) {
