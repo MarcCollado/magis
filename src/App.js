@@ -7,7 +7,7 @@ import styled from 'styled-components';
 // relative imports
 import { handleInitialData } from './actions/shared';
 import AddQuestion from './components/AddQuestion';
-import Feed from './components/Feed';
+import HomePage from './components/HomePage';
 import FourOFour from './components/FourOFour';
 import LeaderPage from './components/LeaderPage';
 import Login from './components/Login';
@@ -38,7 +38,7 @@ class App extends Component {
               <Route
                 path="/"
                 exact
-                component={Feed}
+                component={HomePage}
               />
               <Route
                 path="/login"

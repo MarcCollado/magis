@@ -1,43 +1,100 @@
 import React from 'react';
-// imports from material-ui
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-// relative imports
-import PollList from './PollList';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
 import Layout from './Layout';
+import Question from './question/Question';
+import Tabs from './Tabs';
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: 0 };
+    this.state = { selectedFeed: "unanswered" };
   }
 
-  handleChange = (e, value) => {
-    this.setState({ value });
+  handleTabChange = (value) => {
+    this.setState({ selectedFeed: value });
   };
 
   render() {
-    const { value } = this.state;
+    const {
+      answeredIDs,
+      unansweredIDs,
+    } = this.props;
+
+    const { selectedFeed } = this.state;
 
     return (
       <Layout>
         <Tabs
-          centered
-          fullWidth
-          indicatorColor="primary"
-          textColor="primary"
-          value={value}
-          onChange={this.handleChange}
+          tabState={selectedFeed}
+          handleTabChange={this.handleTabChange}
         >
-          <Tab label="UNANSWERED" />
-          <Tab label="ANSWERED" />
         </Tabs>
-        <PollList
-          answered={value}
-        />
+        <List>
+          {selectedFeed === "unanswered" ?
+            unansweredIDs.map(id => (
+              <ListItem
+                key={id}
+              >
+                <Question
+                  id={id}
+                  status="UserWillVote"
+                />
+              </ListItem>)) :
+            answeredIDs.map(id => (
+              <ListItem
+                key={id}
+              >
+                <Question
+                  id={id}
+                  status="UserDidVote"
+                />
+              </ListItem>))}
+        </List>
       </Layout>
     );
   }
 }
 
-export default HomePage;
+const List = styled.ul`
+  padding: 0em;
+`;
+
+const ListItem = styled.li`
+  list-style-type: none;
+`;
+
+HomePage.propTypes = {
+  // from connect
+  answeredIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
+  unansweredIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+function mapStateToProps({ questions, authUser }) {
+  const answeredIDs = Object.keys(questions)
+    .filter(i => (
+      questions[i].optionOne.votes.includes(authUser) ||
+      questions[i].optionTwo.votes.includes(authUser)
+    ))
+    .sort((a, b) => (
+      questions[b].timestamp - questions[a].timestamp
+    ));
+
+  const unansweredIDs = Object.keys(questions)
+    .filter(i => (
+      !questions[i].optionOne.votes.includes(authUser) &&
+      !questions[i].optionTwo.votes.includes(authUser)
+    ))
+    .sort((a, b) => (
+      questions[b].timestamp - questions[a].timestamp
+    ));
+
+  return {
+    answeredIDs,
+    unansweredIDs,
+  };
+}
+
+export default connect(mapStateToProps)(HomePage);
