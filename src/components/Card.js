@@ -19,11 +19,6 @@ const Container = styled.div`
   flex-direction: column;
   margin-bottom: 1em;
   padding: 0.5em 1em;
-  transition: box-shadow 0.3s ease;
-
-  &:hover, &:active {
-    box-shadow: ${fakeAsbestos}22 0em 0.5em 1em 0em;
-  }
 `;
 
 Card.propTypes = {
