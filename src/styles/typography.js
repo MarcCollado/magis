@@ -6,7 +6,7 @@ import {
 
 const Title1 = styled.h1`
   box-shadow: inset 0em -0.5em 0em ${bianchiGreen};
-  color: ${pitchDark};
+  color: ${fakeAsbestos};
   font-size: 28px;
   font-weight: 700;
   letter-spacing: -1px;
@@ -16,7 +16,7 @@ const Title1 = styled.h1`
 `;
 
 const Title2 = styled.h2`
-  color: ${pitchDark};
+  color: ${fakeAsbestos};
   font-size: 24px;
   font-weight: 700;
   letter-spacing: -1px;
@@ -26,7 +26,7 @@ const Title2 = styled.h2`
 `;
 
 const Title3 = styled.h3`
-  color: ${pitchDark};
+  color: ${fakeAsbestos};
   font-size: 20px;
   font-weight: 700;
   letter-spacing: -1px;
