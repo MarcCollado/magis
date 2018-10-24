@@ -71,9 +71,7 @@ const QuestionPage = ({
       }
 
       <StyledLink to="/">
-        <CardButton>
-          {'Go 🔙 Home'}
-        </CardButton>
+        <CardButton>{'Go 🔙 Home'}</CardButton>
       </StyledLink>
     </Layout>
   );

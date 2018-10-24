@@ -7,8 +7,8 @@ import styled from 'styled-components';
 // relative imports
 import { handleInitialData } from './actions/shared';
 import AddQuestion from './components/AddQuestion';
-import HomePage from './components/HomePage';
 import FourOFour from './components/FourOFour';
+import HomePage from './components/HomePage';
 import LeaderPage from './components/LeaderPage';
 import Login from './components/Login';
 import Nav from './components/Nav';
