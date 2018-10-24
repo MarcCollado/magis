@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { Title3 } from '../styles/typography';
 import { fakeAsbestos } from '../styles/colors';
 
-const Tabs = ({ handleTabChange, tabState }) => (
+const HomeTabs = ({ handleTabChange, tabState }) => (
   <Container>
     <Tab
       onClick={() => handleTabChange("unanswered")}
@@ -41,4 +42,10 @@ const Tab = styled(Title3)`
   }
 `;
 
-export default Tabs;
+HomeTabs.propTypes = {
+  // from HomePage
+  tabState: PropTypes.string.isRequired,
+  handleTabChange: PropTypes.func.isRequired,
+};
+
+export default HomeTabs;
