@@ -4,17 +4,17 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Layout from './Layout';
+import HomeTabs from './HomeTabs';
 import Question from './question/Question';
-import Tabs from './Tabs';
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { selectedFeed: "unanswered" };
+    this.state = { feed: "unanswered" };
   }
 
   handleTabChange = (value) => {
-    this.setState({ selectedFeed: value });
+    this.setState({ feed: value });
   };
 
   render() {
@@ -23,17 +23,17 @@ class HomePage extends React.Component {
       unansweredIDs,
     } = this.props;
 
-    const { selectedFeed } = this.state;
+    const { feed } = this.state;
 
     return (
       <Layout>
-        <Tabs
-          tabState={selectedFeed}
+        <HomeTabs
+          tabState={feed}
           handleTabChange={this.handleTabChange}
         >
-        </Tabs>
+        </HomeTabs>
         <List>
-          {selectedFeed === "unanswered" ?
+          {feed === "unanswered" ?
             unansweredIDs.map(id => (
               <ListItem
                 key={id}
