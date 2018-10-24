@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import CardButton from '../CardButton';
+import { fakeAsbestos } from '../../styles/colors';
 import { handleRegisterVote } from '../../actions/questions';
 
 class PollIsVoting extends React.Component {
@@ -40,16 +41,14 @@ class PollIsVoting extends React.Component {
 
     return (
       <Container>
-        <CardButton
-          onClick={(e) => this.handleOption(e, 'optionOne')}
-        >
-          {`Vote Option One`}
-        </CardButton>
-        <CardButton
-          onClick={(e) => this.handleOption(e, 'optionTwo')}
-        >
-          {`Vote Option Two`}
-        </CardButton>
+        <StyledLink href="#"
+          onClick={(e) => this.handleOption(e, 'optionOne')}>
+        <CardButton>Vote Option One</CardButton>
+        </StyledLink>
+        <StyledLink href="#"
+          onClick={(e) => this.handleOption(e, 'optionTwo')}>
+          <CardButton>Vote Option Two</CardButton>
+        </StyledLink>
       </Container>
     );
   }
@@ -58,6 +57,15 @@ class PollIsVoting extends React.Component {
 const Container = styled.div`
   display: flex;
   justify-content: center;
+`;
+
+const StyledLink = styled.a`
+  color: ${fakeAsbestos};
+  text-decoration: none;
+
+  &:visited, :hover, :active {
+    color: ${fakeAsbestos};
+  }
 `;
 
 export default connect()(PollIsVoting);
