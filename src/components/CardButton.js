@@ -3,29 +3,25 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { fakeAsbestos, bianchiGreen } from '../styles/colors';
-import { BodyText } from '../styles/typography';
 
-const CardButton = ({ children, onClick }) => (
+const CardButton = ({ children, primary }) => (
   <Container
-    onClick={onClick}
+    primary={primary}
   >
-    <StyledLink>
-      {children}
-    </StyledLink>
+    {children}
   </Container>
 );
 
 const Container = styled.div`
-  align-items: center;
-  background: ${bianchiGreen}88;
-  border-radius: 1.25em;
+  background: ${props => props.primary ? bianchiGreen : "#FFF"};
+  border: 1px solid ${props => props.primary ? "#FFF0" : fakeAsbestos};
+  border-radius: 1.5em;
   box-shadow: ${fakeAsbestos}22 0em 0.125em 0.25em 0em;
   display: flex;
   justify-content: center;
-  margin: 0.25em 0.5em 0.75em;
-  min-width: 7em;
-  padding: 0.25em 1em;
-  text-align: center;
+  margin: 0.5em 2em;
+  min-width: 6em;
+  padding: 0.75em 1em;
   transition: box-shadow 0.3s ease;
 
   &:hover, &:active {
@@ -33,19 +29,13 @@ const Container = styled.div`
   }
 `;
 
-const StyledLink = styled(BodyText)`
-  color: ${fakeAsbestos};
-  line-height: 0em;
-  text-decoration: none;
-
-  &:visited, :hover, :active {
-    color: inherit;
-  }
-`;
-
 CardButton.propTypes = {
-  children: PropTypes.object.isRequired,
-  onClick: PropTypes.func,
+  children: PropTypes.string.isRequired,
+  primary: PropTypes.bool,
+};
+
+CardButton.defaultProps = {
+  primary: false,
 };
 
 export default CardButton;
