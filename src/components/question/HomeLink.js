@@ -6,34 +6,25 @@ import styled from 'styled-components';
 import CardButton from '../CardButton';
 import { fakeAsbestos } from '../../styles/colors';
 
-export default function HomeLink(props) {
-  const { id, status } = props;
-
-  return (
-    <CardButton>
-      {status === 'UserWillVote'
-        ? (
-          <StyledLink
-            to={`/questions/${id}`}
-          >
-          {`Vote`}
-          </StyledLink>
-        )
-        : (
-          <StyledLink
-            to={`/questions/${id}/details`}
-          >
-          {`Poll Details`}
-          </StyledLink>
-        )
-      }
-    </CardButton>
-  );
-}
+const HomeLink = ({ id, status }) => (
+  status === 'Vote' ? (
+    <StyledLink
+      to={`/questions/${id}`}
+    >
+      <CardButton primary>Vote</CardButton>
+    </StyledLink>
+    ) : (
+    <StyledLink
+      to={`/questions/${id}/details`}
+    >
+      <CardButton>See Details</CardButton>
+    </StyledLink>
+    )
+);
 
 const StyledLink = styled(Link)`
-  color: ${fakeAsbestos};
   text-decoration: none;
+  color: ${fakeAsbestos};
 
   &:visited, :hover, :active {
     color: ${fakeAsbestos};
@@ -44,7 +35,9 @@ HomeLink.propTypes = {
   // from Question
   id: PropTypes.string.isRequired,
   status: PropTypes.oneOf([
-    'UserWillVote',
-    'UserDidVote',
+    'Vote',
+    'SeeDetails',
   ]).isRequired,
 };
+
+export default HomeLink;
