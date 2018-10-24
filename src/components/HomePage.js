@@ -40,7 +40,7 @@ class HomePage extends React.Component {
               >
                 <Question
                   id={id}
-                  status="UserWillVote"
+                  status="Vote"
                 />
               </ListItem>)) :
             answeredIDs.map(id => (
@@ -49,7 +49,7 @@ class HomePage extends React.Component {
               >
                 <Question
                   id={id}
-                  status="UserDidVote"
+                  status="SeeDetails"
                 />
               </ListItem>))}
         </List>

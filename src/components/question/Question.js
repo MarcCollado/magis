@@ -16,13 +16,11 @@ class Question extends React.Component {
   }
 
   static propTypes = {
-    // from connect
     questions: PropTypes.object.isRequired,
-    // from PollList
     id: PropTypes.string.isRequired,
     status: PropTypes.oneOf([
-      'UserWillVote',
-      'UserDidVote',
+      'Vote',
+      'SeeDetails',
       'PollIsVoting',
       'PollDetails',
     ]).isRequired,
@@ -56,7 +54,7 @@ class Question extends React.Component {
             id={id}
           />
         );
-      case 'UserDidVote':
+      case 'SeeDetails':
         return (
           <HomeLink
             id={id}
