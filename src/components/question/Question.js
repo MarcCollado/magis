@@ -104,9 +104,9 @@ class Question extends React.Component {
 }
 
 const Options = styled.div`
-  height: 8em;
-  display: flex;
   align-items: center;
+  display: flex;
+  margin-top: 0.5em;
 `;
 
 const OptionOne = styled(BodyText)`
