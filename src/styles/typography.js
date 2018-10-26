@@ -7,8 +7,8 @@ import {
 const Title1 = styled.h1`
   box-shadow: inset 0em -0.5em 0em ${bianchiGreen};
   color: ${fakeAsbestos};
-  font-family: 'Fira Sans', 'sans-serif';
-  font-size: 28px;
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 24px;
   font-weight: 700;
   letter-spacing: -1px;
   text-transform: uppercase;
@@ -16,15 +16,7 @@ const Title1 = styled.h1`
 
 const Title2 = styled.h2`
   color: ${fakeAsbestos};
-  font-family: 'Fira Sans', 'sans-serif';
-  font-size: 24px;
-  font-weight: 700;
-  text-transform: uppercase;
-`;
-
-const Title3 = styled.h3`
-  color: ${fakeAsbestos};
-  font-family: 'Fira Sans', 'sans-serif';
+  font-family: 'Fira Sans', sans-serif;
   font-size: 20px;
   font-weight: 700;
   text-transform: uppercase;
@@ -66,5 +58,5 @@ const MetaText = styled.p`
 `;
 
 export {
-  Title1, Title2, Title3, BodyText, BodyLink, MetaText,
+  Title1, Title2, BodyText, BodyLink, MetaText,
 };
