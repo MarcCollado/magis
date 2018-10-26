@@ -1,11 +1,15 @@
-const pitchDark = '#2A2E2E';
-const fakeAsbestos = '#525555';
-const plainTurquoise = '#1ABC9C';
-const bianchiGreen = '#C8EFE8';
+const electricBlue = '#64C3F5';
+const coralRed = '#E17B75';
+const bianchiGreen = '#89BEBB';
+const plainPurple = '#A56AE3';
+const seriousYellow = '#F6D46F';
+const fakeAsbestos = '#2E3449';
 
 export {
-  pitchDark,
-  fakeAsbestos,
-  plainTurquoise,
+  electricBlue,
+  coralRed,
   bianchiGreen,
+  plainPurple,
+  seriousYellow,
+  fakeAsbestos,
 };
