@@ -11,7 +11,7 @@ import FourOFour from './components/FourOFour';
 import HomePage from './components/HomePage';
 import LeaderPage from './components/LeaderPage';
 import Login from './components/Login';
-import Nav from './components/Nav';
+import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import QuestionPage from './components/QuestionPage';
 import AddButton from './components/ui-library/AddButton';
@@ -32,7 +32,7 @@ class App extends Component {
       <Router>
         <Container>
           <LoadingBar />
-          <Nav />
+          <Navbar />
           <Link to="/add"><AddButton /></Link>
             <Switch>
               <Route
