@@ -6,7 +6,10 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+
+import Layout from './Layout';
+import { Title1, BodyText, MetaText } from '../styles/typography';
+
 // relative imports
 import { handleAddQuestion } from '../actions/questions';
 
@@ -87,21 +90,13 @@ class AddQuestion extends React.Component {
     }
 
     return (
-      <div>
-        <div style={{ textAlign: 'center' }}>
-          <Typography
-            style={{ marginTop: 20 }}
-            variant="display1"
-          >
-            Add a New Question
-          </Typography>
-          <Typography
-            style={{ marginTop: 20 }}
-            variant="body1"
-          >
-            {'Would You Rather 🤔'}
-          </Typography>
-        </div>
+      <Layout>
+        <Title1>
+          {`Add New Question`}
+        </Title1>
+        <BodyText>
+          {'Would You Rather 🤔'}
+        </BodyText>
         <form
           className={classes.container}
           onSubmit={this.handleSubmit}
@@ -146,7 +141,7 @@ class AddQuestion extends React.Component {
             Add Question
           </Button>
         </form>
-      </div>
+      </Layout>
     );
   }
 }
