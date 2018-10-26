@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Title3 } from '../styles/typography';
+import { Title2 } from '../styles/typography';
 import { fakeAsbestos } from '../styles/colors';
 
 const HomeTabs = ({ handleTabChange, tabState }) => (
@@ -30,7 +30,7 @@ const Container = styled.div`
   margin: 0.5em auto 0em;
 `;
 
-const Tab = styled(Title3)`
+const Tab = styled(Title2)`
   border-bottom: ${props => props.selected ? `0.25em solid ${fakeAsbestos}` : "0.25em solid #FFF0"};
   border-top: 0.25em solid #FFF0;
   margin-right: 0.5em;
