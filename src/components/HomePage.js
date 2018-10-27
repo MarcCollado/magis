@@ -18,8 +18,20 @@ class HomePage extends React.Component {
     this.setState({ feed: value });
   };
 
+  // determines which option the authUser voted for, and passes it down to
+  // PollCard via props, so it can highlight the voted option
+  whichVoted = (user, question) => {
+    if (question.optionOne.votes.includes(user)) {
+      return 0;
+    } else if (question.optionTwo.votes.includes(user)) {
+      return 1;
+    }
+    return null;
+  }
+
   render() {
     const {
+      authUser,
       questions,
       answeredIDs,
       unansweredIDs,
@@ -42,6 +54,7 @@ class HomePage extends React.Component {
               >
                 <PollCard
                   id={id}
+                  selected={null}
                   status="unAnswered"
                 >
                   {questions[id]}
@@ -51,10 +64,13 @@ class HomePage extends React.Component {
               <ListItem
                 key={id}
               >
-                <Question
+                <PollCard
                   id={id}
-                  status="SeeDetails"
-                />
+                  voted={this.whichVoted(authUser, questions[id])}
+                  status="Answered"
+                >
+                  {questions[id]}
+                </PollCard>
               </ListItem>))}
         </List>
       </Layout>
@@ -101,6 +117,7 @@ function mapStateToProps({ questions, authUser }) {
     ));
 
   return {
+    authUser,
     questions,
     answeredIDs,
     unansweredIDs,
