@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -11,34 +11,23 @@ import { handleRegisterVote } from '../actions/questions';
 class OpenPoll extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      toDetails: false,
-    };
   }
 
   handleOption = (e, option) => {
     e.preventDefault();
-    const { dispatch, id } = this.props;
+    const { dispatch, id, history } = this.props;
     const userVote = { id, option };
     dispatch(handleRegisterVote(userVote));
-    setTimeout(() => this.setState({
-      voted: option === "optionOne" ? 0 : 1,
-      toDetails: true,
-    }), 500);
+    history.push(`/questions/${id}/details`);
   }
 
   render() {
-    const { children, id } = this.props;
+    const { children } = this.props;
     const options = [children.optionOne.text, children.optionTwo.text];
-    const { toDetails } = this.state;
-
-    if (toDetails === true) {
-      return <Redirect to={`/questions/${id}/details`} />;
-    }
 
     return (
       <Container>
-        <StyledLink href="#"
+        <StyledLink href='#'
           onClick={(e) => this.handleOption(e, 'optionOne')}
         >
           <OptionContainer>
@@ -47,7 +36,7 @@ class OpenPoll extends React.Component {
             </OptionText>
           </OptionContainer>
         </StyledLink>
-        <StyledLink href="#"
+        <StyledLink href='#'
           onClick={(e) => this.handleOption(e, 'optionTwo')}
         >
           <OptionContainer
@@ -103,9 +92,8 @@ const OptionText = styled(BodyText)`
   }
 `;
 
-const OR = styled.div`
-
-`;
+// Add an (OR) div in the middle of the Poll
+// const OR = styled.div``;
 
 OpenPoll.propTypes = {
   children: PropTypes.object.isRequired,
@@ -114,4 +102,4 @@ OpenPoll.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-export default connect()(OpenPoll);
+export default withRouter(connect()(OpenPoll));
