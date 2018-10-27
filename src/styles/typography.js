@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-import {
-  pitchDark, fakeAsbestos, plainTurquoise, bianchiGreen,
-} from './colors';
+import { fakeAsbestos, bianchiGreen } from './colors';
 
 const Title1 = styled.h1`
   box-shadow: inset 0em -0.5em 0em ${bianchiGreen};
