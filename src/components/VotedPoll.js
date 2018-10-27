@@ -1,6 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -14,11 +13,20 @@ class VotedPoll extends React.Component {
   }
 
   render() {
-    const { children, id } = this.props;
-    const options = [children.optionOne.text, children.optionTwo.text];
+    // use object destructuring to rename children to poll
+    const { children: poll, id } = this.props;
+    const options = [poll.optionOne.text, poll.optionTwo.text];
     const { voted } = this.state;
 
     return (
+      // use Link instead of history.push() because there's no function
+      // to invoke onClik
+      <StyledLink
+        to={{
+          pathname: `/questions/${id}/details`,
+          state: { poll, voted }}
+        }
+      >
       <Container>
         <OptionContainer
           voted={voted === 1}
@@ -41,9 +49,14 @@ class VotedPoll extends React.Component {
           </OptionText>
         </OptionContainer>
       </Container>
+      </StyledLink>
     )
   }
 };
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
 
 const Container = styled.div`
   align-items: center;
@@ -70,9 +83,8 @@ const OptionText = styled(BodyText)`
   text-align: ${props => props.right ? "right" : "left"};
 `;
 
-const OR = styled.div`
-
-`;
+// Add an (OR) div in the middle of the Poll
+// const OR = styled.div``;
 
 VotedPoll.propTypes = {
   children: PropTypes.object.isRequired,
