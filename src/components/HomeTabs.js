@@ -27,14 +27,13 @@ const Container = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
-  margin: 0.5em auto 0em;
 `;
 
 const Tab = styled(Title2)`
   border-bottom: ${props => props.selected ? `0.25em solid ${fakeAsbestos}` : "0.25em solid #FFF0"};
   border-top: 0.25em solid #FFF0;
-  margin-right: 0.5em;
-  padding: 0.25em;
+  margin-right: 0.75em;
+  padding: 0em 0.5em 0.25em;
   text-decoration: none;
 
   &:active {
