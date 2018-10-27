@@ -8,15 +8,15 @@ import { fakeAsbestos } from '../styles/colors';
 const HomeTabs = ({ handleTabChange, tabState }) => (
   <Container>
     <Tab
-      onClick={() => handleTabChange("unanswered")}
-      selected={tabState === "unanswered"}
+      onClick={() => handleTabChange(0)}
+      selected={tabState === 0}
     >
       Unanswered
     </Tab>
 
     <Tab
-      onClick={() => handleTabChange("answered")}
-      selected={tabState === "answered"}
+      onClick={() => handleTabChange(1)}
+      selected={tabState === 1}
     >
       Answered
     </Tab>
@@ -44,7 +44,7 @@ const Tab = styled(Title2)`
 
 HomeTabs.propTypes = {
   // from HomePage
-  tabState: PropTypes.string.isRequired,
+  tabState: PropTypes.oneOf([0, 1]).isRequired,
   handleTabChange: PropTypes.func.isRequired,
 };
 
