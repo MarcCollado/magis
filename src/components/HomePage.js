@@ -11,7 +11,7 @@ import PollCard from './PollCard';
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { feed: "unanswered" };
+    this.state = { feed: 0 };
   }
 
   handleTabChange = (value) => {
@@ -20,6 +20,7 @@ class HomePage extends React.Component {
 
   render() {
     const {
+      questions,
       answeredIDs,
       unansweredIDs,
     } = this.props;
@@ -33,17 +34,18 @@ class HomePage extends React.Component {
           handleTabChange={this.handleTabChange}
         >
         </HomeTabs>
-        <PollCard></PollCard>
         <List>
-          {feed === "unanswered" ?
+          {feed === 0 ?
             unansweredIDs.map(id => (
               <ListItem
                 key={id}
               >
-                <Question
+                <PollCard
                   id={id}
-                  status="Vote"
-                />
+                  status="unAnswered"
+                >
+                  {questions[id]}
+                </PollCard>
               </ListItem>)) :
             answeredIDs.map(id => (
               <ListItem
@@ -70,6 +72,7 @@ const ListItem = styled.li`
 
 HomePage.propTypes = {
   // from connect
+  questions: PropTypes.object.isRequired,
   answeredIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
   unansweredIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
@@ -98,6 +101,7 @@ function mapStateToProps({ questions, authUser }) {
     ));
 
   return {
+    questions,
     answeredIDs,
     unansweredIDs,
   };
