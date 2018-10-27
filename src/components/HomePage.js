@@ -22,10 +22,10 @@ class HomePage extends React.Component {
   // determines which option the authUser voted for, and passes it down to
   // VotedPoll via props, so it can highlight the voted option
   // returns 1 for optionOne, 2 for optionTwo
-  whichVoted = (user, question) => {
-    if (question.optionOne.votes.includes(user)) {
+  whichVoted = (user, poll) => {
+    if (poll.optionOne.votes.includes(user)) {
       return 1;
-    } else if (question.optionTwo.votes.includes(user)) {
+    } else if (poll.optionTwo.votes.includes(user)) {
       return 2;
     }
     return null;
