@@ -5,8 +5,9 @@ import styled from 'styled-components';
 
 import Layout from './Layout';
 import HomeTabs from './HomeTabs';
-import Question from './question/Question';
-import PollCard from './PollCard';
+import OpenPoll from './OpenPoll';
+import VotedPoll from './VotedPoll';
+import { BodyText } from '../styles/typography';
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -19,12 +20,13 @@ class HomePage extends React.Component {
   };
 
   // determines which option the authUser voted for, and passes it down to
-  // PollCard via props, so it can highlight the voted option
+  // VotedPoll via props, so it can highlight the voted option
+  // returns 1 for optionOne, 2 for optionTwo
   whichVoted = (user, question) => {
     if (question.optionOne.votes.includes(user)) {
-      return 0;
-    } else if (question.optionTwo.votes.includes(user)) {
       return 1;
+    } else if (question.optionTwo.votes.includes(user)) {
+      return 2;
     }
     return null;
   }
@@ -46,32 +48,38 @@ class HomePage extends React.Component {
           handleTabChange={this.handleTabChange}
         >
         </HomeTabs>
+        <BodyText>
+          {feed === 0 ?
+            `Tap your option to vote for it 📨` :
+            `Tap the poll to check its details 📈`
+          }
+        </BodyText>
         <List>
           {feed === 0 ?
             unansweredIDs.map(id => (
               <ListItem
                 key={id}
               >
-                <PollCard
+                <OpenPoll
                   id={id}
-                  selected={null}
-                  status="unAnswered"
                 >
                   {questions[id]}
-                </PollCard>
-              </ListItem>)) :
+                </OpenPoll>
+              </ListItem>)
+            ) :
             answeredIDs.map(id => (
               <ListItem
                 key={id}
               >
-                <PollCard
+                <VotedPoll
                   id={id}
                   voted={this.whichVoted(authUser, questions[id])}
-                  status="Answered"
                 >
                   {questions[id]}
-                </PollCard>
-              </ListItem>))}
+                </VotedPoll>
+              </ListItem>)
+            )
+          }
         </List>
       </Layout>
     );

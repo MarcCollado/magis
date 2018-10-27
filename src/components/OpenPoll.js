@@ -8,12 +8,10 @@ import {bianchiGreen, seriousYellow, fakeAsbestos } from '../styles/colors';
 import { BodyText } from '../styles/typography';
 import { handleRegisterVote } from '../actions/questions';
 
-class PollCard extends React.Component {
+class OpenPoll extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      voted: this.props.voted,
-      status: this.props.status,
       toDetails: false,
     };
   }
@@ -32,7 +30,7 @@ class PollCard extends React.Component {
   render() {
     const { children, id } = this.props;
     const options = [children.optionOne.text, children.optionTwo.text];
-    const { voted, status, toDetails } = this.state;
+    const { toDetails } = this.state;
 
     if (toDetails === true) {
       return <Redirect to={`/questions/${id}/details`} />;
@@ -43,34 +41,24 @@ class PollCard extends React.Component {
         <StyledLink href="#"
           onClick={(e) => this.handleOption(e, 'optionOne')}
         >
-          <OptionOneContainer
-            status={status}
-            voted={voted === 0}
-          >
-            <OptionText
-              status={status}
-              voted={voted === 0}
-            >
+          <OptionContainer>
+            <OptionText>
               {options[0]}
             </OptionText>
-          </OptionOneContainer>
+          </OptionContainer>
         </StyledLink>
-
         <StyledLink href="#"
           onClick={(e) => this.handleOption(e, 'optionTwo')}
         >
-          <OptionTwoContainer
-            status={status}
-            voted={voted === 1}
+          <OptionContainer
+            right
           >
             <OptionText
               right
-              status={status}
-              voted={voted === 1}
             >
               {options[1]}
             </OptionText>
-          </OptionTwoContainer>
+          </OptionContainer>
         </StyledLink>
       </Container>
     )
@@ -89,57 +77,41 @@ const Container = styled.div`
 
 const StyledLink = styled.a`
   text-decoration: none;
+  flex-basis: 50%;
 `;
 
-const OptionOneContainer = styled.div`
+const OptionContainer = styled.div`
   align-items: center;
-  background: ${props => props.voted ? `${bianchiGreen}` : `${bianchiGreen}22`};
+  background: ${props => props.right ? `${seriousYellow}22` : `${bianchiGreen}22`};
   display: flex;
   height: 12em;
+  justify-content: ${props => props.right ? "flex-end" : "flex-start"};
   padding: 0.5em 1em;
   transition: background 0.3s ease;
 
   &:hover {
-    background: ${props => (props.status === 'Answered' && !props.voted) ? '' : bianchiGreen};
-  }
-`;
-
-const OptionTwoContainer = styled.div`
-  align-items: center;
-  background: ${props => props.voted ? `${seriousYellow}` : `${seriousYellow}22`};
-  display: flex;
-  height: 12em;
-  padding: 0.5em 1em;
-  transition: background 0.3s ease;
-
-  &:hover {
-    background: ${props => (props.status === 'Answered' && !props.voted) ? '' : seriousYellow};
+    background: ${props => props.right ? seriousYellow : bianchiGreen};
   }
 `;
 
 const OptionText = styled(BodyText)`
-  color: ${fakeAsbestos};
+  color: ${fakeAsbestos}CC;
   text-align: ${props => props.right ? "right" : "left"};
-  opacity: ${props => (props.status === 'Answered' && !props.voted) ? 0.15 : 1 };
+
+  &:hover {
+    color: ${fakeAsbestos};
+  }
 `;
 
 const OR = styled.div`
-  text-align: center;
-  width: 20%;
+
 `;
 
-PollCard.propTypes = {
+OpenPoll.propTypes = {
   children: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
-  status: PropTypes.oneOf(['unAnswered', 'Answered']).isRequired,
-  voted: PropTypes.oneOf([0, 1]).isRequired,
   // from connect
   dispatch: PropTypes.func.isRequired,
 };
 
-function mapStateToProps({ }) {
-
-  return { };
-}
-
-export default connect(mapStateToProps)(PollCard);
+export default connect()(OpenPoll);
