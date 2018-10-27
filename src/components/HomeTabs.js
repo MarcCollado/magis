@@ -11,14 +11,14 @@ const HomeTabs = ({ handleTabChange, tabState }) => (
       onClick={() => handleTabChange(0)}
       selected={tabState === 0}
     >
-      Unanswered
+      Open
     </Tab>
 
     <Tab
       onClick={() => handleTabChange(1)}
       selected={tabState === 1}
     >
-      Answered
+      Voted
     </Tab>
   </Container>
 );
