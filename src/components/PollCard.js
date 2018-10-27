@@ -1,33 +1,63 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {coralRed, bianchiGreen, seriousYellow, fakeAsbestos } from '../styles/colors';
+import {bianchiGreen, seriousYellow, fakeAsbestos } from '../styles/colors';
 import { BodyText } from '../styles/typography';
+import { handleRegisterVote } from '../actions/questions';
 
 class PollCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { };
+    this.state = { status: this.props.status, toDetails: false };
+  }
+
+  handleOption = (e, option) => {
+    e.preventDefault();
+    const { dispatch, id } = this.props;
+    const userVote = { id, option };
+    dispatch(handleRegisterVote(userVote));
+    setTimeout(() => this.setState({
+      toDetails: true,
+    }), 500);
   }
 
   render() {
+    const { children, id } = this.props;
+    const options = [children.optionOne.text, children.optionTwo.text];
+    const { toDetails } = this.state;
+
+    if (toDetails === true) {
+      return <Redirect to={`/questions/${id}/details`} />;
+    }
+
     return (
       <Container>
-        <OptionOne>
-          <OptionText>
-            Work at Apple, as an engineer at the iPod Touch 📱 team
-          </OptionText>
+        <StyledLink href="#"
+          onClick={(e) => this.handleOption(e, 'optionOne')}
+        >
+          <OptionContainer>
+            <OptionText>
+              {options[0]}
+            </OptionText>
+          </OptionContainer>
+        </StyledLink>
 
-        </OptionOne>
-        <OptionTwo>
-          <OptionText
+        <StyledLink href="#"
+          onClick={(e) => this.handleOption(e, 'optionTwo')}
+        >
+          <OptionContainer
             right
           >
-            Work at Google, as the PM at the Google Reader 📖 team
-          </OptionText>
-        </OptionTwo>
+            <OptionText
+              right
+            >
+              {options[1]}
+            </OptionText>
+          </OptionContainer>
+        </StyledLink>
       </Container>
     )
   }
@@ -43,29 +73,25 @@ const Container = styled.div`
   overflow: hidden;
 `;
 
-const OptionOne = styled.div`
-  background: ${bianchiGreen}22;
-  display: flex;
-  padding: 0.5em 1em;
-  transition: background 0.3s ease;
-
-  &:hover {
-    background: ${bianchiGreen};
-  }
+const StyledLink = styled.a`
+  text-decoration: none;
 `;
 
-const OptionTwo = styled.div`
-  background: ${seriousYellow}22;
+const OptionContainer = styled.div`
+  align-items: center;
+  background: ${props => props.right ? `${seriousYellow}22` : `${bianchiGreen}22`};
   display: flex;
+  height: 10em;
   padding: 0.5em 1em;
   transition: background 0.3s ease;
 
   &:hover {
-    background: ${seriousYellow};
+    background: ${props => props.right ? `${seriousYellow}` : `${bianchiGreen}`};
   }
 `;
 
 const OptionText = styled(BodyText)`
+  color: ${fakeAsbestos};
   text-align: ${props => props.right ? "right" : "left"};
 `;
 
@@ -74,11 +100,16 @@ const OR = styled.div`
   width: 20%;
 `;
 
-const OptionTwoText = styled(BodyText)`
-  text-align: right;
-`;
-
-PollCard.propTypes = { };
+PollCard.propTypes = {
+  children: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
+  status: PropTypes.oneOf([
+    'unAnswered',
+    'Answered',
+  ]).isRequired,
+  // from connect
+  dispatch: PropTypes.func.isRequired,
+};
 
 function mapStateToProps({ }) {
 
