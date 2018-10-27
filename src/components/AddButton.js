@@ -26,6 +26,7 @@ const Button = styled.div`
   right: 1em;
   width: 4em;
   transition: background, box-shadow 0.3s ease;
+  z-index: 1000;
 
   &:hover, &:active {
     background: #E2AFAC;
