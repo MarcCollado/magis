@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import CardButton from './CardButton';
+import Button from './Button';
 import FourOFour from './FourOFour';
 import Layout from './Layout';
+import PollStats from './PollStats';
 import UnbiasedPoll from './UnbiasedPoll';
 import UserImage from './UserImage';
 
-import { bianchiGreen, seriousYellow, fakeAsbestos } from '../styles/colors';
+import { fakeAsbestos } from '../styles/colors';
 import { Title1, BodyText, MetaText } from '../styles/typography';
 
 const PollDetails = ({
@@ -22,15 +23,13 @@ const PollDetails = ({
 }) => {
   const { poll, voted } = location.state;
   const { id } = match.params;
-  const { path } = match;
 
-  if (errorPage) {
+  // sanity check the id of the URL matches the one on the poll
+  if ((errorPage) || (id !== poll.id)) {
     return (
       <FourOFour />
     );
   }
-
-  // is id from poll the same as the one from match ?
 
   return (
     <Layout>
@@ -53,9 +52,11 @@ const PollDetails = ({
         imageURL={imageURL}
         large
       ></UserImage>
-
+      <PollStats>
+        {poll}
+      </PollStats>
       <StyledLink to="/">
-        <CardButton>{'Go 🔙 Home'}</CardButton>
+        <Button>{'👈 Back Home'}</Button>
       </StyledLink>
     </Layout>
   );
@@ -71,12 +72,10 @@ const StyledLink = styled(Link)`
 `;
 
 PollDetails.propTypes = {
-  // from connect
+  // mapStateToProps
   realName: PropTypes.string,
   imageURL: PropTypes.string,
   errorPage: PropTypes.bool.isRequired,
-  // from Router
-  match: PropTypes.object.isRequired,
 };
 
 PollDetails.defaultProps = {
