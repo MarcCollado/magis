@@ -6,13 +6,8 @@ import {
 } from './_DATA';
 
 export function getInitialData() {
-  return Promise.all([
-    _getUsers(),
-    _getQuestions(),
-  ]).then(([users, questions]) => ({
-    users,
-    questions,
-  }));
+  return Promise.all([_getUsers(), _getQuestions()])
+    .then(data => ({ users: data[0], questions: data[1] }));
 }
 
 export function getAuthUsers() {
