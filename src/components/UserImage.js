@@ -11,8 +11,7 @@ const UserImage = ({ imageURL, large }) => {
       <Container
         imageURL={imageURL}
         large={large}
-      >
-      </Container>
+      />
     );
   }
   return (
