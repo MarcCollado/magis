@@ -50,9 +50,7 @@ const BodyLink = styled.a`
 const MetaText = styled.p`
   color: ${fakeAsbestos}88;
   font-family: 'Fira Sans', 'sans-serif';
-  font-size: 0.75em;
-  margin: 0.25em;
-  padding: 0.25em;
+  font-size: 0.8em;
 `;
 
 export {
