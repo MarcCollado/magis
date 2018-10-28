@@ -28,7 +28,7 @@ let users = {
   jony: {
     id: 'jony',
     name: 'Jony Ive',
-    avatarURL: 'http://www.technobuffalo.com/wp-content/uploads/2014/10/jony-ive.jpg',
+    avatarURL: 'https://www.technobuffalo.com/wp-content/uploads/2015/05/ive.jpg',
     answers: {
       vthrdm985a262al8qx3do: 'optionOne',
       xj352vofupe1dqz9emx13r: 'optionTwo',
