@@ -6,7 +6,7 @@ const Title1 = styled.h1`
   box-shadow: inset 0em -0.5em 0em ${bianchiGreen};
   color: ${fakeAsbestos};
   font-family: 'Fira Sans', sans-serif;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
   letter-spacing: -1px;
   text-transform: uppercase;
