@@ -2,43 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-// imports from material-ui
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-// relative imports
-import SmallAvatar from './ui-library/SmallAvatar';
+import styled from 'styled-components';
+
+import Layout from './Layout';
+import UserImage from './UserImage';
 import { handleSetAuthUser } from '../actions/auth';
-// styles
-import { Login as styles } from '../styles/styles';
+import { Title1, BodyText, MetaText } from '../styles/typography';
 
 class Login extends Component {
-  static propTypes = {
-    // from connect
-    dispatch: PropTypes.func.isRequired,
-    // from MapStateToProps
-    userDetails: PropTypes.array.isRequired,
-    authUser: PropTypes.string,
-    // from material-ui
-    classes: PropTypes.object.isRequired,
-    // from Router
-    location: PropTypes.object,
+  constructor(props) {
+    super(props);
   }
 
-  static defaultProps = {
-    authUser: null,
-    location: null,
-  }
-
-  login = (e, id) => {
+  handleLogin = (e, id) => {
     const { dispatch } = this.props;
     dispatch(handleSetAuthUser(id));
   }
 
   render() {
     const {
-      classes,
-      userDetails,
       authUser,
+      userDetails,
       location,
     } = this.props;
     const { from } = location.state || { from: { pathname: '/' } };
@@ -50,65 +34,73 @@ class Login extends Component {
     }
 
     return (
-      <div className={classes.container}>
-        <Typography
-          style={{ marginTop: 20 }}
-          variant="display1"
-        >
-          Login
-        </Typography>
-        <Typography
-          style={{ marginTop: 15, textAlign: 'center' }}
-          variant="body1"
-        >
-          Please, select a user to login.
-        </Typography>
-        <Typography
-          style={{ marginTop: 10, textAlign: 'center' }}
-          variant="caption"
-        >
-          {'Only logged users can vote, submit new questions or view leaderboards. Don\'t miss out on all the fun 🎉'}
-        </Typography>
-        <ul className={classes.feed}>
+      <Layout>
+        <Title1>
+          {`Login`}
+        </Title1>
+        <BodyText>
+          {`Please, select a user to login 👩‍🚀`}
+        </BodyText>
+        <MetaText>
+          {`Only logged users can vote, submit new questions or view leaderboards. Don't miss out on all the fun.`}
+        </MetaText>
+        <List>
           {userDetails
             .map(user => (
-              <li
+              <ListItem
                 key={user.userName}
-                style={{ listStyleType: 'none' }}
-                onClick={e => this.login(e, user.userID)}
               >
-                <SmallAvatar
-                  imageURL={user.imageURL}
-                  userName={user.userName}
-                />
-                <Typography
-                  style={{ marginBottom: 10, textAlign: 'center' }}
-                  variant="caption"
-                  color="default"
+                <StyledLink href='#'
+                  onClick={e => this.handleLogin(e, user.userID)}
                 >
-                  {user.userName}
-                </Typography>
-              </li>))}
-        </ul>
-      </div>
+                <UserImage
+                  imageURL={user.imageURL}
+                />
+                </StyledLink>
+                <MetaText>{user.userName}</MetaText>
+              </ListItem>
+            ))
+          }
+        </List>
+      </Layout>
     );
   }
 }
 
+const List = styled.ul`
+  padding: 0em;
+`;
+
+const ListItem = styled.li`
+  list-style-type: none;
+`;
+
+const StyledLink = styled.a`
+  text-decoration: none;
+  flex-basis: 50%;
+`;
+
+Login.propTypes = {
+  // from MapStateToProps
+  userDetails: PropTypes.array.isRequired,
+  authUser: PropTypes.string,
+}
+
+Login.defaultProps = {
+  authUser: null,
+}
+
 function mapStateToProps({ users, authUser }) {
   const userDetails = Object.keys(users)
-    .map((user) => {
-      const tempUserDetails = {
+    .map((user) => ({
         imageURL: users[user].avatarURL,
         userName: users[user].name,
         userID: users[user].id,
-      };
-      return (tempUserDetails);
-    });
+      }));
   return {
-    userDetails,
     authUser,
+    userDetails,
   };
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(Login));
+export default connect(mapStateToProps)(Login);
