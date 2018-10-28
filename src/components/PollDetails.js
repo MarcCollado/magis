@@ -64,6 +64,7 @@ const PollDetails = ({
 
 const StyledLink = styled(Link)`
   color: ${fakeAsbestos};
+  margin-top: 0.5em;
   text-decoration: none;
 
   &:visited, :hover, :active {
