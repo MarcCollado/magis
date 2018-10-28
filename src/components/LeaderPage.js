@@ -3,35 +3,32 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import LeaderCard from './LeaderCard';
 import Layout from './Layout';
 import { Title1, BodyText, MetaText } from '../styles/typography';
 
-// relative imports
-import UserCard from './ui-library/UserCard';
-
-
-const LeaderPage = ({ userDetails }) => (
+const LeaderPage = ({ userStats }) => (
   <Layout>
     <Title1>
       {`Leaderboard`}
     </Title1>
     <BodyText>
-      {'Meet the app\'s top performers.'}
+      {`Meet the app's top performers 🏅`}
     </BodyText>
     <MetaText>
-      {'The more questions they post and vote, the higher they rank 🏅'}
+      {`The more questions they post and vote, the higher they rank.`}
     </MetaText>
     <List>
-      {userDetails
+      {userStats
         .map(user => (
           <ListItem
             key={user.userName}
           >
-            <UserCard
+            <LeaderCard
               imageURL={user.imageURL}
               userName={user.userName}
-              questionsAnswered={user.questionsAnswered}
-              questionsPosted={user.questionsPosted}
+              pollsVoted={user.pollsVoted}
+              pollsCreated={user.pollsCreated}
             />
           </ListItem>
         ))
@@ -50,27 +47,26 @@ const ListItem = styled.li`
 
 LeaderPage.propTypes = {
   // from connect
-  userDetails: PropTypes.array.isRequired
+  userStats: PropTypes.array.isRequired
 };
 
 function mapStateToProps({ users }) {
-  const userDetails = Object.keys(users)
-    .map((user) => {
-      const tempUserDetails = {
-        imageURL: users[user].avatarURL,
-        userName: users[user].name,
-        questionsAnswered: Object.keys(users[user].answers).length,
-        questionsPosted: users[user].questions.length,
-      };
-      const rank = tempUserDetails.questionsAnswered + tempUserDetails.questionsPosted;
-      tempUserDetails.userRank = rank;
-      return (tempUserDetails);
-    })
+  const userStats = Object.keys(users)
+    .map((user) => ({
+      imageURL: users[user].avatarURL,
+      userName: users[user].name,
+      pollsVoted: Object.keys(users[user].answers).length,
+      pollsCreated: users[user].questions.length,
+    }))
+    .map((user) => ({
+      ...user,
+      rank: user.pollsVoted + user.pollsCreated,
+    }))
     .sort((a, b) => (
-      b.userRank - a.userRank
+      b.rank - a.rank
     ));
   return {
-    userDetails,
+    userStats,
   };
 }
 
