@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LoadingBar from 'react-redux-loading-bar';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faUserCircle } from '@fortawesome/free-solid-svg-icons';
@@ -21,18 +20,12 @@ import PrivateRoute from './components/PrivateRoute';
 library.add(faPlus, faUserCircle);
 
 class App extends Component {
-  static propTypes = {
-    // from connect
-    dispatch: PropTypes.func.isRequired,
-  }
-
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(handleInitialData());
   }
 
   render() {
-
     return (
       <Router>
         <Container>
