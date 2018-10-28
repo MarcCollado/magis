@@ -13,22 +13,35 @@ class OpenPoll extends React.Component {
     super(props);
   }
 
-  handleOption = (e, option) => {
+  handleOption = (e, option, poll) => {
     e.preventDefault();
     const { dispatch, id, history } = this.props;
     const userVote = { id, option };
+
+    // create a variable voted to pass to PollDetails
+    // via props through history.push()
+    if (option === 'optionOne') {
+      var voted = 1;
+    } else if (option === 'optionTwo') {
+      var voted = 2;
+    }
+
     dispatch(handleRegisterVote(userVote));
-    history.push(`/questions/${id}/details`);
+    history.push({
+      pathname: `/questions/${id}/details`,
+      state: { poll, voted }
+    });
   }
 
   render() {
-    const { children } = this.props;
-    const options = [children.optionOne.text, children.optionTwo.text];
+    // use object destructuring to rename children to poll
+    const { children: poll } = this.props;
+    const options = [poll.optionOne.text, poll.optionTwo.text];
 
     return (
       <Container>
         <StyledLink href='#'
-          onClick={(e) => this.handleOption(e, 'optionOne')}
+          onClick={(e) => this.handleOption(e, 'optionOne', poll)}
         >
           <OptionContainer>
             <OptionText>
@@ -37,7 +50,7 @@ class OpenPoll extends React.Component {
           </OptionContainer>
         </StyledLink>
         <StyledLink href='#'
-          onClick={(e) => this.handleOption(e, 'optionTwo')}
+          onClick={(e) => this.handleOption(e, 'optionTwo', poll)}
         >
           <OptionContainer
             right
@@ -52,7 +65,6 @@ class OpenPoll extends React.Component {
       </Container>
     )
   }
-
 };
 
 const Container = styled.div`
