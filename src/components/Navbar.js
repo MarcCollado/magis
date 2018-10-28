@@ -125,6 +125,7 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 const LoginTip = styled(MetaText)`
+  font-size: 0.7em;
   color: #FFF6;
 `;
 
