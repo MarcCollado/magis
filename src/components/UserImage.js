@@ -37,7 +37,11 @@ const IconContainer = styled.div`
 `;
 
 UserImage.propTypes = {
-  userImage: PropTypes.string.isRequired,
+  imageURL: PropTypes.string,
 };
+
+UserImage.defaultProps = {
+  imageURL: '',
+}
 
 export default UserImage;
