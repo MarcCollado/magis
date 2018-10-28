@@ -12,7 +12,8 @@ const countVotes = (poll) => {
 
 const PollStats = ({ children }) => {
     const votes = countVotes(children);
-    const totalVotes = votes[0] + votes[1];
+    // over engineered — but cool — way to sum the two elements of an array
+    const totalVotes = [...votes].reduce((a, b) => a + b, 0);
     const optionOnePer = parseInt(100 * (votes[0] / totalVotes), 10);
     const optionTwoPer = parseInt(100 - optionOnePer, 10);
 
