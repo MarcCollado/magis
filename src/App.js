@@ -7,8 +7,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 // relative imports
 import { handleInitialData } from './actions/shared';
-import AddButton from './components/AddButton';
-import AddQuestion from './components/AddQuestion';
+import CreatePollButton from './components/CreatePollButton';
+import CreatePollPage from './components/CreatePollPage';
 import FourOFour from './components/FourOFour';
 import HomePage from './components/HomePage';
 import LeaderPage from './components/LeaderPage';
@@ -31,7 +31,7 @@ class App extends Component {
         <Container>
           <LoadingBar />
           <Navbar />
-          <Link to="/add"><AddButton /></Link>
+          <Link to="/create"><CreatePollButton /></Link>
           <Switch>
             <Route
               path="/"
@@ -49,9 +49,9 @@ class App extends Component {
               component={LeaderPage}
             />
             <PrivateRoute
-              path="/add"
+              path="/create"
               exact
-              component={AddQuestion}
+              component={CreatePollPage}
             />
             <PrivateRoute
               path="/questions/:id/details"

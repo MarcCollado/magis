@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { coralRed, fakeAsbestos } from '../styles/colors';
 
-const AddButton = () => (
+const CreatePollButton = () => (
   <Button>
     <FontAwesomeIcon icon="plus" color="white" size="lg"/>
   </Button>
@@ -31,4 +31,4 @@ const Button = styled.div`
   }
 `;
 
-export default AddButton;
+export default CreatePollButton;
