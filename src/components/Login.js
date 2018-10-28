@@ -77,7 +77,6 @@ const ListItem = styled.li`
 
 const StyledLink = styled.a`
   text-decoration: none;
-  flex-basis: 50%;
 `;
 
 Login.propTypes = {
