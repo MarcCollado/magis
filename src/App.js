@@ -5,20 +5,20 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 // relative imports
 import { handleInitialData } from './actions/shared';
+import AddButton from './components/AddButton';
 import AddQuestion from './components/AddQuestion';
 import FourOFour from './components/FourOFour';
 import HomePage from './components/HomePage';
 import LeaderPage from './components/LeaderPage';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
+import PollDetails from './components/PollDetails';
 import PrivateRoute from './components/PrivateRoute';
-import QuestionPage from './components/QuestionPage';
-import AddButton from './components/AddButton';
 
-library.add(faPlus);
+library.add(faPlus, faUserCircle);
 
 class App extends Component {
   static propTypes = {
@@ -63,12 +63,7 @@ class App extends Component {
             <PrivateRoute
               path="/questions/:id/details"
               exact
-              component={QuestionPage}
-            />
-            <PrivateRoute
-              path="/questions/:id"
-              exact
-              component={QuestionPage}
+              component={PollDetails}
             />
             <Route
               component={FourOFour}
