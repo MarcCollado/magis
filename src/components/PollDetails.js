@@ -37,9 +37,9 @@ const PollDetails = ({
         Poll Details
       </Title1>
       <BodyText>
-        {voted === 1 ?
-          `👇 You voted for the option one` :
-          `You voted for the option two 👇`
+        {voted === 1
+          ? `👇 You voted for the option one`
+          : `You voted for the option two 👇`
         }
       </BodyText>
       <UnbiasedPoll>
@@ -51,12 +51,14 @@ const PollDetails = ({
       <UserImage
         imageURL={imageURL}
         large
-      ></UserImage>
+      />
       <PollStats>
         {poll}
       </PollStats>
       <StyledLink to="/">
-        <Button>{'👈 Back Home'}</Button>
+        <Button>
+          {`👈 Back Home`}
+        </Button>
       </StyledLink>
     </Layout>
   );

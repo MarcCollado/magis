@@ -5,7 +5,9 @@ import styled from 'styled-components';
 import { fakeAsbestos } from '../styles/colors';
 import { Title2, BodyText } from '../styles/typography';
 
-const LeaderCard = ({ imageURL, userName, pollsCreated, pollsVoted }) => (
+const LeaderCard = ({
+  imageURL, userName, pollsCreated, pollsVoted,
+}) => (
   <Container>
     <PictureContainer
       imageURL={imageURL}
@@ -22,7 +24,7 @@ const LeaderCard = ({ imageURL, userName, pollsCreated, pollsVoted }) => (
       </BodyText>
     </InfoContainer>
   </Container>
-)
+);
 
 const Container = styled.div`
   align-items: center;

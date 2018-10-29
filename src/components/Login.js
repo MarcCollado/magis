@@ -50,14 +50,15 @@ class Login extends Component {
               <ListItem
                 key={user.userName}
               >
-                <StyledLink href='#'
+                <StyledLink
+                  href="#"
                   onClick={e => this.handleLogin(e, user.userID)}
                 >
-                <UserImage
-                  imageURL={user.imageURL}
-                />
+                  <UserImage imageURL={user.imageURL} />
                 </StyledLink>
-                <MetaText>{user.userName}</MetaText>
+                <MetaText>
+                  {user.userName}
+                </MetaText>
               </ListItem>
             ))
           }
@@ -81,21 +82,21 @@ const StyledLink = styled.a`
 
 Login.propTypes = {
   // from MapStateToProps
-  userDetails: PropTypes.array.isRequired,
+  userDetails: PropTypes.arrayOf(PropTypes.object).isRequired,
   authUser: PropTypes.string,
-}
+};
 
 Login.defaultProps = {
   authUser: null,
-}
+};
 
 function mapStateToProps({ users, authUser }) {
   const userDetails = Object.keys(users)
     .map((user) => ({
-        imageURL: users[user].avatarURL,
-        userName: users[user].name,
-        userID: users[user].id,
-      }));
+      imageURL: users[user].avatarURL,
+      userName: users[user].name,
+      userID: users[user].id,
+    }));
   return {
     authUser,
     userDetails,

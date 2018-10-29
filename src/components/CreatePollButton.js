@@ -6,7 +6,7 @@ import { coralRed, fakeAsbestos } from '../styles/colors';
 
 const CreatePollButton = () => (
   <Button>
-    <FontAwesomeIcon icon="plus" color="white" size="lg"/>
+    <FontAwesomeIcon icon="plus" color="white" size="lg" />
   </Button>
 );
 

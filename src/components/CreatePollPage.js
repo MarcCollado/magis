@@ -23,7 +23,7 @@ class CreatePollPage extends React.Component {
     const option = e.target.name;
     this.setState({
       [option]: input,
-    })
+    });
   };
 
   handleSubmit = (e) => {

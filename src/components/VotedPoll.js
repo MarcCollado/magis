@@ -9,7 +9,8 @@ import { BodyText } from '../styles/typography';
 class VotedPoll extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { voted: this.props.voted };
+    const { voted } = this.props;
+    this.state = { voted };
   }
 
   render() {
@@ -24,35 +25,36 @@ class VotedPoll extends React.Component {
       <StyledLink
         to={{
           pathname: `/questions/${id}/details`,
-          state: { poll, voted }}
+          state: { poll, voted },
+        }
         }
       >
-      <Container>
-        <OptionContainer
-          voted={voted === 1}
-        >
-          <OptionText
+        <Container>
+          <OptionContainer
             voted={voted === 1}
           >
-            {options[0]}
-          </OptionText>
-        </OptionContainer>
-        <OptionContainer
-          right
-          voted={voted === 2}
-        >
-          <OptionText
+            <OptionText
+              voted={voted === 1}
+            >
+              {options[0]}
+            </OptionText>
+          </OptionContainer>
+          <OptionContainer
             right
             voted={voted === 2}
           >
-            {options[1]}
-          </OptionText>
-        </OptionContainer>
-      </Container>
+            <OptionText
+              right
+              voted={voted === 2}
+            >
+              {options[1]}
+            </OptionText>
+          </OptionContainer>
+        </Container>
       </StyledLink>
-    )
+    );
   }
-};
+}
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -69,18 +71,18 @@ const Container = styled.div`
 
 const OptionContainer = styled.div`
   align-items: center;
-  background: ${props => props.right ? `${seriousYellow}` : `${bianchiGreen}`};
+  background: ${props => (props.right ? `${seriousYellow}` : `${bianchiGreen}`)};
   display: flex;
   flex-basis: 50%;
   height: 12em;
-  justify-content: ${props => props.right ? "flex-end" : "flex-start"};
-  opacity: ${props => props.voted ? 1 : 0.3};
+  justify-content: ${props => (props.right ? 'flex-end' : 'flex-start')};
+  opacity: ${props => (props.voted ? 1 : 0.3)};
   padding: 0.5em 1em;
 `;
 
 const OptionText = styled(BodyText)`
   color: ${fakeAsbestos};
-  text-align: ${props => props.right ? "right" : "left"};
+  text-align: ${props => (props.right ? 'right' : 'left')};
 `;
 
 // Add an (OR) div in the middle of the Poll

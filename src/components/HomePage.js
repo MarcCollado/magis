@@ -25,7 +25,7 @@ class HomePage extends React.Component {
   whichVoted = (user, poll) => {
     if (poll.optionOne.votes.includes(user)) {
       return 1;
-    } else if (poll.optionTwo.votes.includes(user)) {
+    } if (poll.optionTwo.votes.includes(user)) {
       return 2;
     }
     return null;
@@ -46,17 +46,16 @@ class HomePage extends React.Component {
         <HomeTabs
           tabState={feed}
           handleTabChange={this.handleTabChange}
-        >
-        </HomeTabs>
+        />
         <BodyText>
-          {feed === 0 ?
-            `Tap your option to vote for it 📨` :
-            `Tap the poll to check its details 📈`
+          {feed === 0
+            ? `Tap your option to vote for it 📨`
+            : `Tap the poll to check its details 📈`
           }
         </BodyText>
         <List>
-          {feed === 0 ?
-            unansweredIDs.map(id => (
+          {feed === 0
+            ? unansweredIDs.map(id => (
               <ListItem
                 key={id}
               >
@@ -65,9 +64,8 @@ class HomePage extends React.Component {
                 >
                   {questions[id]}
                 </OpenPoll>
-              </ListItem>)
-            ) :
-            answeredIDs.map(id => (
+              </ListItem>))
+            : answeredIDs.map(id => (
               <ListItem
                 key={id}
               >
@@ -77,8 +75,7 @@ class HomePage extends React.Component {
                 >
                   {questions[id]}
                 </VotedPoll>
-              </ListItem>)
-            )
+              </ListItem>))
           }
         </List>
       </Layout>
@@ -96,17 +93,22 @@ const ListItem = styled.li`
 
 HomePage.propTypes = {
   // from connect
-  questions: PropTypes.object.isRequired,
+  authUser: PropTypes.string,
+  questions: PropTypes.objectOf(PropTypes.object),
   answeredIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
   unansweredIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+HomePage.defaultProps = {
+  authUser: null,
 };
 
 function mapStateToProps({ questions, authUser }) {
   // filter votes from the currently authUser
   const answeredIDs = Object.keys(questions)
     .filter(i => (
-      questions[i].optionOne.votes.includes(authUser) ||
-      questions[i].optionTwo.votes.includes(authUser)
+      questions[i].optionOne.votes.includes(authUser)
+      || questions[i].optionTwo.votes.includes(authUser)
     ))
     .sort((a, b) => (
       questions[b].timestamp - questions[a].timestamp
@@ -117,9 +119,9 @@ function mapStateToProps({ questions, authUser }) {
 
   const unansweredIDs = Object.keys(questions)
     .filter(i => (!filteredIDs.includes(i)))
-      // used to check for the complementary case
-      // !questions[i].optionOne.votes.includes(authUser) &&
-      // !questions[i].optionTwo.votes.includes(authUser)
+  // used to check for the complementary case
+  // !questions[i].optionOne.votes.includes(authUser) &&
+  // !questions[i].optionTwo.votes.includes(authUser)
     .sort((a, b) => (
       questions[b].timestamp - questions[a].timestamp
     ));

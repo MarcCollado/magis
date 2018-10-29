@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {bianchiGreen, seriousYellow, fakeAsbestos } from '../styles/colors';
+import { bianchiGreen, seriousYellow, fakeAsbestos } from '../styles/colors';
 import { BodyText } from '../styles/typography';
 import { handleRegisterVote } from '../actions/questions';
 
@@ -21,16 +21,20 @@ class OpenPoll extends React.Component {
     // create a variable voted to pass to PollDetails
     // via props through history.push()
     if (option === 'optionOne') {
-      var voted = 1;
+      const voted = 1;
+      dispatch(handleRegisterVote(userVote));
+      history.push({
+        pathname: `/questions/${id}/details`,
+        state: { poll, voted },
+      });
     } else if (option === 'optionTwo') {
-      var voted = 2;
+      const voted = 2;
+      dispatch(handleRegisterVote(userVote));
+      history.push({
+        pathname: `/questions/${id}/details`,
+        state: { poll, voted },
+      });
     }
-
-    dispatch(handleRegisterVote(userVote));
-    history.push({
-      pathname: `/questions/${id}/details`,
-      state: { poll, voted }
-    });
   }
 
   render() {
@@ -40,7 +44,8 @@ class OpenPoll extends React.Component {
 
     return (
       <Container>
-        <StyledLink href='#'
+        <StyledLink
+          href="#"
           onClick={(e) => this.handleOption(e, 'optionOne', poll)}
         >
           <OptionContainer>
@@ -49,7 +54,8 @@ class OpenPoll extends React.Component {
             </OptionText>
           </OptionContainer>
         </StyledLink>
-        <StyledLink href='#'
+        <StyledLink
+          href="#"
           onClick={(e) => this.handleOption(e, 'optionTwo', poll)}
         >
           <OptionContainer
@@ -63,9 +69,9 @@ class OpenPoll extends React.Component {
           </OptionContainer>
         </StyledLink>
       </Container>
-    )
+    );
   }
-};
+}
 
 const Container = styled.div`
   align-items: center;
@@ -83,21 +89,21 @@ const StyledLink = styled.a`
 
 const OptionContainer = styled.div`
   align-items: center;
-  background: ${props => props.right ? `${seriousYellow}22` : `${bianchiGreen}22`};
+  background: ${props => (props.right ? `${seriousYellow}22` : `${bianchiGreen}22`)};
   display: flex;
   height: 12em;
-  justify-content: ${props => props.right ? "flex-end" : "flex-start"};
+  justify-content: ${props => (props.right ? 'flex-end' : 'flex-start')};
   padding: 0.5em 1em;
   transition: background 0.3s ease;
 
   &:hover {
-    background: ${props => props.right ? seriousYellow : bianchiGreen};
+    background: ${props => (props.right ? seriousYellow : bianchiGreen)};
   }
 `;
 
 const OptionText = styled(BodyText)`
   color: ${fakeAsbestos}CC;
-  text-align: ${props => props.right ? "right" : "left"};
+  text-align: ${props => (props.right ? 'right' : 'left')};
 
   &:hover {
     color: ${fakeAsbestos};
@@ -108,7 +114,6 @@ const OptionText = styled(BodyText)`
 // const OR = styled.div``;
 
 OpenPoll.propTypes = {
-  children: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
   // from connect
   dispatch: PropTypes.func.isRequired,

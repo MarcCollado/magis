@@ -13,7 +13,7 @@ const FourOFour = () => (
       {`404`}
     </Title1>
     <BodyText>
-      {`Yikes... this URL doesn\'t belong to any question 😞`}
+      {`Yikes... this URL doesn't belong to any question 😞`}
     </BodyText>
     <img
       src="/minions.jpg"
@@ -24,7 +24,9 @@ const FourOFour = () => (
       {`You can either keep staring at these cute Minions or go back home and have fun voting more polls 🎉`}
     </MetaText>
     <StyledLink to="/">
-      <Button>{'👈 Back Home'}</Button>
+      <Button>
+        {`👈 Back Home`}
+      </Button>
     </StyledLink>
   </Layout>
 );

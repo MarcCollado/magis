@@ -47,7 +47,7 @@ const ListItem = styled.li`
 
 LeaderPage.propTypes = {
   // from connect
-  userStats: PropTypes.array.isRequired
+  userStats: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 function mapStateToProps({ users }) {

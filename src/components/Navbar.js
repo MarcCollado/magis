@@ -10,7 +10,8 @@ import { MetaText } from '../styles/typography';
 
 class Navbar extends React.Component {
   handleLogOut = () => {
-    this.props.dispatch(logOut());
+    const { dispatch } = this.props;
+    dispatch(logOut());
   }
 
   render() {
@@ -22,47 +23,56 @@ class Navbar extends React.Component {
 
     return (
       <Container>
-      <Nav>
-        <MenuItems>
-          <StyledNavLink
-            exact to="/"
-            activeStyle={{
-              borderBottom: `0.25em solid #FFF4`,
-            }}
-          >
-            Home
-          </StyledNavLink>
-          <StyledNavLink
-            exact to="/leaderboard"
-            activeClassName="selected"
-            activeStyle={{
-              borderBottom: `0.25em solid #FFF4`,
-            }}
-          >
-            Leaderboard
-          </StyledNavLink>
-        </MenuItems>
-
-        {authUserID ?
-        <LoginItems>
-            <LoginTip>Logged as {authUserName}</LoginTip>
-          <StyledNavLink
-            to="/login"
-            onClick={this.handleLogOut}
-          >
-            Logout
-          </StyledNavLink>
-        </LoginItems> :
-        <LoginItems>
-          <LoginTip>Have an account?</LoginTip>
-          <StyledNavLink
-            to="/login"
-          >
-            Login
-          </StyledNavLink>
-        </LoginItems>
-        }
-      </Nav>
+        <Nav>
+          <MenuItems>
+            <StyledNavLink
+              exact
+              to="/"
+              activeStyle={{
+                borderBottom: `0.25em solid #FFF4`,
+              }}
+            >
+              Home
+            </StyledNavLink>
+            <StyledNavLink
+              exact
+              to="/leaderboard"
+              activeClassName="selected"
+              activeStyle={{
+                borderBottom: `0.25em solid #FFF4`,
+              }}
+            >
+              Leaderboard
+            </StyledNavLink>
+          </MenuItems>
+          {authUserID
+            ? (
+              <LoginItems>
+                <LoginTip>
+                  {`Logged as ${authUserName}`}
+                </LoginTip>
+                <StyledNavLink
+                  to="/login"
+                  onClick={this.handleLogOut}
+                >
+                  Logout
+                </StyledNavLink>
+              </LoginItems>
+            )
+            : (
+              <LoginItems>
+                <LoginTip>
+                  Have an account?
+                </LoginTip>
+                <StyledNavLink
+                  to="/login"
+                >
+                  Login
+                </StyledNavLink>
+              </LoginItems>
+            )
+          }
+        </Nav>
       </Container>
     );
   }
