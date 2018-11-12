@@ -6,14 +6,6 @@
     "jquery": true
   },
   "extends": "airbnb",
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
-      "jsx": true
-    },
-    "sourceType": "module"
-  },
   "rules": {
     "arrow-body-style": 1,
     "arrow-parens": 0,
