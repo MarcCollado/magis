@@ -42,13 +42,13 @@ function registerVote({ authedUser, pollId, vote }) {
   };
 }
 
-export function handleRegisterVote(info) {
+export function handleRegisterVote(userVote) {
   return (dispatch, getState) => {
     const { authUser } = getState();
     const pollData = {
       authedUser: authUser,
-      pollId: info.id,
-      vote: info.option,
+      pollId: userVote.id,
+      vote: userVote.option,
     };
     dispatch(showLoading());
     dispatch(registerVote(pollData));
