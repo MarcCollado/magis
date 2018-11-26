@@ -1,6 +1,4 @@
-import { GET_USERS } from '../actions/actionTypes';
-
-import { REGISTER_VOTE } from '../actions/actionTypes';
+import { GET_USERS, REGISTER_VOTE } from '../actions/actionTypes';
 
 export default function users(state = {}, action) {
   switch (action.type) {
