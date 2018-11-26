@@ -34,9 +34,9 @@ class HomePage extends React.Component {
   render() {
     const {
       authUser,
-      questions,
-      answeredIDs,
-      unansweredIDs,
+      polls,
+      votedPollsIds,
+      unvotedPollsIds,
     } = this.props;
 
     const { feed } = this.state;
@@ -55,25 +55,25 @@ class HomePage extends React.Component {
         </BodyText>
         <List>
           {feed === 0
-            ? unansweredIDs.map(id => (
+            ? unvotedPollsIds.map((id) => (
               <ListItem
                 key={id}
               >
                 <OpenPoll
                   id={id}
                 >
-                  {questions[id]}
+                  {polls[id]}
                 </OpenPoll>
               </ListItem>))
-            : answeredIDs.map(id => (
+            : votedPollsIds.map((id) => (
               <ListItem
                 key={id}
               >
                 <VotedPoll
                   id={id}
-                  voted={this.whichVoted(authUser, questions[id])}
+                  voted={this.whichVoted(authUser, polls[id])}
                 >
-                  {questions[id]}
+                  {polls[id]}
                 </VotedPoll>
               </ListItem>))
           }
@@ -94,43 +94,39 @@ const ListItem = styled.li`
 HomePage.propTypes = {
   // from connect
   authUser: PropTypes.string,
-  questions: PropTypes.objectOf(PropTypes.object),
-  answeredIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
-  unansweredIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
+  polls: PropTypes.objectOf(PropTypes.object),
+  votedPollsIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  unvotedPollsIds: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 HomePage.defaultProps = {
   authUser: null,
 };
 
-function mapStateToProps({ questions, authUser }) {
+function mapStateToProps({ polls, authUser }) {
   // filter votes from the currently authUser
-  const answeredIDs = Object.keys(questions)
-    .filter(i => (
-      questions[i].optionOne.votes.includes(authUser)
-      || questions[i].optionTwo.votes.includes(authUser)
+  const votedPollsIds = Object.keys(polls)
+    .filter((i) => (
+      polls[i].optionOne.votes.includes(authUser)
+      || polls[i].optionTwo.votes.includes(authUser)
     ))
-    .sort((a, b) => (
-      questions[b].timestamp - questions[a].timestamp
-    ));
+    .sort((a, b) => (polls[b].timestamp - polls[a].timestamp));
 
-  // create a copy of [answeredIDs] to extract the [unansweredIDs]
-  const filteredIDs = [...answeredIDs];
+  // create a copy of [votedPollsIds] to extract the [unvotedPollsIds]
+  const filteredIDs = [...votedPollsIds];
 
-  const unansweredIDs = Object.keys(questions)
-    .filter(i => (!filteredIDs.includes(i)))
-  // used to check for the complementary case
-  // !questions[i].optionOne.votes.includes(authUser) &&
-  // !questions[i].optionTwo.votes.includes(authUser)
-    .sort((a, b) => (
-      questions[b].timestamp - questions[a].timestamp
-    ));
+  const unvotedPollsIds = Object.keys(polls)
+    .filter((i) => (!filteredIDs.includes(i)))
+    // used to check for the complementary case
+    // !polls[i].optionOne.votes.includes(authUser) &&
+    // !polls[i].optionTwo.votes.includes(authUser)
+    .sort((a, b) => (polls[b].timestamp - polls[a].timestamp));
 
   return {
     authUser,
-    questions,
-    answeredIDs,
-    unansweredIDs,
+    polls,
+    votedPollsIds,
+    unvotedPollsIds,
   };
 }
 

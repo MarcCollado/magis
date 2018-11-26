@@ -7,8 +7,8 @@ import {
 import styled from 'styled-components';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-// relative imports
-import { handleInitialData } from './actions/shared';
+
+import handleInitialData from './actions/shared';
 import CreatePollButton from './components/CreatePollButton';
 import CreatePollPage from './components/CreatePollPage';
 import FourOFour from './components/FourOFour';
@@ -56,7 +56,7 @@ class App extends Component {
               component={CreatePollPage}
             />
             <PrivateRoute
-              path="/questions/:id/details"
+              path="/polls/:id/details"
               exact
               component={PollDetails}
             />

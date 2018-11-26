@@ -39,17 +39,17 @@ const Container = styled.div`
 
 const OptionContainer = styled.div`
   align-items: center;
-  background: ${props => (props.right ? `${seriousYellow}` : `${bianchiGreen}`)};
+  background: ${(props) => (props.right ? `${seriousYellow}` : `${bianchiGreen}`)};
   display: flex;
   flex-basis: 50%;
   height: 12em;
-  justify-content: ${props => (props.right ? 'flex-end' : 'flex-start')};
+  justify-content: ${(props) => (props.right ? 'flex-end' : 'flex-start')};
   padding: 0.5em 1em;
 `;
 
 const OptionText = styled(BodyText)`
   color: ${fakeAsbestos};
-  text-align: ${props => (props.right ? 'right' : 'left')};
+  text-align: ${(props) => (props.right ? 'right' : 'left')};
 `;
 
 // Add an (OR) div in the middle of the Poll

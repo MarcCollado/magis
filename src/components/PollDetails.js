@@ -17,11 +17,12 @@ import { Title1, BodyText, MetaText } from '../styles/typography';
 const PollDetails = ({
   location,
   match,
+  poll,
   realName,
   imageURL,
   errorPage,
 }) => {
-  const { poll, voted } = location.state;
+  const { voted } = location.state;
   const { id } = match.params;
 
   // sanity check the id of the URL matches the one on the poll
@@ -33,9 +34,7 @@ const PollDetails = ({
 
   return (
     <Layout>
-      <Title1>
-        Poll Details
-      </Title1>
+      <Title1>Poll Details</Title1>
       <BodyText>
         {voted === 1
           ? `👇 You voted for the option one`
@@ -86,18 +85,20 @@ PollDetails.defaultProps = {
   imageURL: '',
 };
 
-function mapStateToProps({ questions, users, authUser }, { match }) {
-  if (questions[match.params.id] === undefined) {
+function mapStateToProps({ polls, users, authUser }, { match }) {
+  if (polls[match.params.id] === undefined) {
     const errorPage = true;
     return {
       errorPage,
     };
   }
-  const userName = questions[match.params.id].author;
+  const poll = polls[match.params.id];
+  const userName = polls[match.params.id].author;
   const realName = authUser === userName ? 'you' : users[userName].name;
   const imageURL = users[userName].avatarURL;
   const errorPage = false;
   return {
+    poll,
     realName,
     imageURL,
     errorPage,

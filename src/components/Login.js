@@ -42,17 +42,17 @@ class Login extends Component {
           {`Please, select a user to login 👩‍🚀`}
         </BodyText>
         <MetaText>
-          {`Only logged users can vote, submit new questions or view leaderboards. Don't miss out on all the fun.`}
+          {`Only logged users can vote, submit new polls or view leaderboards. Don't miss out on all the fun.`}
         </MetaText>
         <List>
           {userDetails
-            .map(user => (
+            .map((user) => (
               <ListItem
                 key={user.userName}
               >
                 <StyledLink
                   href="#"
-                  onClick={e => this.handleLogin(e, user.userID)}
+                  onClick={(e) => this.handleLogin(e, user.userID)}
                 >
                   <UserImage imageURL={user.imageURL} />
                 </StyledLink>

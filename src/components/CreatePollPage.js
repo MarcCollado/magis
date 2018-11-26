@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Layout from './Layout';
-import { handleAddQuestion } from '../actions/questions';
+import { handleCreatePoll } from '../actions/polls';
 import { fakeAsbestos } from '../styles/colors';
 import { Title1, BodyText } from '../styles/typography';
 
@@ -12,8 +12,8 @@ class CreatePollPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      optionOneValue: '',
-      optionTwoValue: '',
+      optionOne: '',
+      optionTwo: '',
       toHome: false,
     };
   }
@@ -27,21 +27,21 @@ class CreatePollPage extends React.Component {
   };
 
   handleSubmit = (e) => {
-    const { optionOneValue, optionTwoValue } = this.state;
+    const { optionOne, optionTwo } = this.state;
     const { dispatch } = this.props;
     e.preventDefault();
-    if (optionOneValue && optionTwoValue) {
-      dispatch(handleAddQuestion(optionOneValue, optionTwoValue));
+    if (optionOne && optionTwo) {
+      dispatch(handleCreatePoll(optionOne, optionTwo));
+      this.setState({
+        optionOne: '',
+        optionTwo: '',
+        toHome: true,
+      });
     }
-    this.setState({
-      optionOneValue: '',
-      optionTwoValue: '',
-      toHome: true,
-    });
   }
 
   render() {
-    const { optionOneValue, optionTwoValue, toHome } = this.state;
+    const { optionOne, optionTwo, toHome } = this.state;
 
     if (toHome === true) {
       return <Redirect to="/" />;
@@ -64,9 +64,9 @@ class CreatePollPage extends React.Component {
               Option one
             </BodyText>
             <StyledInput
-              name="optionOneValue"
+              name="optionOne"
               type="text"
-              value={optionOneValue}
+              value={optionOne}
               onChange={(e) => this.handleInput(e)}
               maxlength="140"
               placeholder="Option one"
@@ -78,9 +78,9 @@ class CreatePollPage extends React.Component {
               Option one
             </BodyText>
             <StyledInput
-              name="optionTwoValue"
+              name="optionTwo"
               type="text"
-              value={optionTwoValue}
+              value={optionTwo}
               onChange={(e) => this.handleInput(e)}
               maxlength="140"
               placeholder="Option two"
@@ -90,7 +90,7 @@ class CreatePollPage extends React.Component {
           <StyledSubmit
             type="submit"
             value="Create Poll"
-            disabled={optionOneValue === '' || optionTwoValue === ''}
+            disabled={optionOne === '' || optionTwo === ''}
           />
         </StyledForm>
       </Layout>

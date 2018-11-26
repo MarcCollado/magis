@@ -6,35 +6,26 @@ import styled from 'styled-components';
 
 import { bianchiGreen, seriousYellow, fakeAsbestos } from '../styles/colors';
 import { BodyText } from '../styles/typography';
-import { handleRegisterVote } from '../actions/questions';
+import { handleRegisterVote } from '../actions/polls';
 
 class OpenPoll extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  handleOption = (e, option, poll) => {
+  handleOption = (e, option) => {
     e.preventDefault();
     const { dispatch, id, history } = this.props;
     const userVote = { id, option };
 
     // create a variable voted to pass to PollDetails
     // via props through history.push()
-    if (option === 'optionOne') {
-      const voted = 1;
-      dispatch(handleRegisterVote(userVote));
-      history.push({
-        pathname: `/questions/${id}/details`,
-        state: { poll, voted },
-      });
-    } else if (option === 'optionTwo') {
-      const voted = 2;
-      dispatch(handleRegisterVote(userVote));
-      history.push({
-        pathname: `/questions/${id}/details`,
-        state: { poll, voted },
-      });
-    }
+    const voted = option === 'optionOne' ? 1 : 2;
+    dispatch(handleRegisterVote(userVote));
+    history.push({
+      pathname: `/polls/${id}/details`,
+      state: { voted },
+    });
   }
 
   render() {
@@ -46,7 +37,7 @@ class OpenPoll extends React.Component {
       <Container>
         <StyledLink
           href="#"
-          onClick={(e) => this.handleOption(e, 'optionOne', poll)}
+          onClick={(e) => this.handleOption(e, 'optionOne')}
         >
           <OptionContainer>
             <OptionText>
@@ -56,7 +47,7 @@ class OpenPoll extends React.Component {
         </StyledLink>
         <StyledLink
           href="#"
-          onClick={(e) => this.handleOption(e, 'optionTwo', poll)}
+          onClick={(e) => this.handleOption(e, 'optionTwo')}
         >
           <OptionContainer
             right
@@ -89,21 +80,21 @@ const StyledLink = styled.a`
 
 const OptionContainer = styled.div`
   align-items: center;
-  background: ${props => (props.right ? `${seriousYellow}22` : `${bianchiGreen}22`)};
+  background: ${(props) => (props.right ? `${seriousYellow}22` : `${bianchiGreen}22`)};
   display: flex;
   height: 12em;
-  justify-content: ${props => (props.right ? 'flex-end' : 'flex-start')};
+  justify-content: ${(props) => (props.right ? 'flex-end' : 'flex-start')};
   padding: 0.5em 1em;
   transition: background 0.3s ease;
 
   &:hover {
-    background: ${props => (props.right ? seriousYellow : bianchiGreen)};
+    background: ${(props) => (props.right ? seriousYellow : bianchiGreen)};
   }
 `;
 
 const OptionText = styled(BodyText)`
   color: ${fakeAsbestos}CC;
-  text-align: ${props => (props.right ? 'right' : 'left')};
+  text-align: ${(props) => (props.right ? 'right' : 'left')};
 
   &:hover {
     color: ${fakeAsbestos};

@@ -5,55 +5,55 @@ let users = {
     id: 'marccollado',
     name: 'Marc Collado',
     avatarURL: 'https://pbs.twimg.com/profile_images/713380804890484739/iAe1nkdr_400x400.jpg',
-    answers: {
+    votes: {
       '8xf0y6ziyjabvozdd253nd': 'optionTwo',
       '6ni6ok3ym7mf1p33lnez': 'optionTwo',
       am8ehyc8byjqgar0jgpub9: 'optionOne',
       loxhs1bqm25b708cmbf3g: 'optionTwo',
     },
-    questions: ['7fj3y6ziyoresozdd23r6u'],
+    polls: ['7fj3y6ziyoresozdd23r6u'],
   },
   niko: {
     id: 'niko',
     name: 'Nikola Tesla',
     avatarURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/N.Tesla.JPG/800px-N.Tesla.JPG',
-    answers: {
+    votes: {
       '8xf0y6ziyjabvozdd253nd': 'optionOne',
       '6ni6ok3ym7mf1p33lnez': 'optionOne',
       am8ehyc8byjqgar0jgpub9: 'optionTwo',
       loxhs1bqm25b708cmbf3g: 'optionTwo',
     },
-    questions: ['8xf0y6ziyjabvozdd253nd', 'am8ehyc8byjqgar0jgpub9'],
+    polls: ['8xf0y6ziyjabvozdd253nd', 'am8ehyc8byjqgar0jgpub9'],
   },
   jony: {
     id: 'jony',
     name: 'Jony Ive',
     avatarURL: 'https://www.technobuffalo.com/wp-content/uploads/2015/05/ive.jpg',
-    answers: {
+    votes: {
       vthrdm985a262al8qx3do: 'optionOne',
       xj352vofupe1dqz9emx13r: 'optionTwo',
       '7gd6fk3em9h2dpe490e1': 'optionTwo',
       '7fj3y6ziyoresozdd23r6u': 'optionTwo',
       'am8rszc8bysdear0jgpubv8': 'optionTwo',
     },
-    questions: ['loxhs1bqm25b708cmbf3g', 'vthrdm985a262al8qx3do', 'am8rszc8bysdear0jgpubv8'],
+    polls: ['loxhs1bqm25b708cmbf3g', 'vthrdm985a262al8qx3do', 'am8rszc8bysdear0jgpubv8'],
   },
   albert: {
     id: 'albert',
     name: 'Albert Einstein',
     avatarURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Albert_Einstein_Head.jpg/220px-Albert_Einstein_Head.jpg',
-    answers: {
+    votes: {
       xj352vofupe1dqz9emx13r: 'optionOne',
       vthrdm985a262al8qx3do: 'optionTwo',
       '6ni6ok3ym7mf1p33lnez': 'optionOne',
       '7fj3y6ziyoresozdd23r6u': 'optionOne',
       'am8rszc8bysdear0jgpubv8': 'optionTwo',
     },
-    questions: ['6ni6ok3ym7mf1p33lnez', 'xj352vofupe1dqz9emx13r', '7gd6fk3em9h2dpe490e1'],
+    polls: ['6ni6ok3ym7mf1p33lnez', 'xj352vofupe1dqz9emx13r', '7gd6fk3em9h2dpe490e1'],
   },
 };
 
-let questions = {
+let polls = {
   'am8rszc8bysdear0jgpubv8': {
     id: 'am8rszc8bysdear0jgpubv8',
     author: 'jony',
@@ -183,69 +183,69 @@ export function _getUsers() {
   });
 }
 
-export function _getQuestions() {
+export function _getPolls() {
   return new Promise((res, rej) => {
-    setTimeout(() => res({ ...questions }), 1000);
+    setTimeout(() => res({ ...polls }), 1000);
   });
 }
 
-function formatQuestion({ optionOneText, optionTwoText, author }) {
+function formatPoll({ optionOne, optionTwo, author }) {
   return {
-    id: generateUID(),
-    timestamp: Date.now(),
+    "id": generateUID(),
+    "timestamp": Date.now(),
     author,
-    optionOne: {
+    "optionOne": {
       votes: [],
-      text: optionOneText,
+      text: optionOne,
     },
-    optionTwo: {
+    "optionTwo": {
       votes: [],
-      text: optionTwoText,
+      text: optionTwo,
     },
   };
 }
 
-export function _saveQuestion(question) {
+export function _savePoll(poll) {
   return new Promise((res, rej) => {
-    const formattedQuestion = formatQuestion(question);
+    const formattedPoll = formatPoll(poll);
 
     setTimeout(() => {
-      questions = {
-        ...questions,
-        [formattedQuestion.id]: formattedQuestion,
+      polls = {
+        ...polls,
+        [formattedPoll.id]: formattedPoll,
       };
 
-      res(formattedQuestion);
+      res(formattedPoll);
     }, 1000);
   });
 }
 
-export function _saveQuestionAnswer({ authedUser, qid, answer }) {
+export function _savePollAnswer({ authedUser, pollId, vote }) {
   return new Promise((res, rej) => {
     setTimeout(() => {
       users = {
         ...users,
         [authedUser]: {
           ...users[authedUser],
-          answers: {
-            ...users[authedUser].answers,
-            [qid]: answer,
+          votes: {
+            ...users[authedUser].votes,
+            [pollId]: vote,
           },
         },
       };
 
-      questions = {
-        ...questions,
-        [qid]: {
-          ...questions[qid],
-          [answer]: {
-            ...questions[qid][answer],
-            votes: questions[qid][answer].votes.concat([authedUser]),
+      polls = {
+        ...polls,
+        [pollId]: {
+          ...polls[pollId],
+          [vote]: {
+            ...polls[pollId][vote],
+            votes: polls[pollId][vote].votes.concat([authedUser]),
           },
         },
       };
 
-      res({ ...questions, ...users });
+      res({ ...polls, ...users });
     }, 500);
   });
 }

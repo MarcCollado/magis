@@ -1,23 +1,23 @@
 import {
   _getUsers,
-  _getQuestions,
-  _saveQuestion,
-  _saveQuestionAnswer,
+  _getPolls,
+  _savePoll,
+  _savePollAnswer,
 } from './_DATA';
 
 export function getInitialData() {
-  return Promise.all([_getUsers(), _getQuestions()])
-    .then(data => ({ users: data[0], questions: data[1] }));
+  return Promise.all([_getUsers(), _getPolls()])
+    .then((data) => ({ users: data[0], polls: data[1] }));
 }
 
 export function getAuthUsers() {
   return _getUsers();
 }
 
-export function saveQuestion(question) {
-  return _saveQuestion(question);
+export function savePoll(poll) {
+  return _savePoll(poll);
 }
 
-export function saveQuestionAnswer({ authedUser, qid, answer }) {
-  return _saveQuestionAnswer({ authedUser, qid, answer });
+export function savePollAnswer({ authedUser, pollId, vote }) {
+  return _savePollAnswer({ authedUser, pollId, vote });
 }
