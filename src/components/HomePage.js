@@ -105,7 +105,6 @@ HomePage.defaultProps = {
 
 function mapStateToProps({ polls, authUser }) {
   // filter votes from the currently authUser
-  console.log('POLLS', polls);
   const votedPollsIds = Object.keys(polls)
     .filter((i) => (
       polls[i].optionOne.votes.includes(authUser)
