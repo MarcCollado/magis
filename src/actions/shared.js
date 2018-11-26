@@ -1,15 +1,15 @@
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
-// relative imports
-import { getInitialData } from '../utils/api';
-import { getQuestions } from './questions';
-import { getUsers } from './users';
 
-export function handleInitialData() {
+import { getPolls } from './polls';
+import getUsers from './users';
+import { getInitialData } from '../utils/api';
+
+export default function handleInitialData() {
   return (dispatch) => {
     dispatch(showLoading());
     return getInitialData()
-      .then(({ users, questions }) => {
-        dispatch(getQuestions(questions));
+      .then(({ users, polls }) => {
+        dispatch(getPolls(polls));
         dispatch(getUsers(users));
         dispatch(hideLoading());
       });

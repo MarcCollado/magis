@@ -12,9 +12,9 @@ export default function users(state = {}, action) {
         ...state,
         [action.authedUser]: {
           ...state[action.authedUser],
-          answers: {
-            ...state[action.authedUser].answers,
-            [action.qid]: action.answer,
+          votes: {
+            ...state[action.authedUser].votes,
+            [action.pollId]: action.vote,
           },
         },
       };

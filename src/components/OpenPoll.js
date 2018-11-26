@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { bianchiGreen, seriousYellow, fakeAsbestos } from '../styles/colors';
 import { BodyText } from '../styles/typography';
-import { handleRegisterVote } from '../actions/questions';
+import { handleRegisterVote } from '../actions/polls';
 
 class OpenPoll extends React.Component {
   constructor(props) {
@@ -24,14 +24,14 @@ class OpenPoll extends React.Component {
       const voted = 1;
       dispatch(handleRegisterVote(userVote));
       history.push({
-        pathname: `/questions/${id}/details`,
+        pathname: `/polls/${id}/details`,
         state: { poll, voted },
       });
     } else if (option === 'optionTwo') {
       const voted = 2;
       dispatch(handleRegisterVote(userVote));
       history.push({
-        pathname: `/questions/${id}/details`,
+        pathname: `/polls/${id}/details`,
         state: { poll, voted },
       });
     }
@@ -89,21 +89,21 @@ const StyledLink = styled.a`
 
 const OptionContainer = styled.div`
   align-items: center;
-  background: ${props => (props.right ? `${seriousYellow}22` : `${bianchiGreen}22`)};
+  background: ${(props) => (props.right ? `${seriousYellow}22` : `${bianchiGreen}22`)};
   display: flex;
   height: 12em;
-  justify-content: ${props => (props.right ? 'flex-end' : 'flex-start')};
+  justify-content: ${(props) => (props.right ? 'flex-end' : 'flex-start')};
   padding: 0.5em 1em;
   transition: background 0.3s ease;
 
   &:hover {
-    background: ${props => (props.right ? seriousYellow : bianchiGreen)};
+    background: ${(props) => (props.right ? seriousYellow : bianchiGreen)};
   }
 `;
 
 const OptionText = styled(BodyText)`
   color: ${fakeAsbestos}CC;
-  text-align: ${props => (props.right ? 'right' : 'left')};
+  text-align: ${(props) => (props.right ? 'right' : 'left')};
 
   &:hover {
     color: ${fakeAsbestos};

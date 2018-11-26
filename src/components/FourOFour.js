@@ -13,7 +13,7 @@ const FourOFour = () => (
       {`404`}
     </Title1>
     <BodyText>
-      {`Yikes... this URL doesn't belong to any question 😞`}
+      {`Yikes... this URL doesn't belong to any poll 😞`}
     </BodyText>
     <img
       src="/minions.jpg"

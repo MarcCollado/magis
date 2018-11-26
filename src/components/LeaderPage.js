@@ -16,7 +16,7 @@ const LeaderPage = ({ userStats }) => (
       {`Meet the app's top performers 🏅`}
     </BodyText>
     <MetaText>
-      {`The more questions they post and vote, the higher they rank.`}
+      {`The more polls they post and vote, the higher they rank.`}
     </MetaText>
     <List>
       {userStats
@@ -56,15 +56,13 @@ function mapStateToProps({ users }) {
       imageURL: users[user].avatarURL,
       userName: users[user].name,
       pollsVoted: Object.keys(users[user].votes).length,
-      pollsCreated: users[user].questions.length,
+      pollsCreated: users[user].polls.length,
     }))
     .map((user) => ({
       ...user,
       rank: user.pollsVoted + user.pollsCreated,
     }))
-    .sort((a, b) => (
-      b.rank - a.rank
-    ));
+    .sort((a, b) => (b.rank - a.rank));
   return {
     userStats,
   };

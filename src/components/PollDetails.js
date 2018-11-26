@@ -86,14 +86,14 @@ PollDetails.defaultProps = {
   imageURL: '',
 };
 
-function mapStateToProps({ questions, users, authUser }, { match }) {
-  if (questions[match.params.id] === undefined) {
+function mapStateToProps({ polls, users, authUser }, { match }) {
+  if (polls[match.params.id] === undefined) {
     const errorPage = true;
     return {
       errorPage,
     };
   }
-  const userName = questions[match.params.id].author;
+  const userName = polls[match.params.id].author;
   const realName = authUser === userName ? 'you' : users[userName].name;
   const imageURL = users[userName].avatarURL;
   const errorPage = false;
