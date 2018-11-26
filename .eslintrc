@@ -5,10 +5,25 @@
     "node": true,
     "jquery": true
   },
-  "extends": "airbnb",
+  "extends": [
+    "airbnb"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
   "rules": {
-    "arrow-body-style": 1,
-    "arrow-parens": 0,
+    "arrow-body-style": [
+      2,
+      "as-needed"
+    ],
+    "arrow-parens": [
+      2,
+      "always"
+    ],
     "jsx-a11y/anchor-is-valid": [
       1,
       {
@@ -18,6 +33,13 @@
         "specialLink": [
           "to"
         ]
+      }
+    ],
+    "lines-between-class-members": [
+      2,
+      "always",
+      {
+        "exceptAfterSingleLine": true
       }
     ],
     "no-console": 1,
@@ -37,6 +59,13 @@
     ],
     "react/forbid-prop-types": 1,
     "react/jsx-filename-extension": 0,
+    "react/jsx-one-expression-per-line": [
+      1,
+      {
+        "allow": "single-child"
+      }
+    ],
+    "react/prefer-stateless-function": 1,
     "react/prop-types": 1
   },
   "plugins": [
