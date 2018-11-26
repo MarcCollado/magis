@@ -20,7 +20,7 @@ const LeaderPage = ({ userStats }) => (
     </MetaText>
     <List>
       {userStats
-        .map(user => (
+        .map((user) => (
           <ListItem
             key={user.userName}
           >
@@ -55,7 +55,7 @@ function mapStateToProps({ users }) {
     .map((user) => ({
       imageURL: users[user].avatarURL,
       userName: users[user].name,
-      pollsVoted: Object.keys(users[user].answers).length,
+      pollsVoted: Object.keys(users[user].votes).length,
       pollsCreated: users[user].questions.length,
     }))
     .map((user) => ({
