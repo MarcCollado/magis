@@ -19,15 +19,13 @@ const PollStats = ({ children }) => {
 
   return (
     <Container>
-      <Title2>
-          Poll Stats
-      </Title2>
+      <Title2>Poll Stats</Title2>
       <BodyText>
         {votes === 1
           ? `You're the only one that has participated in this poll so far.`
           : `${totalVotes} people participated in this poll. ${optionOnePer}% voted for option one,
           while ${optionTwoPer}% voted for option two.`
-          }
+        }
       </BodyText>
     </Container>
   );
