@@ -1,6 +1,6 @@
 import { GET_USERS } from './actionTypes';
 
-export function getUsers(users) {
+export default function getUsers(users) {
   return {
     type: GET_USERS,
     users,
