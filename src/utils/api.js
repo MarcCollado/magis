@@ -1,13 +1,18 @@
+import database from './firebase';
+
 import {
   _getUsers,
-  _getPolls,
   _savePoll,
   _savePollAnswer,
 } from './_DATA';
 
+
 export function getInitialData() {
-  return Promise.all([_getUsers(), _getPolls()])
-    .then((data) => ({ users: data[0], polls: data[1] }));
+  // fetch seed data from Firebase
+  return database.ref('seed').once('value')
+    .then((snapshot) => ({
+      users: snapshot.val().users, polls: snapshot.val().polls,
+    }));
 }
 
 export function getAuthUsers() {
@@ -18,6 +23,16 @@ export function savePoll(poll) {
   return _savePoll(poll);
 }
 
-export function savePollAnswer({ authedUser, pollId, vote }) {
-  return _savePollAnswer({ authedUser, pollId, vote });
+export function registerVoteToDB({ authedUser, pollId, vote }) {
+  return database.ref(`/seed/polls/${pollId}/${vote}/votes/`).once('value')
+    // workaround to work with arrays in Firebase
+    // 1. get the length of the array
+    .then((snapshot) => snapshot.val().length)
+    // 2. use the length of the array as the key for the Firebase object
+    .then((arrayKey) => {
+      const updates = {};
+      updates[`/seed/users/${authedUser}/votes/${pollId}`] = vote;
+      updates[`/seed/polls/${pollId}/${vote}/votes/${arrayKey}`] = authedUser;
+      return database.ref().update(updates);
+    });
 }
