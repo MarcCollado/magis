@@ -1,7 +1,7 @@
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
 import { GET_POLLS, CREATE_POLL, REGISTER_VOTE } from './actionTypes';
-import { savePoll, savePollAnswer } from '../utils/api';
+import { savePoll, registerVoteToDB } from '../utils/api';
 
 export function getPolls(polls) {
   return {
@@ -53,7 +53,8 @@ export function handleRegisterVote(userVote) {
     dispatch(showLoading());
     dispatch(registerVote(pollData));
 
-    return savePollAnswer(pollData)
+    // save vote to Firebase database
+    return registerVoteToDB(pollData)
       .then(() => dispatch(hideLoading()));
   };
 }
