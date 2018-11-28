@@ -105,9 +105,10 @@ const OptionText = styled(BodyText)`
 // const OR = styled.div``;
 
 OpenPoll.propTypes = {
-  id: PropTypes.string.isRequired,
-  // from connect
+  children: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default withRouter(connect()(OpenPoll));
