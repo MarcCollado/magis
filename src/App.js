@@ -4,6 +4,7 @@ import LoadingBar from 'react-redux-loading-bar';
 import {
   BrowserRouter as Router, Switch, Route, Link,
 } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faUserCircle } from '@fortawesome/free-solid-svg-icons';
@@ -19,6 +20,9 @@ import Navbar from './components/Navbar';
 import PollDetails from './components/PollDetails';
 import PrivateRoute from './components/PrivateRoute';
 
+import database from './utils/firebase';
+import { _getPolls, _getUsers } from './utils/_DATA';
+
 library.add(faPlus, faUserCircle);
 
 class App extends Component {
@@ -27,12 +31,22 @@ class App extends Component {
     dispatch(handleInitialData());
   }
 
+  handleFirebase = () => {
+    _getPolls().then((polls) => {
+      _getUsers().then((users) => {
+        const seed = { polls, users };
+        database.ref('seed').set(seed);
+      });
+    });
+  }
+
   render() {
     return (
       <Router>
         <Container>
           <LoadingBar />
           <Navbar />
+          <button onClick={this.handleFirebase}>Reset Firebase</button>
           <Link to="/create"><CreatePollButton /></Link>
           <Switch>
             <Route
@@ -74,5 +88,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+App.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
 
 export default connect()(App);
