@@ -1,5 +1,4 @@
 /* eslint-disable */
-import database from './firebase';
 
 let users = {
   marccollado: {
@@ -218,35 +217,5 @@ export function _savePoll(poll) {
 
       res(formattedPoll);
     }, 1000);
-  });
-}
-
-export function _savePollAnswer({ authedUser, pollId, vote }) {
-  return new Promise((res, rej) => {
-    setTimeout(() => {
-      users = {
-        ...users,
-        [authedUser]: {
-          ...users[authedUser],
-          votes: {
-            ...users[authedUser].votes,
-            [pollId]: vote,
-          },
-        },
-      };
-
-      polls = {
-        ...polls,
-        [pollId]: {
-          ...polls[pollId],
-          [vote]: {
-            ...polls[pollId][vote],
-            votes: polls[pollId][vote].votes.concat([authedUser]),
-          },
-        },
-      };
-
-      res({ ...polls, ...users });
-    }, 500);
   });
 }
