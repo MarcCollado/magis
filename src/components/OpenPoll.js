@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -15,14 +15,22 @@ class OpenPoll extends React.Component {
 
   handleOption = (e, option) => {
     e.preventDefault();
-    const { dispatch, id, history } = this.props;
+    const {
+      dispatch, authUser, id, history,
+    } = this.props;
     const userVote = { id, option };
 
     // create a variable voted to pass to PollDetails
     // via props through history.push()
     const voted = option === 'optionOne' ? 1 : 2;
-    dispatch(handleRegisterVote(userVote));
-    history.push({
+    if (authUser !== null) {
+      dispatch(handleRegisterVote(userVote));
+      return history.push({
+        pathname: `/polls/${id}/details`,
+        state: { voted },
+      });
+    }
+    return history.push({
       pathname: `/polls/${id}/details`,
       state: { voted },
     });
@@ -111,4 +119,8 @@ OpenPoll.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-export default withRouter(connect()(OpenPoll));
+function mapStateToProps({ authUser }) {
+  return { authUser };
+}
+
+export default withRouter(connect(mapStateToProps)(OpenPoll));
