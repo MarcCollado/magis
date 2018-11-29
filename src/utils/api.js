@@ -3,7 +3,6 @@ import database from './firebase';
 import {
   _getUsers,
   _savePoll,
-  _savePollAnswer,
 } from './_DATA';
 
 
@@ -31,7 +30,9 @@ export function registerVoteToDB({ authedUser, pollId, vote }) {
     // 2. use the length of the array as the key for the Firebase object
     .then((arrayKey) => {
       const updates = {};
+      // add { pollId: "optionXxx" } at the /userName/votes object
       updates[`/seed/users/${authedUser}/votes/${pollId}`] = vote;
+      // add the authedUser at the /pollId/optionXxx/votes array
       updates[`/seed/polls/${pollId}/${vote}/votes/${arrayKey}`] = authedUser;
       return database.ref().update(updates);
     });
