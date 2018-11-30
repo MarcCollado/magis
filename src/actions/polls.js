@@ -1,7 +1,8 @@
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
 import { GET_POLLS, CREATE_POLL, REGISTER_VOTE } from './actionTypes';
-import { savePoll, registerVoteToDB } from '../utils/api';
+import { registerVoteToDB } from '../utils/api';
+import { formatPoll } from '../utils/_DATA';
 
 export function getPolls(polls) {
   return {
@@ -20,16 +21,14 @@ function createPoll(poll) {
 export function handleCreatePoll(optionOne, optionTwo) {
   return (dispatch, getState) => {
     const { authUser } = getState();
-
-    dispatch(showLoading());
-
-    return savePoll({
+    const pollData = {
       author: authUser,
       optionOne,
       optionTwo,
-    })
-      .then((poll) => dispatch(createPoll(poll)))
-      .then(() => dispatch(hideLoading()));
+    };
+    dispatch(showLoading());
+    dispatch(createPoll(formatPoll(pollData)));
+    dispatch(hideLoading());
   };
 }
 
