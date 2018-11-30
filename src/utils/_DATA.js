@@ -173,10 +173,6 @@ let polls = {
   },
 };
 
-function generateUID() {
-  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-}
-
 export function _getUsers() {
   return new Promise((res, rej) => {
     setTimeout(() => res(users), 1000);
@@ -189,8 +185,12 @@ export function _getPolls() {
   });
 }
 
-function formatPoll({ optionOne, optionTwo, author }) {
-  return {
+function generateUID() {
+  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+}
+
+export function formatPoll({ author, optionOne, optionTwo }) {
+  return ({
     "id": generateUID(),
     "timestamp": Date.now(),
     author,
@@ -202,20 +202,5 @@ function formatPoll({ optionOne, optionTwo, author }) {
       votes: [],
       text: optionTwo,
     },
-  };
-}
-
-export function _savePoll(poll) {
-  return new Promise((res, rej) => {
-    const formattedPoll = formatPoll(poll);
-
-    setTimeout(() => {
-      polls = {
-        ...polls,
-        [formattedPoll.id]: formattedPoll,
-      };
-
-      res(formattedPoll);
-    }, 1000);
   });
-}
+};
