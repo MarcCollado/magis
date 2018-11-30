@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -115,6 +115,7 @@ const OptionText = styled(BodyText)`
 OpenPoll.propTypes = {
   children: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  authUser: PropTypes.string.isRequired,
   history: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
 };
