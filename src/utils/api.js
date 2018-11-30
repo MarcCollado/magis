@@ -2,7 +2,6 @@ import database from './firebase';
 
 import {
   _getUsers,
-  _savePoll,
 } from './_DATA';
 
 
@@ -16,10 +15,6 @@ export function getInitialData() {
 
 export function getAuthUsers() {
   return _getUsers();
-}
-
-export function savePoll(poll) {
-  return _savePoll(poll);
 }
 
 export function registerVoteToDB({ authedUser, pollId, vote }) {
