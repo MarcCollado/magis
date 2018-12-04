@@ -46,7 +46,7 @@ class App extends Component {
         <Container>
           <LoadingBar />
           <Navbar />
-          <button onClick={this.handleFirebase}>Reset Firebase</button>
+          {/* <button onClick={this.handleFirebase}>Reset Firebase</button> */}
           <Link to="/create"><CreatePollButton /></Link>
           <Switch>
             <Route
