@@ -15,14 +15,22 @@ class OpenPoll extends React.Component {
 
   handleOption = (e, option) => {
     e.preventDefault();
-    const { dispatch, id, history } = this.props;
+    const {
+      dispatch, authUser, id, history,
+    } = this.props;
     const userVote = { id, option };
 
     // create a variable voted to pass to PollDetails
     // via props through history.push()
     const voted = option === 'optionOne' ? 1 : 2;
-    dispatch(handleRegisterVote(userVote));
-    history.push({
+    if (authUser !== null) {
+      dispatch(handleRegisterVote(userVote));
+      return history.push({
+        pathname: `/polls/${id}/details`,
+        state: { voted },
+      });
+    }
+    return history.push({
       pathname: `/polls/${id}/details`,
       state: { voted },
     });
@@ -105,9 +113,15 @@ const OptionText = styled(BodyText)`
 // const OR = styled.div``;
 
 OpenPoll.propTypes = {
-  id: PropTypes.string.isRequired,
-  // from connect
+  children: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  authUser: PropTypes.string.isRequired,
+  history: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
-export default withRouter(connect()(OpenPoll));
+function mapStateToProps({ authUser }) {
+  return { authUser };
+}
+
+export default withRouter(connect(mapStateToProps)(OpenPoll));

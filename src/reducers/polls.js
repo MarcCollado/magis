@@ -23,7 +23,8 @@ export default function polls(state = {}, action) {
           ...state[action.pollId],
           [action.vote]: {
             ...state[action.pollId][action.vote],
-            votes: [...state[action.pollId][action.vote].votes, action.authedUser],
+            votes: [
+              ...state[action.pollId][action.vote].votes, action.authedUser],
           },
         },
       };

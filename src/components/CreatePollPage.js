@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Layout from './Layout';
@@ -18,11 +19,11 @@ class CreatePollPage extends React.Component {
     };
   }
 
-  handleInput = (e) => {
-    const input = e.target.value;
-    const option = e.target.name;
+  handleChange = (e) => {
+    const inputValue = e.target.value;
+    const inputName = e.target.name;
     this.setState({
-      [option]: input,
+      [inputName]: inputValue,
     });
   };
 
@@ -67,7 +68,7 @@ class CreatePollPage extends React.Component {
               name="optionOne"
               type="text"
               value={optionOne}
-              onChange={(e) => this.handleInput(e)}
+              onChange={this.handleChange}
               maxlength="140"
               placeholder="Option one"
               required
@@ -81,7 +82,7 @@ class CreatePollPage extends React.Component {
               name="optionTwo"
               type="text"
               value={optionTwo}
-              onChange={(e) => this.handleInput(e)}
+              onChange={this.handleChange}
               maxlength="140"
               placeholder="Option two"
               required
@@ -135,5 +136,9 @@ const StyledSubmit = styled.input`
     background: ${fakeAsbestos};
   }
 `;
+
+CreatePollPage.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
 
 export default connect()(CreatePollPage);

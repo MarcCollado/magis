@@ -59,7 +59,7 @@ let polls = {
     author: 'jony',
     timestamp: 1466264761544,
     optionOne: {
-      votes: [],
+      votes: ['niko'],
       text: 'Turn the world into a thin, white ⚪️ room like mine',
     },
     optionTwo: {
@@ -89,7 +89,7 @@ let polls = {
       text: 'Eat only 🍏 fruit and 🥦 vegetables for the rest of your life',
     },
     optionTwo: {
-      votes: ['marccollado'],
+      votes: ['jony', 'marccollado'],
       text: 'Eat only 🥩 meat and 🐠 fish for the rest of your life',
     },
   },
@@ -111,7 +111,7 @@ let polls = {
     author: 'albert',
     timestamp: 1476479545194,
     optionOne: {
-      votes: [],
+      votes: ['albert'],
       text: 'Develop the habit of waking up ⏰ at 5:00am every day',
     },
     optionTwo: {
@@ -137,11 +137,11 @@ let polls = {
     author: 'jony',
     timestamp: 1482579767190,
     optionOne: {
-      votes: [],
+      votes: ['albert', 'jony'],
       text: 'Get a job as top notch executive 💸 at Wall Street',
     },
     optionTwo: {
-      votes: ['niko', 'marccollado'],
+      votes: ['marccollado', 'niko'],
       text: 'Get a job as a programmer 👩‍💻 at Silicon Valley',
     },
   },
@@ -167,85 +167,41 @@ let polls = {
       text: 'Work at Google, as the PM at the Google Reader 📖 team',
     },
     optionTwo: {
-      votes: ['jony'],
+      votes: ['jony', 'marccollado'],
       text: 'Work at Apple, as an engineer at the iPod Touch 📱 team',
     },
   },
 };
 
-function generateUID() {
-  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-}
-
 export function _getUsers() {
   return new Promise((res, rej) => {
-    setTimeout(() => res({ ...users }), 1000);
+    setTimeout(() => res(users), 1000);
   });
 }
 
 export function _getPolls() {
   return new Promise((res, rej) => {
-    setTimeout(() => res({ ...polls }), 1000);
+    setTimeout(() => res(polls), 1000);
   });
 }
 
-function formatPoll({ optionOne, optionTwo, author }) {
-  return {
+function generateUID() {
+  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+}
+
+export function formatPoll({ author, optionOne, optionTwo }) {
+  return ({
     "id": generateUID(),
     "timestamp": Date.now(),
     author,
     "optionOne": {
-      votes: [],
+      // FIXME: creating a fake object to the array so it gets added to Firebase
+      votes: ["0"],
       text: optionOne,
     },
     "optionTwo": {
-      votes: [],
+      votes: ["0"],
       text: optionTwo,
     },
-  };
-}
-
-export function _savePoll(poll) {
-  return new Promise((res, rej) => {
-    const formattedPoll = formatPoll(poll);
-
-    setTimeout(() => {
-      polls = {
-        ...polls,
-        [formattedPoll.id]: formattedPoll,
-      };
-
-      res(formattedPoll);
-    }, 1000);
   });
-}
-
-export function _savePollAnswer({ authedUser, pollId, vote }) {
-  return new Promise((res, rej) => {
-    setTimeout(() => {
-      users = {
-        ...users,
-        [authedUser]: {
-          ...users[authedUser],
-          votes: {
-            ...users[authedUser].votes,
-            [pollId]: vote,
-          },
-        },
-      };
-
-      polls = {
-        ...polls,
-        [pollId]: {
-          ...polls[pollId],
-          [vote]: {
-            ...polls[pollId][vote],
-            votes: polls[pollId][vote].votes.concat([authedUser]),
-          },
-        },
-      };
-
-      res({ ...polls, ...users });
-    }, 500);
-  });
-}
+};

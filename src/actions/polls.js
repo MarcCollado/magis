@@ -1,7 +1,8 @@
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
 import { GET_POLLS, CREATE_POLL, REGISTER_VOTE } from './actionTypes';
-import { savePoll, savePollAnswer } from '../utils/api';
+import { registerVoteToDB, createPollToDB } from '../utils/api';
+import { formatPoll } from '../utils/_DATA';
 
 export function getPolls(polls) {
   return {
@@ -20,15 +21,18 @@ function createPoll(poll) {
 export function handleCreatePoll(optionOne, optionTwo) {
   return (dispatch, getState) => {
     const { authUser } = getState();
-
-    dispatch(showLoading());
-
-    return savePoll({
+    const pollRawData = {
       author: authUser,
       optionOne,
       optionTwo,
-    })
-      .then((poll) => dispatch(createPoll(poll)))
+    };
+    const pollCleanData = formatPoll(pollRawData);
+
+    dispatch(showLoading());
+    dispatch(createPoll(pollCleanData));
+
+    // create poll to Firebase database
+    return createPollToDB(pollCleanData)
       .then(() => dispatch(hideLoading()));
   };
 }
@@ -53,7 +57,8 @@ export function handleRegisterVote(userVote) {
     dispatch(showLoading());
     dispatch(registerVote(pollData));
 
-    return savePollAnswer(pollData)
+    // save vote to Firebase database
+    return registerVoteToDB(pollData)
       .then(() => dispatch(hideLoading()));
   };
 }
