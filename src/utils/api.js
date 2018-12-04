@@ -15,11 +15,21 @@ export function getAuthUsers() {
 }
 
 export function createPollToDB(pollData) {
-  const pollId = pollData.id;
-  const updates = {};
+  const { id, author } = pollData;
 
-  updates[`/seed/polls/${pollId}`] = pollData;
-  return database.ref().update(updates);
+  return database.ref(`/seed/users/${author}/polls/`).once('value')
+    // workaround to work with arrays in Firebase
+    // 1. get the length of the array
+    .then((snapshot) => snapshot.val().length)
+    // 2. use the length of the array as the key for the Firebase object
+    .then((arrayKey) => {
+      const updates = {};
+      // add the poll to the polls object
+      updates[`/seed/polls/${id}`] = pollData;
+      // add the pollId to the user profile
+      updates[`/seed/users/${author}/polls/${arrayKey}`] = id;
+      return database.ref().update(updates);
+    });
 }
 
 export function registerVoteToDB({ authedUser, pollId, vote }) {

@@ -195,11 +195,12 @@ export function formatPoll({ author, optionOne, optionTwo }) {
     "timestamp": Date.now(),
     author,
     "optionOne": {
-      votes: [],
+      // FIXME: creating a fake object to the array so it gets added to Firebase
+      votes: ["0"],
       text: optionOne,
     },
     "optionTwo": {
-      votes: [],
+      votes: ["0"],
       text: optionTwo,
     },
   });
