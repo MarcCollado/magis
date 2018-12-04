@@ -1,9 +1,6 @@
 import database from './firebase';
 
-import {
-  _getUsers,
-} from './_DATA';
-
+import { _getUsers } from './_DATA';
 
 export function getInitialData() {
   // fetch seed data from Firebase
@@ -15,6 +12,14 @@ export function getInitialData() {
 
 export function getAuthUsers() {
   return _getUsers();
+}
+
+export function createPollToDB(pollData) {
+  const pollId = pollData.id;
+  const updates = {};
+
+  updates[`/seed/polls/${pollId}`] = pollData;
+  return database.ref().update(updates);
 }
 
 export function registerVoteToDB({ authedUser, pollId, vote }) {
