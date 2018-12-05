@@ -2,7 +2,7 @@ import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
 import { GET_POLLS, CREATE_POLL, REGISTER_VOTE } from './actionTypes';
 import { registerVoteToDB, createPollToDB } from '../utils/api';
-import { pollFormatter, getAuthUserData } from '../utils/_DATA';
+import { pollFormatter, getAuthUserData } from '../utils/helpers';
 
 export function getPolls(polls) {
   return {
