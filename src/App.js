@@ -31,6 +31,10 @@ class App extends Component {
     dispatch(handleInitialData());
   }
 
+  componentWillUnmount() {
+    database.ref().off();
+  }
+
   seedFirebase = () => {
     seedPolls().then((polls) => {
       seedUsers().then((users) => {
