@@ -3,7 +3,7 @@ import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import { LOG_IN, LOG_OUT } from './actionTypes';
 import { handleCreateUser } from './users';
 
-export function logIn(id) {
+function logIn(id) {
   return {
     type: LOG_IN,
     id,
