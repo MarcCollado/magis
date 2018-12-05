@@ -1,6 +1,74 @@
 /* eslint-disable */
+let polls = {
+  'am8rszc8bysdear0jgpubv8': {
+    pollID: 'am8rszc8bysdear0jgpubv8',
+    createdBy: 'marc8xf',
+    timestamp: 1466264761544,
+    options: {
+      optionOne: 'Develop a procedure ‍⚗️ to turn steel into alumninum',
+      optionTwo: 'Turn the world into a thin, white ⚪️ room like mine',
+    },
+    votes: {
+      'marc8xf': 1,
+      'niko8xf': 2,
+    }
+  },
+  '7fj3y6ziyoresozdd23r6u': {
+    pollID: '7fj3y6ziyoresozdd23r6u',
+    createdBy: 'marc8xf',
+    timestamp: 1467265871642,
+    options: {
+      optionOne: 'Graduate from Stanford 👩‍🎓 and go work at a bank',
+      optionTwo: 'Graduate from MIT 👩‍🔬 and go work at CERN',
+    },
+    votes: {
+      'niko8xf': 2,
+    }
+  },
+  '8xf0y6ziyjabvozdd253nd': {
+    pollID: '8xf0y6ziyjabvozdd253nd',
+    createdBy: 'niko8xf',
+    timestamp: 1467166872634,
+    options: {
+      optionOne: 'Eat only 🍏 fruit and 🥦 vegetables for the rest of your life',
+      optionTwo: 'Eat only 🥩 meat and 🐠 fish for the rest of your life',
+    },
+    votes: {
+      'marc8xf': 1,
+    }
+  },
+  'am8ehyc8byjqgar0jgpub9': {
+    pollID: 'am8ehyc8byjqgar0jgpub9',
+    createdBy: 'marc8xf',
+    timestamp: 1488579767190,
+    options: {
+      optionOne: 'Go through a ten day meditation retreat 🧘‍',
+      optionTwo: 'Finish a marathon 🏃‍',
+    },
+    votes: {
+      'marc8xf': 1,
+    }
+  },
+};
 
 let users = {
+  'marc8xf': {
+    userID: 'marc8xf',
+    userEmail: 'marc@collado.com',
+    userName: 'Marc Collado',
+    avatarURL: 'https://pbs.twimg.com/profile_images/713380804890484739/iAe1nkdr_400x400.jpg',
+    authProvider: 'github.com'
+  },
+  'niko8xf': {
+    userID: 'niko8xf',
+    userEmail: 'niko@tesla.com',
+    userName: 'Niko Tesla',
+    avatarURL: 'https://pbs.twimg.com/profile_images/713380804890484739/iAe1nkdr_400x400.jpg',
+    authProvider: 'github.com'
+  }
+};
+
+let __users = {
   marccollado: {
     id: 'marccollado',
     name: 'Marc Collado',
@@ -53,7 +121,7 @@ let users = {
   },
 };
 
-let polls = {
+let __polls = {
   'am8rszc8bysdear0jgpubv8': {
     id: 'am8rszc8bysdear0jgpubv8',
     author: 'jony',
@@ -189,19 +257,25 @@ function generateUID() {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 }
 
-export function formatPoll({ author, optionOne, optionTwo }) {
+export function pollFormatter({ createdBy, optionOne, optionTwo }) {
   return ({
-    "id": generateUID(),
+    "pollID": generateUID(),
+    createdBy,
     "timestamp": Date.now(),
-    author,
-    "optionOne": {
-      // FIXME: creating a fake object to the array so it gets added to Firebase
-      votes: ["0"],
-      text: optionOne,
+    "options": {
+      optionOne,
+      optionTwo
     },
-    "optionTwo": {
-      votes: ["0"],
-      text: optionTwo,
-    },
+    "votes": {}
   });
 };
+
+export function getAuthUserData(authUser, users) {
+  const authUserData = Object.keys(users).some((key) => key === authUser);
+
+  if (authUserData) {
+    return users[authUser];
+  } else {
+    return null;
+  }
+}
