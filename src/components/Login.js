@@ -7,7 +7,7 @@ import firebase from 'firebase';
 
 import Layout from './Layout';
 import UserImage from './UserImage';
-import { handleSetAuthUser, logIn } from '../actions/auth';
+import { handleSetAuthUser } from '../actions/auth';
 import { Title1, BodyText, MetaText } from '../styles/typography';
 import { auth } from '../utils/firebase';
 
