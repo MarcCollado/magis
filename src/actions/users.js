@@ -23,6 +23,8 @@ export function handleCreateUser(userData) {
     if (authUser === null) {
       dispatch(createUser(userData));
     } else {
+      // TODO: better error handling for authUser !== null
+      console.error('Can\'t create a new user if another user is already logged in');
       return null;
     }
     // create user to Firebase database
