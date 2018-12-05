@@ -24,35 +24,15 @@ export function createUserToDB(userData) {
 }
 
 export function createPollToDB(pollData) {
-  const { id, author } = pollData;
-
-  return database.ref(`/seed/users/${author}/polls/`).once('value')
-    // workaround to work with arrays in Firebase
-    // 1. get the length of the array
-    .then((snapshot) => snapshot.val().length)
-    // 2. use the length of the array as the key for the Firebase object
-    .then((arrayKey) => {
-      const updates = {};
-      // add the poll to the polls object
-      updates[`/seed/polls/${id}`] = pollData;
-      // add the pollId to the user profile
-      updates[`/seed/users/${author}/polls/${arrayKey}`] = id;
-      return database.ref().update(updates);
-    });
+  const { pollID } = pollData;
+  const updates = {};
+  updates[`/seed/polls/${pollID}`] = pollData;
+  return database.ref().update(updates);
 }
 
-export function registerVoteToDB({ authedUser, pollId, vote }) {
-  return database.ref(`/seed/polls/${pollId}/${vote}/votes/`).once('value')
-    // workaround to work with arrays in Firebase
-    // 1. get the length of the array
-    .then((snapshot) => snapshot.val().length)
-    // 2. use the length of the array as the key for the Firebase object
-    .then((arrayKey) => {
-      const updates = {};
-      // add { pollId: "optionXxx" } at the /userName/votes object
-      updates[`/seed/users/${authedUser}/votes/${pollId}`] = vote;
-      // add the authedUser at the /pollId/optionXxx/votes array
-      updates[`/seed/polls/${pollId}/${vote}/votes/${arrayKey}`] = authedUser;
-      return database.ref().update(updates);
-    });
+export function registerVoteToDB(voteData) {
+  const { pollID, vote } = voteData;
+  const updates = {};
+  updates[`/seed/polls/${pollID}/votes`] = vote;
+  return database.ref().update(updates);
 }
