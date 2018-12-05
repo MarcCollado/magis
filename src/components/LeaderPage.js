@@ -22,11 +22,11 @@ const LeaderPage = ({ userStats }) => (
       {userStats
         .map((user) => (
           <ListItem
-            key={user.userName}
+            key={user.userID}
           >
             <LeaderCard
-              imageURL={user.imageURL}
               userName={user.userName}
+              avatarURL={user.avatarURL}
               pollsVoted={user.pollsVoted}
               pollsCreated={user.pollsCreated}
             />
@@ -50,14 +50,20 @@ LeaderPage.propTypes = {
   userStats: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ polls, users }) {
   const userStats = Object.keys(users)
-    .map((user) => ({
-      imageURL: users[user].avatarURL,
-      userName: users[user].name,
-      pollsVoted: Object.keys(users[user].votes).length,
-      pollsCreated: users[user].polls.length,
-    }))
+    .map((user) => {
+      const { userID } = users[user];
+      return {
+        userID,
+        userName: users[user].userName,
+        avatarURL: users[user].avatarURL,
+        pollsVoted: Object.keys(polls)
+          .filter((i) => (polls[i].votes !== undefined ? userID in polls[i].votes : false)).length,
+        pollsCreated: Object.keys(polls)
+          .filter((i) => polls[i].createdBy === (userID)).length,
+      };
+    })
     .map((user) => ({
       ...user,
       rank: user.pollsVoted + user.pollsCreated,

@@ -18,15 +18,15 @@ const PollDetails = ({
   location,
   match,
   poll,
-  realName,
-  imageURL,
+  displayName,
+  avatarURL,
   errorPage,
 }) => {
   const { voted } = location.state;
   const { id } = match.params;
 
   // sanity check the id of the URL matches the one on the poll
-  if ((errorPage) || (id !== poll.id)) {
+  if ((errorPage) || (id !== poll.pollID)) {
     return (
       <FourOFour />
     );
@@ -45,10 +45,10 @@ const PollDetails = ({
         {poll}
       </UnbiasedPoll>
       <MetaText>
-        {`Posted by ${realName}`}
+        {`Posted by ${displayName}`}
       </MetaText>
       <UserImage
-        imageURL={imageURL}
+        avatarURL={avatarURL}
         large
       />
       <PollStats>
@@ -75,17 +75,17 @@ const StyledLink = styled(Link)`
 
 PollDetails.propTypes = {
   // mapStateToProps
-  realName: PropTypes.string,
-  imageURL: PropTypes.string,
+  displayName: PropTypes.string,
+  avatarURL: PropTypes.string,
   errorPage: PropTypes.bool.isRequired,
 };
 
 PollDetails.defaultProps = {
-  realName: '',
-  imageURL: '',
+  displayName: '',
+  avatarURL: '',
 };
 
-function mapStateToProps({ polls, users, authUser }, { match }) {
+function mapStateToProps({ authUser, polls, users }, { match }) {
   if (polls[match.params.id] === undefined) {
     const errorPage = true;
     return {
@@ -93,14 +93,16 @@ function mapStateToProps({ polls, users, authUser }, { match }) {
     };
   }
   const poll = polls[match.params.id];
-  const userName = polls[match.params.id].author;
-  const realName = authUser === userName ? 'you' : users[userName].name;
-  const imageURL = users[userName].avatarURL;
+  const creatorID = polls[match.params.id].createdBy;
+  const creatorName = users[creatorID].userName;
+  const { userID, userName } = users[authUser];
+  const displayName = userID === creatorID ? 'you' : creatorName;
+  const { avatarURL } = users[creatorID];
   const errorPage = false;
   return {
     poll,
-    realName,
-    imageURL,
+    displayName,
+    avatarURL,
     errorPage,
   };
 }
