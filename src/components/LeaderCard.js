@@ -37,7 +37,7 @@ const PictureContainer = styled.div`
   background-image: url(${(props) => props.avatarURL});
   background-size: cover;
   height: 15em;
-  width: 15em;s
+  width: 15em;
 `;
 
 const InfoContainer = styled.div`
