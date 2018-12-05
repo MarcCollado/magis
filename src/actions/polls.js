@@ -20,6 +20,8 @@ function createPoll(poll) {
 
 export function handleCreatePoll(optionOne, optionTwo) {
   return (dispatch, getState) => {
+    dispatch(showLoading());
+
     const { authUser } = getState();
     const pollRawData = {
       author: authUser,
@@ -28,7 +30,6 @@ export function handleCreatePoll(optionOne, optionTwo) {
     };
     const pollCleanData = formatPoll(pollRawData);
 
-    dispatch(showLoading());
     dispatch(createPoll(pollCleanData));
 
     // create poll to Firebase database
