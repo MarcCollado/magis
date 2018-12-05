@@ -3,21 +3,54 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import firebase from 'firebase';
 
 import Layout from './Layout';
 import UserImage from './UserImage';
-import { handleSetAuthUser } from '../actions/auth';
+import { handleSetAuthUser, logIn } from '../actions/auth';
 import { Title1, BodyText, MetaText } from '../styles/typography';
+import { auth } from '../utils/firebase';
+
 
 class Login extends Component {
   constructor(props) {
     super(props);
   }
 
-  handleLogin = (e, id) => {
+  authHandler = async (authData, provider = 'Github') => {
     const { dispatch } = this.props;
-    dispatch(handleSetAuthUser(id));
-  }
+
+    switch (provider) {
+      case 'Github': {
+        const userID = authData.user.uid;
+        const userEmail = authData.user.email;
+        const userName = authData.user.displayName;
+        const avatarURL = authData.additionalUserInfo.profile.avatar_url;
+        const authProvider = authData.credential.providerId;
+        const userData = {
+          userID, userEmail, userName, avatarURL, authProvider,
+        };
+        dispatch(handleSetAuthUser(userData));
+        break;
+      }
+      case 'Twitter': {
+        break;
+      }
+      default:
+        break;
+    }
+    return null;
+    // 1 .Look up the current store in the firebase database
+    // 2. Claim it if there is no owner
+    // 3. Set the state of the inventory component to reflect the current user
+  };
+
+  authenticate = (provider) => {
+    const authProvider = new firebase.auth[`${provider}AuthProvider`]();
+    auth
+      .signInWithPopup(authProvider)
+      .then(this.authHandler);
+  };
 
   render() {
     const {
@@ -44,7 +77,16 @@ class Login extends Component {
         <MetaText>
           {`Only logged users can vote, submit new polls or view leaderboards. Don't miss out on all the fun.`}
         </MetaText>
-        <List>
+
+        <nav className="login">
+          <button className="github" onClick={() => this.authenticate('Github')}>
+            Log In With GitHub
+          </button>
+          <button className="twitter" onClick={() => this.authenticate('Twitter')}>
+            Log In With Twitter
+          </button>
+        </nav>
+        {/* <List>
           {userDetails
             .map((user) => (
               <ListItem
@@ -62,7 +104,7 @@ class Login extends Component {
               </ListItem>
             ))
           }
-        </List>
+        </List> */}
       </Layout>
     );
   }
