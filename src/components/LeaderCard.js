@@ -9,19 +9,19 @@ const LeaderCard = ({
   imageURL, userName, pollsCreated, pollsVoted,
 }) => (
   <Container>
-      <PictureContainer imageURL={imageURL} />
-      <InfoContainer>
-        <LeaderName>
-          {userName}
-        </LeaderName>
-        <BodyText>
-          {`🎲 ${pollsCreated} polls created`}
-        </BodyText>
-        <BodyText>
-          {`📨 ${pollsVoted} polls voted`}
-        </BodyText>
-      </InfoContainer>
-    </Container>
+    <PictureContainer imageURL={imageURL} />
+    <InfoContainer>
+      <LeaderName>
+        {userName}
+      </LeaderName>
+      <BodyText>
+        {`🎲 ${pollsCreated} polls created`}
+      </BodyText>
+      <BodyText>
+        {`📨 ${pollsVoted} polls voted`}
+      </BodyText>
+    </InfoContainer>
+  </Container>
 );
 
 const Container = styled.div`
