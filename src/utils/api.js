@@ -1,5 +1,4 @@
-import database from './firebase';
-
+import { database } from './firebase';
 import { _getUsers } from './_DATA';
 
 export function getInitialData() {
@@ -11,7 +10,17 @@ export function getInitialData() {
 }
 
 export function getAuthUsers() {
-  return _getUsers();
+  return database.ref('seed').once('value')
+    .then((snapshot) => ({
+      users: snapshot.val().users,
+    }));
+}
+
+export function createUserToDB(userData) {
+  const { userID } = userData;
+  const updates = {};
+  updates[`/seed/users/${userID}`] = userData;
+  return database.ref().update(updates);
 }
 
 export function createPollToDB(pollData) {
