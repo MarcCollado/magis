@@ -20,7 +20,7 @@ import Navbar from './components/Navbar';
 import PollDetails from './components/PollDetails';
 import PrivateRoute from './components/PrivateRoute';
 
-import database from './utils/firebase';
+import { database } from './utils/firebase';
 import { _getPolls, _getUsers } from './utils/_DATA';
 
 library.add(faPlus, faUserCircle);
