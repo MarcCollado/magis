@@ -5,9 +5,8 @@ import styled from 'styled-components';
 import { bianchiGreen, seriousYellow, fakeAsbestos } from '../styles/colors';
 import { BodyText } from '../styles/typography';
 
-const UnbiasedPoll = ({ children }) => {
-  const options = [children.optionOne.text, children.optionTwo.text];
-
+const UnbiasedPoll = ({ children: poll }) => {
+  const options = [poll.options.optionOne, poll.options.optionTwo];
   return (
     <Container>
       <OptionContainer>
