@@ -14,17 +14,16 @@ export default function polls(state = {}, action) {
     case CREATE_POLL:
       return {
         ...state,
-        [action.poll.id]: action.poll,
+        [action.poll.pollID]: action.poll,
       };
     case REGISTER_VOTE:
       return {
         ...state,
-        [action.pollId]: {
-          ...state[action.pollId],
-          [action.vote]: {
-            ...state[action.pollId][action.vote],
-            votes: [
-              ...state[action.pollId][action.vote].votes, action.authedUser],
+        [action.pollID]: {
+          ...state[action.pollID],
+          votes: {
+            ...state[action.pollID].votes,
+            ...action.vote,
           },
         },
       };

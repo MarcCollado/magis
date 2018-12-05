@@ -6,12 +6,17 @@ import { electricBlue } from '../styles/colors';
 import { Title2, BodyText } from '../styles/typography';
 
 const countVotes = (poll) => {
-  const votes = [poll.optionOne.votes.length, poll.optionTwo.votes.length];
-  return votes;
+  const pollVotes = Object.keys(poll.votes);
+  if (pollVotes.length !== 0) {
+    const votesForOne = pollVotes.filter((key) => (poll[key] === 1)).length;
+    const votesForTwo = pollVotes.length - votesForOne;
+    return [votesForOne, votesForTwo];
+  }
+  return [0, 0];
 };
 
-const PollStats = ({ children }) => {
-  const votes = countVotes(children);
+const PollStats = ({ children: poll }) => {
+  const votes = countVotes(poll);
   // over engineered (but cool) way to sum the two elements of an array
   const totalVotes = [...votes].reduce((a, b) => a + b, 0);
   const optionOnePer = parseInt(100 * (votes[0] / totalVotes), 10);

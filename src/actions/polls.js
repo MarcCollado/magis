@@ -2,7 +2,7 @@ import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
 import { GET_POLLS, CREATE_POLL, REGISTER_VOTE } from './actionTypes';
 import { registerVoteToDB, createPollToDB } from '../utils/api';
-import { formatPoll } from '../utils/_DATA';
+import { pollFormatter, getAuthUserData } from '../utils/helpers';
 
 export function getPolls(polls) {
   return {
@@ -20,45 +20,39 @@ function createPoll(poll) {
 
 export function handleCreatePoll(optionOne, optionTwo) {
   return (dispatch, getState) => {
-    const { authUser } = getState();
-    const pollRawData = {
-      author: authUser,
+    dispatch(showLoading());
+    const { authUser, users } = getState();
+    const authUserData = getAuthUserData(authUser, users);
+    const pollDataRaw = {
+      createdBy: authUserData.userID,
       optionOne,
       optionTwo,
     };
-    const pollCleanData = formatPoll(pollRawData);
-
-    dispatch(showLoading());
-    dispatch(createPoll(pollCleanData));
-
-    // create poll to Firebase database
-    return createPollToDB(pollCleanData)
+    const pollData = pollFormatter(pollDataRaw);
+    // create poll @ Redux store
+    dispatch(createPoll(pollData));
+    // create poll @ Firebase database
+    return createPollToDB(pollData)
       .then(() => dispatch(hideLoading()));
   };
 }
 
-function registerVote({ authedUser, pollId, vote }) {
+function registerVote({ pollID, vote }) {
   return {
     type: REGISTER_VOTE,
-    authedUser,
-    pollId,
+    pollID,
     vote,
   };
 }
 
-export function handleRegisterVote(userVote) {
-  return (dispatch, getState) => {
-    const { authUser } = getState();
-    const pollData = {
-      authedUser: authUser,
-      pollId: userVote.id,
-      vote: userVote.option,
-    };
+export function handleRegisterVote(pollID, vote) {
+  return (dispatch) => {
     dispatch(showLoading());
-    dispatch(registerVote(pollData));
-
-    // save vote to Firebase database
-    return registerVoteToDB(pollData)
+    const voteData = { pollID, vote };
+    // register vote @ Redux store
+    dispatch(registerVote(voteData));
+    // register vote @ Firebase database
+    return registerVoteToDB(voteData)
       .then(() => dispatch(hideLoading()));
   };
 }

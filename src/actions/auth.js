@@ -1,24 +1,31 @@
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
 import { LOG_IN, LOG_OUT } from './actionTypes';
-import { getAuthUsers } from '../utils/api';
+import { handleCreateUser } from './users';
 
-export function logIn(id) {
+function logIn(id) {
   return {
     type: LOG_IN,
     id,
   };
 }
 
-export function handleSetAuthUser(id) {
-  return (dispatch) => {
+export function handleSetAuthUser(userData) {
+  return (dispatch, getState) => {
     dispatch(showLoading());
-    return getAuthUsers()
-      .then((users) => {
-        const auth = Object.keys(users).filter((user) => user === id);
-        auth.length === 0 ? dispatch(logIn(null)) : dispatch(logIn(id));
-      })
-      .then(() => dispatch(hideLoading()));
+
+    const { users } = getState();
+    const { userID } = userData;
+    // check if the user already exists in the store
+    const userExists = Object.keys(users).some((key) => key === userID);
+
+    if (userExists) {
+      dispatch(logIn(userID));
+      dispatch(hideLoading());
+    } else {
+      dispatch(handleCreateUser(userData));
+      dispatch(logIn(userID));
+    }
   };
 }
 

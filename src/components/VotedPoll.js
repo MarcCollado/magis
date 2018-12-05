@@ -16,7 +16,7 @@ class VotedPoll extends React.Component {
   render() {
     // use object destructuring to rename children to poll
     const { children: poll, id } = this.props;
-    const options = [poll.optionOne.text, poll.optionTwo.text];
+    const options = [poll.options.optionOne, poll.options.optionTwo];
     const { voted } = this.state;
 
     return (

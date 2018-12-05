@@ -16,9 +16,8 @@ class Navbar extends React.Component {
 
   render() {
     const {
-      authUserID,
-      authUserURL,
-      authUserName,
+      userID,
+      userName,
     } = this.props;
 
     return (
@@ -45,11 +44,11 @@ class Navbar extends React.Component {
               Leaderboard
             </StyledNavLink>
           </MenuItems>
-          {authUserID
+          {userID
             ? (
               <LoginItems>
                 <LoginTip>
-                  {`Logged as ${authUserName}`}
+                  {`Logged as ${userName}`}
                 </LoginTip>
                 <StyledNavLink
                   to="/login"
@@ -143,24 +142,21 @@ Navbar.propTypes = {
   // from connect
   dispatch: PropTypes.func.isRequired,
   // from MapStateToProps
-  authUserURL: PropTypes.string.isRequired,
-  authUserID: PropTypes.string.isRequired,
-  authUserName: PropTypes.string.isRequired,
+  userID: PropTypes.string.isRequired,
+  userName: PropTypes.string.isRequired,
 };
 
 function mapStateToProps({ authUser, users }) {
   if (authUser !== null) {
-    const loggedUser = users[authUser];
+    const { userID, userName } = users[authUser];
     return {
-      authUserURL: loggedUser.avatarURL,
-      authUserID: loggedUser.id,
-      authUserName: loggedUser.name,
+      userID,
+      userName,
     };
   }
   return {
-    authUserURL: '',
-    authUserID: '',
-    authUserName: '',
+    userID: '',
+    userName: '',
   };
 }
 

@@ -1,4 +1,4 @@
-import { GET_USERS, REGISTER_VOTE } from '../actions/actionTypes';
+import { GET_USERS, CREATE_USER } from '../actions/actionTypes';
 
 export default function users(state = {}, action) {
   switch (action.type) {
@@ -7,16 +7,10 @@ export default function users(state = {}, action) {
         ...state,
         ...action.users,
       };
-    case REGISTER_VOTE:
+    case CREATE_USER:
       return {
         ...state,
-        [action.authedUser]: {
-          ...state[action.authedUser],
-          votes: {
-            ...state[action.authedUser].votes,
-            [action.pollId]: action.vote,
-          },
-        },
+        [action.user.userID]: action.user,
       };
     default:
       return state;

@@ -20,8 +20,8 @@ import Navbar from './components/Navbar';
 import PollDetails from './components/PollDetails';
 import PrivateRoute from './components/PrivateRoute';
 
-import database from './utils/firebase';
-import { _getPolls, _getUsers } from './utils/_DATA';
+import { database } from './utils/firebase';
+import { seedPolls, seedUsers } from './utils/helpers';
 
 library.add(faPlus, faUserCircle);
 
@@ -31,11 +31,15 @@ class App extends Component {
     dispatch(handleInitialData());
   }
 
-  handleFirebase = () => {
-    _getPolls().then((polls) => {
-      _getUsers().then((users) => {
+  componentWillUnmount() {
+    database.ref().off();
+  }
+
+  seedFirebase = () => {
+    seedPolls().then((polls) => {
+      seedUsers().then((users) => {
         const seed = { polls, users };
-        database.ref('seed').set(seed);
+        database.ref().set(seed);
       });
     });
   }
@@ -46,7 +50,7 @@ class App extends Component {
         <Container>
           <LoadingBar />
           <Navbar />
-          {/* <button onClick={this.handleFirebase}>Reset Firebase</button> */}
+          {/* <button onClick={this.seedFirebase}>Reset Firebase</button> */}
           <Link to="/create"><CreatePollButton /></Link>
           <Switch>
             <Route

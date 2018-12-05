@@ -6,22 +6,22 @@ import { fakeAsbestos } from '../styles/colors';
 import { Title2, BodyText } from '../styles/typography';
 
 const LeaderCard = ({
-  imageURL, userName, pollsCreated, pollsVoted,
+  avatarURL, userName, pollsCreated, pollsVoted,
 }) => (
   <Container>
-      <PictureContainer imageURL={imageURL} />
-      <InfoContainer>
-        <LeaderName>
-          {userName}
-        </LeaderName>
-        <BodyText>
-          {`🎲 ${pollsCreated} polls created`}
-        </BodyText>
-        <BodyText>
-          {`📨 ${pollsVoted} polls voted`}
-        </BodyText>
-      </InfoContainer>
-    </Container>
+    <PictureContainer avatarURL={avatarURL} />
+    <InfoContainer>
+      <LeaderName>
+        {userName}
+      </LeaderName>
+      <BodyText>
+        {`🎲 ${pollsCreated} polls created`}
+      </BodyText>
+      <BodyText>
+        {`📨 ${pollsVoted} polls voted`}
+      </BodyText>
+    </InfoContainer>
+  </Container>
 );
 
 const Container = styled.div`
@@ -34,10 +34,10 @@ const Container = styled.div`
 `;
 
 const PictureContainer = styled.div`
-  background-image: url(${(props) => props.imageURL});
+  background-image: url(${(props) => props.avatarURL});
   background-size: cover;
   height: 15em;
-  width: 15em;s
+  width: 15em;
 `;
 
 const InfoContainer = styled.div`
@@ -53,7 +53,7 @@ const LeaderName = styled(Title2)`
 `;
 
 LeaderCard.propTypes = {
-  imageURL: PropTypes.string.isRequired,
+  avatarURL: PropTypes.string.isRequired,
   userName: PropTypes.string.isRequired,
   pollsCreated: PropTypes.number.isRequired,
   pollsVoted: PropTypes.number.isRequired,
