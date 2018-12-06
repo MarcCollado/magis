@@ -13,7 +13,7 @@ function logIn(id) {
 export function handleSetAuthUser(userData) {
   return (dispatch, getState) => {
     dispatch(showLoading());
-
+    // TODO: this check should be done in Firebase, not in Redux
     const { users } = getState();
     const { userID } = userData;
     // check if the user already exists in the store
