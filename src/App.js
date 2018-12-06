@@ -15,7 +15,7 @@ import CreatePollPage from './components/CreatePollPage';
 import FourOFour from './components/FourOFour';
 import HomePage from './components/HomePage';
 import LeaderPage from './components/LeaderPage';
-import Login from './components/Login';
+import LoginPage from './components/LoginPage';
 import Navbar from './components/Navbar';
 import PollDetails from './components/PollDetails';
 import PrivateRoute from './components/PrivateRoute';
@@ -61,7 +61,7 @@ class App extends Component {
             <Route
               path="/login"
               exact
-              component={Login}
+              component={LoginPage}
             />
             <PrivateRoute
               path="/leaderboard"

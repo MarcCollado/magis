@@ -12,7 +12,7 @@ import { Title1, BodyText, MetaText } from '../styles/typography';
 import { auth } from '../utils/firebase';
 
 
-class Login extends Component {
+class LoginPage extends Component {
   constructor(props) {
     super(props);
   }
@@ -99,7 +99,7 @@ const Nav = styled.nav`
   justify-content: center;
 `;
 
-Login.propTypes = {
+LoginPage.propTypes = {
   authUser: PropTypes.string,
   location: PropTypes.shape({
     state: PropTypes.shape({
@@ -110,7 +110,7 @@ Login.propTypes = {
   }).isRequired,
 };
 
-Login.defaultProps = {
+LoginPage.defaultProps = {
   authUser: null,
 };
 
@@ -127,4 +127,4 @@ function mapStateToProps({ users, authUser }) {
   };
 }
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(LoginPage);
