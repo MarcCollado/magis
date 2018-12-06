@@ -42,9 +42,13 @@ const StyledBody = styled(BodyText)`
 
 LoginButton.propTypes = {
   children: PropTypes.string.isRequired,
-  disabled: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
   provider: PropTypes.oneOf(['Github', 'Twitter']).isRequired,
+};
+
+LoginButton.defaultProps = {
+  disabled: false,
 };
 
 export default LoginButton;
