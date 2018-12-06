@@ -76,7 +76,7 @@ class CreatePollPage extends React.Component {
           </StyledLabel>
           <StyledLabel>
             <BodyText>
-              Option one
+              Option two
             </BodyText>
             <StyledInput
               name="optionTwo"
