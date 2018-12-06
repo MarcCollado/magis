@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import firebase from 'firebase';
 
 import Layout from './Layout';
-import UserImage from './UserImage';
+import LoginButton from './LoginButton';
 import { handleSetAuthUser } from '../actions/auth';
 import { Title1, BodyText, MetaText } from '../styles/typography';
 import { auth } from '../utils/firebase';
@@ -40,9 +40,6 @@ class Login extends Component {
         break;
     }
     return null;
-    // 1 .Look up the current store in the firebase database
-    // 2. Claim it if there is no owner
-    // 3. Set the state of the inventory component to reflect the current user
   };
 
   authenticate = (provider) => {
@@ -55,7 +52,6 @@ class Login extends Component {
   render() {
     const {
       authUser,
-      userDetails,
       location,
     } = this.props;
     const { from } = location.state || { from: { pathname: '/' } };
@@ -77,55 +73,41 @@ class Login extends Component {
         <MetaText>
           {`Only logged users can vote, submit new polls or view leaderboards. Don't miss out on all the fun.`}
         </MetaText>
-
-        <nav className="login">
-          <button className="github" onClick={() => this.authenticate('Github')}>
-            Log In With GitHub
-          </button>
-          <button className="twitter" onClick={() => this.authenticate('Twitter')}>
-            Log In With Twitter
-          </button>
-        </nav>
-        {/* <List>
-          {userDetails
-            .map((user) => (
-              <ListItem
-                key={user.userName}
-              >
-                <StyledLink
-                  href="#"
-                  onClick={(e) => this.handleLogin(e, user.userID)}
-                >
-                  <UserImage imageURL={user.imageURL} />
-                </StyledLink>
-                <MetaText>
-                  {user.userName}
-                </MetaText>
-              </ListItem>
-            ))
-          }
-        </List> */}
+        <Nav>
+          <LoginButton
+            provider="Github"
+            onClick={() => this.authenticate('Github')}
+          >
+          Log In With GitHub
+          </LoginButton>
+          <LoginButton
+            provider="Twitter"
+            onClick={() => this.authenticate('Twitter')}
+            disabled
+          >
+          Log In With Twitter
+          </LoginButton>
+        </Nav>
       </Layout>
     );
   }
 }
 
-const List = styled.ul`
-  padding: 0em;
-`;
-
-const ListItem = styled.li`
-  list-style-type: none;
-`;
-
-const StyledLink = styled.a`
-  text-decoration: none;
+const Nav = styled.nav`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 Login.propTypes = {
-  // from MapStateToProps
-  userDetails: PropTypes.arrayOf(PropTypes.object).isRequired,
   authUser: PropTypes.string,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      from: PropTypes.shape({
+        pathname: PropTypes.string.isRequired,
+      }),
+    }),
+  }).isRequired,
 };
 
 Login.defaultProps = {
