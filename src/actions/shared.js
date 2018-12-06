@@ -4,10 +4,10 @@ import { getPolls } from './polls';
 import { getUsers } from './users';
 import { getInitialData } from '../utils/api';
 
-// TODO: this method has to get the data from Firebase
 export default function handleInitialData() {
   return (dispatch) => {
     dispatch(showLoading());
+    // get the data from Firebase then seeds the Redux store
     return getInitialData()
       .then(({ users, polls }) => {
         dispatch(getPolls(polls));
