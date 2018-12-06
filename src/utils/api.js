@@ -4,6 +4,7 @@ export function getInitialData() {
   // fetch seed data from Firebase
   return database.ref().once('value')
     .then((snapshot) => ({
+      // TODO: users shouldn't be stored in Redux
       users: snapshot.val().users, polls: snapshot.val().polls,
     }));
 }
