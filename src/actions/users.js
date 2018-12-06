@@ -20,11 +20,13 @@ function createUser(user) {
 export function handleCreateUser(userData) {
   return (dispatch, getState) => {
     const { authUser } = getState();
+
+    // double check there is no authUser already set
     if (authUser === null) {
       dispatch(createUser(userData));
     } else {
       // TODO: better error handling for authUser !== null
-      console.error('Can\'t create a new user if another user is already logged in');
+      console.error('There is another user already logged in');
       return null;
     }
     // create user to Firebase database
