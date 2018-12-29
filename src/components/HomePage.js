@@ -1,18 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import CreatePollButton from './CreatePollButton';
 import Layout from './Layout';
 import HomeTabs from './HomeTabs';
 import OpenPoll from './OpenPoll';
+import TogglePollButton from './TogglePollButton';
 import VotedPoll from './VotedPoll';
 import { BodyText } from '../styles/typography';
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { feed: 0 };
+    this.state = { feed: 0, viewAll: true };
   }
 
   handleTabChange = (value) => {
@@ -29,16 +32,68 @@ class HomePage extends React.Component {
     return null;
   }
 
+  handleToggleView = () => {
+    this.setState((prevState) => ({
+      viewAll: !prevState.viewAll,
+    }));
+  }
 
-  render() {
+  showTheRightList = (state, props) => {
     const {
       authUser,
       polls,
       votedPollsIDs,
       unvotedPollsIDs,
-    } = this.props;
+      ownUnvotedPollsIDs,
+    } = props;
+    const { feed, viewAll } = state;
+    if (feed === 0) {
+      return viewAll
+        ? unvotedPollsIDs.map((id) => (
+          <ListItem
+            key={id}
+          >
+            <OpenPoll
+              id={id}
+            >
+              {polls[id]}
+            </OpenPoll>
+          </ListItem>
+        )) : ownUnvotedPollsIDs.map((id) => (
+          <ListItem
+            key={id}
+          >
+            <OpenPoll
+              id={id}
+            >
+              {polls[id]}
+            </OpenPoll>
+          </ListItem>
+        ));
+    }
+    return votedPollsIDs.map((id) => (
+      <ListItem
+        key={id}
+      >
+        <VotedPoll
+          id={id}
+          voted={this.whichVoted(authUser, polls[id])}
+        >
+          {polls[id]}
+        </VotedPoll>
+      </ListItem>
+    ));
+  }
 
-    const { feed } = this.state;
+  render() {
+    const { feed, viewAll } = this.state;
+    const {
+      authUser,
+      polls,
+      votedPollsIDs,
+      unvotedPollsIDs,
+      ownUnvotedPollsIDs,
+    } = this.props;
 
     return (
       <Layout>
@@ -53,29 +108,14 @@ class HomePage extends React.Component {
           }
         </BodyText>
         <List>
-          {feed === 0
-            ? unvotedPollsIDs.map((id) => (
-              <ListItem
-                key={id}
-              >
-                <OpenPoll
-                  id={id}
-                >
-                  {polls[id]}
-                </OpenPoll>
-              </ListItem>))
-            : votedPollsIDs.map((id) => (
-              <ListItem
-                key={id}
-              >
-                <VotedPoll
-                  id={id}
-                  voted={this.whichVoted(authUser, polls[id])}
-                >
-                  {polls[id]}
-                </VotedPoll>
-              </ListItem>))
-          }
+          {this.showTheRightList(this.state, this.props)}
+          {authUser && (
+          <TogglePollButton
+            viewAll={viewAll}
+            handleToggleView={this.handleToggleView}
+          />
+          )}
+          {authUser && <Link to="/create"><CreatePollButton /></Link>}
         </List>
       </Layout>
     );
@@ -96,6 +136,7 @@ HomePage.propTypes = {
   polls: PropTypes.shape(PropTypes.object).isRequired,
   votedPollsIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
   unvotedPollsIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
+  ownUnvotedPollsIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 HomePage.defaultProps = {
@@ -113,12 +154,16 @@ function mapStateToProps({ authUser, polls }) {
     const unvotedPollsIDs = Object.keys(polls)
       .filter((key) => (!filteredIDs.includes(key)))
       .sort((a, b) => (polls[b].timestamp - polls[a].timestamp));
+    const ownUnvotedPollsIDs = Object.keys(polls)
+      .filter((key) => (!filteredIDs.includes(key) && polls[key].createdBy === authUser))
+      .sort((a, b) => (polls[b].timestamp - polls[a].timestamp));
 
     return {
       authUser,
       polls,
       votedPollsIDs,
       unvotedPollsIDs,
+      ownUnvotedPollsIDs,
     };
   }
   // if no user is logged in then...
