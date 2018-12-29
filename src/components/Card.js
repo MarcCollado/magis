@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { fakeAsbestos } from '../styles/colors';
-
 const Card = ({ children }) => (
   <Container>
     {children}
@@ -12,9 +10,9 @@ const Card = ({ children }) => (
 
 const Container = styled.div`
   align-items: center;
-  border: 1px solid ${fakeAsbestos}22;
+  border: 1px solid ${(props) => props.theme.fakeAsbestos}22;
   border-radius: 0.25em;
-  box-shadow: ${fakeAsbestos}22 0em 0.125em 0.25em 0em;
+  box-shadow: ${(props) => props.theme.boxShadow};
   display: flex;
   flex-direction: column;
   margin-bottom: 1em;
