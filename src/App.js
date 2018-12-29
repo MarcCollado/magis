@@ -7,10 +7,11 @@ import {
 import PropTypes from 'prop-types';
 import styled, { ThemeProvider } from 'styled-components';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPlus, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import {
+  faGlobeAmericas, faPlus, faUser, faUserCircle,
+} from '@fortawesome/free-solid-svg-icons';
 
 import handleInitialData from './actions/shared';
-import CreatePollButton from './components/CreatePollButton';
 import CreatePollPage from './components/CreatePollPage';
 import FourOFour from './components/FourOFour';
 import HomePage from './components/HomePage';
@@ -26,7 +27,7 @@ import {
 import { database } from './utils/firebase';
 import { seedPolls, seedUsers } from './utils/helpers';
 
-library.add(faPlus, faUserCircle);
+library.add(faGlobeAmericas, faPlus, faUser, faUserCircle);
 
 const theme = {
   electricBlue,
@@ -68,7 +69,6 @@ class App extends Component {
             <LoadingBar />
             <Navbar />
             {/* <button onClick={this.seedFirebase}>Reset Firebase</button> */}
-            <Link to="/create"><CreatePollButton /></Link>
             <Switch>
               <Route
                 path="/"
