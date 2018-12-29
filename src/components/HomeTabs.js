@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { Title2 } from '../styles/typography';
-import { fakeAsbestos } from '../styles/colors';
 
 const HomeTabs = ({ handleTabChange, tabState }) => (
   <Container>
@@ -30,14 +29,14 @@ const Container = styled.div`
 `;
 
 const Tab = styled(Title2)`
-  border-bottom: ${(props) => (props.selected ? `0.25em solid ${fakeAsbestos}` : '0.25em solid #FFF0')};
+  border-bottom: ${(props) => (props.selected ? `0.25em solid ${props.theme.fakeAsbestos}` : '0.25em solid #FFF0')};
   border-top: 0.25em solid #FFF0;
   margin-right: 0.75em;
   padding: 0em 0.5em 0.25em;
   text-decoration: none;
 
   &:active {
-    border-bottom: 0.25em solid ${fakeAsbestos};
+    border-bottom: 0.25em solid ${(props) => (props.theme.fakeAsbestos)};
   }
 `;
 

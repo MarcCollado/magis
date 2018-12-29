@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { fakeAsbestos } from '../styles/colors';
 import { BodyText } from '../styles/typography';
 
 const Button = ({ children, primary }) => (
@@ -14,8 +13,8 @@ const Button = ({ children, primary }) => (
 );
 
 const Container = styled.div`
-  background: ${(props) => (props.primary ? fakeAsbestos : '#FFF')};
-  border: 2px solid ${fakeAsbestos};
+  background: ${(props) => (props.primary ? props.theme.fakeAsbestos : '#FFF')};
+  border: 2px solid ${(props) => (props.theme.fakeAsbestos)};
   border-radius: 0.25em;
   display: flex;
   justify-content: center;
@@ -24,15 +23,15 @@ const Container = styled.div`
   transition: box-shadow 0.3s ease;
 
   &:hover, &:active {
-    background: ${(props) => (props.primary ? '#FFF' : fakeAsbestos)};
+    background: ${(props) => (props.primary ? '#FFF' : props.theme.fakeAsbestos)};
   }
 `;
 
 const StyledBody = styled(BodyText)`
-  color: ${(props) => (props.primary ? '#FFF' : fakeAsbestos)};
+  color: ${(props) => (props.primary ? '#FFF' : props.theme.fakeAsbestos)};
 
   ${Container}:hover & {
-    color: ${(props) => (props.primary ? fakeAsbestos : '#FFF')};
+    color: ${(props) => (props.primary ? props.theme.fakeAsbestos : '#FFF')};
   }
 `;
 
