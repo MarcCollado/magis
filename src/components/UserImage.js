@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const UserImage = ({ imageURL, large }) => {
-  if (imageURL) {
+const UserImage = ({ avatarURL, large }) => {
+  if (avatarURL) {
     return (
       <Container
-        imageURL={imageURL}
+        avatarURL={avatarURL}
         large={large}
       />
     );
@@ -20,7 +20,7 @@ const UserImage = ({ imageURL, large }) => {
 };
 
 const Container = styled.div`
-  background-image: url(${(props) => props.imageURL});
+  background-image: url(${(props) => props.avatarURL});
   background-size: cover;
   border-radius: ${(props) => (props.large ? '2.5em' : '1.25em')};
   box-shadow: ${(props) => (props.theme.boxShadow22)};
@@ -34,12 +34,12 @@ const IconContainer = styled.div`
 `;
 
 UserImage.propTypes = {
-  imageURL: PropTypes.string,
+  avatarURL: PropTypes.string,
   large: PropTypes.bool,
 };
 
 UserImage.defaultProps = {
-  imageURL: '',
+  avatarURL: '',
   large: false,
 };
 
