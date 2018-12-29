@@ -12,7 +12,7 @@ const Container = styled.div`
   align-items: center;
   border: 1px solid ${(props) => props.theme.fakeAsbestos}22;
   border-radius: 0.25em;
-  box-shadow: ${(props) => props.theme.boxShadow};
+  box-shadow: ${(props) => `${props.theme.fakeAsbestos}22 0em 0.125em 0.25em 0em`};
   display: flex;
   flex-direction: column;
   margin-bottom: 1em;
