@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { electricBlue } from '../styles/colors';
 import { Title2, BodyText } from '../styles/typography';
 
 const countVotes = (poll) => {
@@ -37,7 +36,7 @@ const PollStats = ({ children: poll }) => {
 };
 
 const Container = styled.div`
-  background: ${electricBlue}22;
+  background: ${(props) => (`${props.theme.electricBlue}22`)};
   border-radius: 0.5em;
   margin: 1em 3em;
   padding: 0.5em 1.5em;

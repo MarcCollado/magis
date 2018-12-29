@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { fakeAsbestos } from '../styles/colors';
-
 const UserImage = ({ imageURL, large }) => {
   if (imageURL) {
     return (
@@ -25,7 +23,7 @@ const Container = styled.div`
   background-image: url(${(props) => props.imageURL});
   background-size: cover;
   border-radius: ${(props) => (props.large ? '2.5em' : '1.25em')};
-  box-shadow: ${fakeAsbestos}22 0em 0.25em 0.25em 0em;
+  box-shadow: ${(props) => (props.theme.boxShadow22)};
   margin-bottom: 1em;
   height: ${(props) => (props.large ? '5em' : '2.5em')};
   width: ${(props) => (props.large ? '5em' : '2.5em')};

@@ -11,7 +11,6 @@ import PollStats from './PollStats';
 import UnbiasedPoll from './UnbiasedPoll';
 import UserImage from './UserImage';
 
-import { fakeAsbestos } from '../styles/colors';
 import { Title1, BodyText, MetaText } from '../styles/typography';
 
 const PollDetails = ({
@@ -64,12 +63,12 @@ const PollDetails = ({
 };
 
 const StyledLink = styled(Link)`
-  color: ${fakeAsbestos};
+  color: ${(props) => props.theme.fakeAsbestos};
   margin-top: 0.5em;
   text-decoration: none;
 
   &:visited, :hover, :active {
-    color: ${fakeAsbestos};
+    color: ${(props) => props.theme.fakeAsbestos};
   }
 `;
 
