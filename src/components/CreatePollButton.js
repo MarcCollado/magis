@@ -15,11 +15,11 @@ const Button = styled.div`
   bottom: 1em;
   box-shadow: ${(props) => props.theme.boxShadow88};
   display: flex;
-  height: 4em;
+  height: 3em;
   justify-content: center;
   position: fixed;
   right: 1em;
-  width: 4em;
+  width: 3em;
   transition: background, box-shadow 0.3s ease;
   z-index: 1000;
 
