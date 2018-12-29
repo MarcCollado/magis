@@ -37,6 +37,7 @@ const theme = {
   fakeAsbestos,
   minWidth: '320px',
   maxWidth: '480px',
+  boxShadow22: `${fakeAsbestos}22 0em 0.25em 0.25em 0em`,
   boxShadow88: `${fakeAsbestos}88 0em 0.125em 0.25em 0em`,
 };
 
