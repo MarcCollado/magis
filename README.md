@@ -8,11 +8,9 @@ This is the second project of the [React Developer Nanodegree](https://eu.udacit
 * [Flashcards](https://github.com/MarcCollado/flashcards) — React Native Project
   * [Flashcards API](https://github.com/MarcCollado/flashcards-api) — Flashcards' backend
 
-ℹ️ This project was developed in 2018 during the Nanodegree under the name of "Would You Rather". Yet I [kept working](https://www.collado.io/blog/2018/would-you-rather-refactor) on it after the course, even to the point that I [changed its name](https://www.collado.io/blog/2018/magis-10), and has now become my go-to React playground — where to try new technologies before rolling them out into more mature, [React-based projects](https://github.com/MarcCollado/collado-io).
+ℹ️ This project was developed in 2018 during the Nanodegree under the name of "Would You Rather". Yet I [kept working](https://www.collado.io/blog/2018/would-you-rather-refactor) on it after the course, even to the point that I [changed its name](https://www.collado.io/blog/2018/magis-10), and has now become my go-to React playground — where I try new technologies before rolling them out to more mature [React-based projects](https://github.com/MarcCollado/collado-io) of mine.
 
 ⚠️ Because of that, this project lives in a permanent state of beta. And while I try to maintain it as stable as possible, you might come across some bugs or a few broken things here and there.
-
-Other than that, you should be fine, and if you'd like to see what I'm currently working on, please, visit my [now page](https://www.collado.io/now).
 
 
 ## About
