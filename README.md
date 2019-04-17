@@ -2,6 +2,8 @@
 
 React & Redux Project — Udacity React Developer Nanodegree
 
+![img](/public/readme/readme-cover.jpg)
+
 This is the second project of the [React Developer Nanodegree](https://eu.udacity.com/course/react-nanodegree--nd019). Below you'll find the rest of the Nanodegree projects and I also wrote a [short post](https://www.collado.io/blog/2018/udacity-rdnd) in my blog about the course experience.
 
 - [MyReads](https://github.com/MarcCollado/my-reads) — React Project
